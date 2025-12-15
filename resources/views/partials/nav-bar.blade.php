@@ -1,3 +1,21 @@
+@php
+    $isActive = function ($patterns) {
+        foreach ((array) $patterns as $pattern) {
+            if (request()->routeIs($pattern) || request()->is(ltrim($pattern, '/'))) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    $linkClass = function (bool $active) {
+        return 'hover:text-blue-600 transition-colors relative group py-2 ' . ($active ? 'text-blue-600' : 'text-slate-700');
+    };
+
+    $underlineClass = function (bool $active) {
+        return 'absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform transition-transform origin-left duration-200 ' . ($active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100');
+    };
+@endphp
 
 <header class="sticky top-0 z-50 transition-all duration-300 border-b border-white/20 bg-white/50 backdrop-blur-lg supports-[backdrop-filter]:bg-white/40">
         <!-- Main Header -->
@@ -30,19 +48,20 @@
 
                 <!-- Desktop Navigation -->
                 <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-700">
-                    <a class="hover:text-blue-600 transition-colors relative group py-2 text-blue-600 active" href="{{ route('home') }}">Home
-                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform transition-transform origin-left duration-200 scale-x-0 group-hover:scale-x-100"></span>
-                        
+                    @php $homeActive = $isActive(['home', '/']); @endphp
+                    <a class="{{ $linkClass($homeActive) }}" href="{{ route('home') }}">Home
+                        <span class="{{ $underlineClass($homeActive) }}"></span>
                     </a>
                     
                     <!-- Shop Dropdown -->
+                    @php $shopActive = $isActive(['shop', 'shop/*']); @endphp
                     <div class="dropdown relative">
-                        <a class="hover:text-blue-600 transition-colors relative group py-2 flex items-center cursor-pointer">
+                        <a class="{{ $linkClass($shopActive) }} flex items-center cursor-pointer">
                             Shop
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 ml-1">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
-                            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform transition-transform origin-left duration-200 scale-x-0 group-hover:scale-x-100"></span>
+                            <span class="{{ $underlineClass($shopActive) }}"></span>
                         </a>
                         <div class="dropdown-content mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[280px]">
                             <div class="grid grid-cols-2 gap-4">
@@ -66,19 +85,20 @@
                                 </div>
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-100">
-                                <a href="/shop" class="text-blue-600 hover:text-blue-700 font-medium text-sm">View All Categories →</a>
+                                <a href="{{ route('shop') }}" class="text-blue-600 hover:text-blue-700 font-medium text-sm">View All Categories -></a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Categories Dropdown -->
+                    @php $categoriesActive = $isActive(['categories*']); @endphp
                     <div class="dropdown relative">
-                        <a class="hover:text-blue-600 transition-colors relative group py-2 flex items-center cursor-pointer">
+                        <a class="{{ $linkClass($categoriesActive) }} flex items-center cursor-pointer">
                             Categories
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 ml-1">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
-                            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform transition-transform origin-left duration-200 scale-x-0 group-hover:scale-x-100"></span>
+                            <span class="{{ $underlineClass($categoriesActive) }}"></span>
                         </a>
                         <div class="dropdown-content mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[280px]">
                             <div class="grid grid-cols-2 gap-4">
@@ -102,16 +122,19 @@
                                 </div>
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-100">
-                                <a href="/categories" class="text-blue-600 hover:text-blue-700 font-medium text-sm">View All Products →</a>
+                                <a href="/categories" class="text-blue-600 hover:text-blue-700 font-medium text-sm">View All Products -></a>
                             </div>
                         </div>
                     </div>
 
-                    <a class="hover:text-blue-600 transition-colors relative group py-2" href="/about">About Us
-                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform transition-transform origin-left duration-200 scale-x-100"></span>
+                    @php $aboutActive = $isActive(['about']); @endphp
+                    <a class="{{ $linkClass($aboutActive) }}" href="/about">About Us
+                        <span class="{{ $underlineClass($aboutActive) }}"></span>
                     </a>
-                    <a class="hover:text-blue-600 transition-colors relative group py-2" href="/contact">Contact
-                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform transition-transform origin-left duration-200 scale-x-0 group-hover:scale-x-100"></span>
+
+                    @php $contactActive = $isActive(['contact']); @endphp
+                    <a class="{{ $linkClass($contactActive) }}" href="/contact">Contact
+                        <span class="{{ $underlineClass($contactActive) }}"></span>
                     </a>
                 </nav>
 
@@ -159,7 +182,7 @@
                     </div>
 
                     <!-- Cart -->
-                    <button id="cartButton" class="inline-flex items-center justify-center text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 w-10 relative bg-slate-900/90 hover:bg-blue-600 text-white rounded-full transition-all duration-300 shadow-lg hover:shadow-blue-500/30 backdrop-blur-sm">
+                    <button id="cartButton" wire:click="$emitTo('cart-sidebar','open')" class="inline-flex items-center justify-center text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 w-10 relative bg-slate-900/90 hover:bg-blue-600 text-white rounded-full transition-all duration-300 shadow-lg hover:shadow-blue-500/30 backdrop-blur-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
                             <circle cx="8" cy="21" r="1"></circle>
                             <circle cx="19" cy="21" r="1"></circle>
@@ -173,7 +196,8 @@
             <!-- Mobile Navigation Menu -->
             <div id="mobileMenu" class="lg:hidden mt-4 hidden">
                 <div class="space-y-2 border-t border-gray-100 pt-4">
-                    <a href="/" class="block py-2 text-slate-700 hover:text-blue-600 transition-colors font-medium">Home</a>
+                    @php $mobileHome = $isActive(['home', '/']); @endphp
+                    <a href="/" class="block py-2 font-medium transition-colors {{ $mobileHome ? 'text-blue-600' : 'text-slate-700 hover:text-blue-600' }}">Home</a>
                     
                     <!-- Mobile Shop Dropdown -->
                     <div class="mobile-dropdown">
@@ -192,8 +216,9 @@
                     </div>
 
                     <!-- Mobile Categories Dropdown -->
+                    @php $mobileCategories = $isActive(['categories*']); @endphp
                     <div class="mobile-dropdown">
-                        <button class="mobile-dropdown-toggle flex items-center justify-between w-full py-2 text-slate-700 hover:text-blue-600 transition-colors font-medium">
+                        <button class="mobile-dropdown-toggle flex items-center justify-between w-full py-2 transition-colors font-medium {{ $mobileCategories ? 'text-blue-600' : 'text-slate-700 hover:text-blue-600' }}">
                             Categories
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
                                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -207,8 +232,10 @@
                         </div>
                     </div>
 
-                    <a href="/about" class="block py-2 text-blue-600 font-medium">About Us</a>
-                    <a href="/contact" class="block py-2 text-slate-700 hover:text-blue-600 transition-colors font-medium">Contact</a>
+                    @php $mobileAbout = $isActive(['about']); @endphp
+                    @php $mobileContact = $isActive(['contact']); @endphp
+                    <a href="/about" class="block py-2 font-medium transition-colors {{ $mobileAbout ? 'text-blue-600' : 'text-slate-700 hover:text-blue-600' }}">About Us</a>
+                    <a href="/contact" class="block py-2 font-medium transition-colors {{ $mobileContact ? 'text-blue-600' : 'text-slate-700 hover:text-blue-600' }}">Contact</a>
                 </div>
             </div>
         </div>

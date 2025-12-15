@@ -15,6 +15,9 @@ Route::get('/', Home::class)->name('home');
 Route::get('/about', function () {
     return view('about'); // resources/views/about.blade.php
 })->name('about');
+Route::get('/shop', function () {
+    return view('pages.shop.index'); // resources/views/about.blade.php
+})->name('shop');
 
 // Contact Page
 Route::get('/contact', function () {
@@ -22,27 +25,27 @@ Route::get('/contact', function () {
 })->name('contact');
 
 // Shop Pages
-Route::prefix('shop')->name('shop.')->group(function () {
-    Route::get('/', function () {
-        return view('shop.index'); // resources/views/shop/index.blade.php
-    })->name('index');
+// Route::prefix('shop')->name('shop.')->group(function () {
+//     Route::get('/', function () {
+//         return view('shop.index'); // resources/views/shop/index.blade.php
+//     })->name('index');
 
-    Route::get('/interior', function () {
-        return view('shop.interior'); // resources/views/shop/interior.blade.php
-    })->name('interior');
+//     Route::get('/interior', function () {
+//         return view('shop.interior'); // resources/views/shop/interior.blade.php
+//     })->name('interior');
 
-    Route::get('/exterior', function () {
-        return view('shop.exterior'); // resources/views/shop/exterior.blade.php
-    })->name('exterior');
+//     Route::get('/exterior', function () {
+//         return view('shop.exterior'); // resources/views/shop/exterior.blade.php
+//     })->name('exterior');
 
-    Route::get('/performance', function () {
-        return view('shop.performance'); // resources/views/shop/performance.blade.php
-    })->name('performance');
+//     Route::get('/performance', function () {
+//         return view('shop.performance'); // resources/views/shop/performance.blade.php
+//     })->name('performance');
 
-    Route::get('/electronics', function () {
-        return view('shop.electronics'); // resources/views/shop/electronics.blade.php
-    })->name('electronics');
-});
+//     Route::get('/electronics', function () {
+//         return view('shop.electronics'); // resources/views/shop/electronics.blade.php
+//     })->name('electronics');
+// });
 
 // Categories Pages
 Route::prefix('categories')->name('categories.')->group(function () {
