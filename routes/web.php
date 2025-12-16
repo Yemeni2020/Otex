@@ -25,6 +25,11 @@ Route::get('/contact', function () {
     return view('contact'); // resources/views/contact.blade.php
 })->name('contact');
 
+// Checkout Page
+Route::get('/checkout', function () {
+    return view('checkout');
+})->name('checkout');
+
 // Shop Pages
 // Route::prefix('shop')->name('shop.')->group(function () {
 //     Route::get('/', function () {
