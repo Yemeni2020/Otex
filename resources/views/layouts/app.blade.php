@@ -26,34 +26,46 @@
     @include('partials.footer')
 
     @livewireScripts
+    @stack('scripts')
     <script>
-    const cartButton = document.getElementById('cartButton'); // add id="cartButton" to your cart icon button
-    const cartSidebar = document.getElementById('cartSidebar');
-    const cartBackdrop = document.getElementById('cartBackdrop');
-    const closeCart = document.getElementById('closeCart');
+    (() => {
+        const cartButton = document.getElementById('cartButton');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartBackdrop = document.getElementById('cartBackdrop');
+        const closeCart = document.getElementById('closeCart');
 
-    // Open cart
-    cartButton.addEventListener('click', () => {
-        cartSidebar.classList.remove('translate-x-full');
-        cartBackdrop.classList.remove('hidden');
-    });
+        // Let Livewire handle toggling if available.
+        if (cartButton) {
+            cartButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (window.Livewire) {
+                    window.Livewire.dispatch('open-cart');
+                }
+            }, { passive: true });
+        }
 
-    // Close cart
-    closeCart.addEventListener('click', () => {
-        cartSidebar.classList.add('translate-x-full');
-        cartBackdrop.classList.add('hidden');
-    });
+        // If elements aren't present, bail for the DOM toggle helpers.
+        if (!cartSidebar || !closeCart) return;
 
-    // Close cart when clicking on backdrop
-    cartBackdrop.addEventListener('click', () => {
-        cartSidebar.classList.add('translate-x-full');
-        cartBackdrop.classList.add('hidden');
-    });
+        const open = () => {
+            cartSidebar.classList.remove('translate-x-full');
+            if (cartBackdrop) cartBackdrop.classList.remove('hidden');
+        };
+        const close = () => {
+            cartSidebar.classList.add('translate-x-full');
+            if (cartBackdrop) cartBackdrop.classList.add('hidden');
+        };
+
+        closeCart.addEventListener('click', close, { passive: true });
+        if (cartBackdrop) {
+            cartBackdrop.addEventListener('click', close, { passive: true });
+        }
+    })();
+
     window.addEventListener('notify', event => {
-    alert(event.detail.message);
-});
-
-</script>
+        alert(event.detail.message);
+    });
+    </script>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
 </body>
 </html>

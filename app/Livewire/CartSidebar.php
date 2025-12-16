@@ -8,6 +8,7 @@ class CartSidebar extends Component
 {
     public $cart = [];
     public $isOpen = false;
+    protected $listeners = ['open-cart' => 'open', 'close-cart' => 'close'];
 
     public function mount()
     {
@@ -43,6 +44,8 @@ class CartSidebar extends Component
     public function increment($index)
     {
         $this->cart[$index]['quantity']++;
+        // Keep the sidebar open after Livewire re-render
+        $this->isOpen = true;
     }
 
     public function decrement($index)
@@ -50,11 +53,13 @@ class CartSidebar extends Component
         if ($this->cart[$index]['quantity'] > 1) {
             $this->cart[$index]['quantity']--;
         }
+        $this->isOpen = true;
     }
 
     public function removeItem($index)
     {
         array_splice($this->cart, $index, 1);
+        $this->isOpen = true;
     }
 
     public function getSubtotalProperty()

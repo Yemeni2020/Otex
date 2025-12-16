@@ -324,11 +324,11 @@
 
                         <el-menu anchor="bottom end" popover class="w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
                             <div class="py-1">
-                                <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900 focus:bg-gray-100 focus:outline-hidden">Most Popular</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-500 focus:bg-gray-100 focus:outline-hidden">Best Rating</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-500 focus:bg-gray-100 focus:outline-hidden">Newest</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-500 focus:bg-gray-100 focus:outline-hidden">Price: Low to High</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-500 focus:bg-gray-100 focus:outline-hidden">Price: High to Low</a>
+                                <a href="#" data-sort="popular" class="block px-4 py-2 text-sm font-medium text-gray-900 focus:bg-gray-100 focus:outline-hidden">Most Popular</a>
+                                <a href="#" data-sort="rating" class="block px-4 py-2 text-sm text-gray-500 focus:bg-gray-100 focus:outline-hidden">Best Rating</a>
+                                <a href="#" data-sort="newest" class="block px-4 py-2 text-sm text-gray-500 focus:bg-gray-100 focus:outline-hidden">Newest</a>
+                                <a href="#" data-sort="price-asc" class="block px-4 py-2 text-sm text-gray-500 focus:bg-gray-100 focus:outline-hidden">Price: Low to High</a>
+                                <a href="#" data-sort="price-desc" class="block px-4 py-2 text-sm text-gray-500 focus:bg-gray-100 focus:outline-hidden">Price: High to Low</a>
                             </div>
                         </el-menu>
                     </el-dropdown>
@@ -639,10 +639,210 @@
 
                     <!-- Product grid -->
                     <div class="lg:col-span-3">
-                        <!-- Your content -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-product-grid>
+                            @php
+                                $products = [
+                                    [
+                                        'id' => 1,
+                                        'name' => 'Premium Leather Seat Covers',
+                                        'description' => 'Transform your car interior with our premium leather seat covers. Designed for durability and maximum comfort, these covers are breathable, water-resistant, and easy to clean.',
+                                        'price' => 189.99,
+                                        'image' => 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=80',
+                                        'category' => 'Interior',
+                                        'color' => 'black',
+                                        'size' => 'standard',
+                                        'badge' => 'Best Seller',
+                                    ],
+                                    [
+                                        'id' => 2,
+                                        'name' => 'All-Weather Floor Mats Pro',
+                                        'description' => 'Heavy-duty protection for your vehicle floor. Deep channels trap water, mud, and debris. Custom fit for most sedans and SUVs.',
+                                        'price' => 49.99,
+                                        'image' => 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&q=80',
+                                        'category' => 'Interior',
+                                        'color' => 'black',
+                                        'size' => 'standard',
+                                        'badge' => 'Best Seller',
+                                    ],
+                                    [
+                                        'id' => 3,
+                                        'name' => 'Smart Trunk Organizer',
+                                        'description' => 'Keep your trunk clutter-free. Collapsible design with multiple compartments, sturdy handles, and non-slip bottom strips.',
+                                        'price' => 34.99,
+                                        'image' => 'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=800&q=80',
+                                        'category' => 'Storage',
+                                        'color' => 'gray',
+                                        'size' => 'standard',
+                                        'badge' => null,
+                                    ],
+                                    [
+                                        'id' => 4,
+                                        'name' => 'MagSafe Dashboard Mount',
+                                        'description' => 'Secure magnetic phone mount with 360-degree rotation. Industrial-strength suction cup adheres to dashboard or windshield.',
+                                        'price' => 29.99,
+                                        'image' => 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&q=80',
+                                        'category' => 'Electronics',
+                                        'color' => 'black',
+                                        'size' => 'small',
+                                        'badge' => 'Best Seller',
+                                    ],
+                                    [
+                                        'id' => 5,
+                                        'name' => 'RGB Ambient Lighting Kit',
+                                        'description' => 'App-controlled LED interior lights with music sync mode. Choose from 16 million colors to match your mood.',
+                                        'price' => 39.99,
+                                        'image' => 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80',
+                                        'category' => 'Electronics',
+                                        'color' => 'multicolor',
+                                        'size' => 'standard',
+                                        'badge' => null,
+                                    ],
+                                    [
+                                        'id' => 6,
+                                        'name' => 'Ergonomic Steering Wheel Cover',
+                                        'description' => 'Enhanced grip and comfort. Protects your steering wheel from wear and tear while keeping your hands warm in winter and cool in summer.',
+                                        'price' => 19.99,
+                                        'image' => 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80',
+                                        'category' => 'Interior',
+                                        'color' => 'black',
+                                        'size' => 'standard',
+                                        'badge' => null,
+                                    ],
+                                    [
+                                        'id' => 7,
+                                        'name' => 'HEPA Car Air Purifier',
+                                        'description' => 'Eliminate odors, smoke, and allergens. Portable design fits in cup holder. USB powered with quiet operation.',
+                                        'price' => 59.99,
+                                        'image' => 'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&q=80',
+                                        'category' => 'Electronics',
+                                        'color' => 'white',
+                                        'size' => 'small',
+                                        'badge' => null,
+                                    ],
+                                    [
+                                        'id' => 8,
+                                        'name' => 'Backseat Tablet Organizer',
+                                        'description' => 'Perfect for road trips with kids. Holds tablets up to 11 inches, drinks, snacks, and toys. Durable waterproof fabric.',
+                                        'price' => 29.99,
+                                        'image' => 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80',
+                                        'category' => 'Storage',
+                                        'color' => 'black',
+                                        'size' => 'standard',
+                                        'badge' => 'Best Seller',
+                                    ],
+                                    [
+                                        'id' => 9,
+                                        'name' => 'Ceramic Coating Spray',
+                                        'description' => 'Professional grade ceramic coating for high gloss shine and hydrophobic protection.',
+                                        'price' => 24.99,
+                                        'image' => 'https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=800&q=80',
+                                        'category' => 'Car Care',
+                                        'color' => 'clear',
+                                        'size' => 'small',
+                                        'badge' => 'Best Seller',
+                                    ],
+                                    [
+                                        'id' => 10,
+                                        'name' => 'Digital Tire Pressure Gauge',
+                                        'description' => 'Accurate readings with backlit LCD display. Essential safety tool for every vehicle.',
+                                        'price' => 15.99,
+                                        'image' => 'https://images.unsplash.com/photo-1595167440058-20412e87c53d?w=800&q=80',
+                                        'category' => 'Tools',
+                                        'color' => 'black',
+                                        'size' => 'small',
+                                        'badge' => null,
+                                    ],
+                                ];
+                            @endphp
+
+                            @foreach ($products as $product)
+                                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col"
+                                    data-product-card
+                                    data-name="{{ $product['name'] }}"
+                                    data-price="{{ $product['price'] }}"
+                                    data-category="{{ strtolower($product['category']) }}"
+                                    data-color="{{ strtolower($product['color'] ?? '') }}"
+                                    data-size="{{ strtolower($product['size'] ?? '') }}">
+                                    <a class="block relative overflow-hidden h-64 bg-slate-100 group" href="/shop/{{ $product['id'] }}">
+                                        <img src="{{ $product['image'] }}" alt="{{ $product['name'] }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                        <div class="absolute top-3 right-3 bg-blue-600/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm">{{ $product['category'] }}</div>
+                                        @if(!empty($product['badge']))
+                                            <div class="absolute top-3 left-3 bg-amber-500/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm">{{ $product['badge'] }}</div>
+                                        @endif
+                                    </a>
+                                    <div class="p-5 flex flex-col flex-1">
+                                        <a class="hover:text-blue-600 transition-colors" href="/shop/{{ $product['id'] }}">
+                                            <h3 class="text-lg font-bold text-slate-800 mb-2 line-clamp-1">{{ $product['name'] }}</h3>
+                                        </a>
+                                        <p class="text-slate-600 text-sm mb-4 line-clamp-2 flex-grow">{{ $product['description'] }}</p>
+                                        <div class="flex items-center justify-between mt-auto">
+                                            <span class="text-xl font-bold text-blue-600">${{ number_format($product['price'], 2) }}</span>
+                                            <button class="inline-flex items-center justify-center text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart w-4 h-4 mr-2">
+                                                    <circle cx="8" cy="21" r="1"></circle>
+                                                    <circle cx="19" cy="21" r="1"></circle>
+                                                    <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                                                </svg>
+                                                Add
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </section>
         </main>
     </div>
 </x-layouts.app>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = Array.from(document.querySelectorAll('[data-product-card]'));
+    const grid = document.querySelector('[data-product-grid]') || document.querySelector('.lg\\:col-span-3 > .grid');
+
+    const getChecked = (name) => Array.from(document.querySelectorAll(`input[name="${name}[]"]:checked`)).map(i => i.value.toLowerCase());
+
+    const applyFilters = () => {
+        const categories = getChecked('category');
+        const colors = getChecked('color');
+        const sizes = getChecked('size');
+
+        cards.forEach(card => {
+            const matchCategory = !categories.length || categories.includes(card.dataset.category);
+            const matchColor = !colors.length || colors.includes(card.dataset.color);
+            const matchSize = !sizes.length || sizes.includes(card.dataset.size);
+            card.style.display = (matchCategory && matchColor && matchSize) ? '' : 'none';
+        });
+    };
+
+    const applySort = (sort) => {
+        const visibleCards = cards.filter(c => c.style.display !== 'none');
+        const sorter = {
+            'price-asc': (a,b) => parseFloat(a.dataset.price) - parseFloat(b.dataset.price),
+            'price-desc': (a,b) => parseFloat(b.dataset.price) - parseFloat(a.dataset.price),
+            'name-asc': (a,b) => a.dataset.name.localeCompare(b.dataset.name),
+        }[sort];
+        if (!sorter) return;
+        visibleCards.sort(sorter).forEach(card => grid.appendChild(card));
+    };
+
+    document.querySelectorAll('input[name="category[]"], input[name="color[]"], input[name="size[]"]').forEach(input => {
+        input.addEventListener('change', applyFilters, { passive: true });
+    });
+
+    document.querySelectorAll('[data-sort]').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const sort = link.dataset.sort;
+            if (sort === 'newest' || sort === 'popular' || sort === 'rating') return; // not implemented
+            applySort(sort);
+        });
+    });
+
+    applyFilters();
+});
+</script>
+@endpush

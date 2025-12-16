@@ -5,6 +5,7 @@
 // use App\Http\Controllers\ShopController;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\ProductDetail;
 use App\Livewire\Home;
 Route::get('/1', function () {
     return view('welcome');
@@ -69,7 +70,7 @@ Route::prefix('categories')->name('categories.')->group(function () {
         return view('categories.dash-cams'); // resources/views/categories/dash-cams.blade.php
     })->name('dash-cams');
 });
-
+Route::get('shop/{productId}', \App\Livewire\ProductDetail::class)->name('shop.show');
 
 // Home Page
 // Route::get('/', [HomeController::class, 'index'])->name('home');

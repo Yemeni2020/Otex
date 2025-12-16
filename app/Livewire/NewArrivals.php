@@ -48,13 +48,19 @@ class NewArrivals extends Component
             ],
         ];
     }
-     public function addToCart($productId) {
-        $product = collect($this->products)->firstWhere('id', $productId);
-        session()->push('cart', $product);
-        $this->dispatchBrowserEvent('notify', [
-            'message' => "{$product['name']} added to cart!"
-        ]);
-    }
+     public function addToCart($productId)
+     {
+         $product = collect($this->products)->firstWhere('id', $productId);
+
+         if (! $product) {
+             return;
+         }
+
+         session()->push('cart', $product);
+
+         // Livewire v3 browser event dispatch
+         $this->dispatch('notify', message: "{$product['name']} added to cart!");
+     }
 
     public function render()
     {
