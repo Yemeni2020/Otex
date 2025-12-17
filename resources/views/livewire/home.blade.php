@@ -27,6 +27,7 @@
 
 <div>
     @include('partials.hero')
+    
     <livewire:new-arrivals />
     <livewire:best-sellers />
     <livewire:trending-now />

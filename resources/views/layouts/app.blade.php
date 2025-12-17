@@ -8,6 +8,8 @@
     @livewireStyles
     <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
     <style>
+        :root { color-scheme: light; }
+        .dark { color-scheme: dark; }
         .mobile-menu-transition {
             transition: opacity 180ms ease, transform 180ms ease;
         }
@@ -16,6 +18,30 @@
             transform: translateY(0) !important;
             pointer-events: auto !important;
         }
+        .dark body { background-color: #0f172a; color: #e2e8f0; }
+        .dark header { background-color: rgba(15, 23, 42, 0.8); color: #e2e8f0; }
+        .dark nav a { color: #e2e8f0; }
+        .dark .bg-white { background-color: #0f172a !important; }
+        .dark .bg-gray-50,
+        .dark .bg-slate-50 { background-color: #0b1428 !important; }
+        .dark .text-gray-900,
+        .dark .text-slate-900,
+        .dark .text-slate-800 { color: #e2e8f0 !important; }
+        .dark .text-gray-800,
+        .dark .text-slate-700,
+        .dark .text-slate-600,
+        .dark .text-slate-500 { color: #cbd5e1 !important; }
+        .dark .text-gray-700,
+        .dark .text-gray-600 { color: #cbd5e1 !important; }
+        .dark .border-gray-200 { border-color: #1e293b !important; }
+        .dark .border-slate-100,
+        .dark .border-slate-200 { border-color: #1e293b !important; }
+        .dark .shadow-lg,
+        .dark .shadow-xl { box-shadow: 0 10px 30px rgba(0,0,0,0.45) !important; }
+        .toggle-checkbox:checked + .toggle-label { background: linear-gradient(90deg, #2563eb, #60a5fa); }
+        .toggle-checkbox:checked { right: 0; border-color: #fff; }
+        .toggle-checkbox { transition: all 0.3s ease; }
+        .toggle-label { transition: background-color 0.3s ease; }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-900 min-h-screen expansion-alids-init">
@@ -62,6 +88,47 @@
         const iconClose = document.getElementById('mobileMenuIconClose');
         const mobileSearchButton = document.getElementById('mobileSearchButton');
         const mobileSearchBar = document.getElementById('mobileSearchBar');
+        const themeToggle = document.getElementById('toggle');
+        const themeToggleButton = document.getElementById('themeToggleButton');
+        const themeIconSun = document.getElementById('themeIconSun');
+        const themeIconMoon = document.getElementById('themeIconMoon');
+        const root = document.documentElement;
+
+        // Theme
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                root.classList.add('dark');
+                if (themeToggle) themeToggle.checked = true;
+                if (themeIconSun && themeIconMoon) {
+                    themeIconSun.classList.add('hidden');
+                    themeIconMoon.classList.remove('hidden');
+                }
+            } else {
+                root.classList.remove('dark');
+                if (themeToggle) themeToggle.checked = false;
+                if (themeIconSun && themeIconMoon) {
+                    themeIconSun.classList.remove('hidden');
+                    themeIconMoon.classList.add('hidden');
+                }
+            }
+        };
+        const storedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(storedTheme || (prefersDark ? 'dark' : 'light'));
+        if (themeToggle) {
+            themeToggle.addEventListener('change', (e) => {
+                const next = e.target.checked ? 'dark' : 'light';
+                localStorage.setItem('theme', next);
+                applyTheme(next);
+            });
+        }
+        if (themeToggleButton) {
+            themeToggleButton.addEventListener('click', () => {
+                const next = root.classList.contains('dark') ? 'light' : 'dark';
+                localStorage.setItem('theme', next);
+                applyTheme(next);
+            });
+        }
 
         // Let Livewire handle toggling if available.
         if (cartButton) {

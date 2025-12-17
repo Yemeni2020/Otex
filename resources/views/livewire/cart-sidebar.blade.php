@@ -74,7 +74,7 @@
             <span class="font-bold text-2xl text-blue-600">${{ number_format($this->subtotal, 2) }}</span>
         </div>
         <button class="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-lg font-medium">
-            Proceed to Checkout
+           <a href="{{ route('checkout') }}">Proceed to Checkout</a> 
         </button>
     </div>
     </div>
