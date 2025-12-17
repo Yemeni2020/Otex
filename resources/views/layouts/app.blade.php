@@ -92,6 +92,9 @@
         const themeToggleButton = document.getElementById('themeToggleButton');
         const themeIconSun = document.getElementById('themeIconSun');
         const themeIconMoon = document.getElementById('themeIconMoon');
+        const dirToggleButton = document.getElementById('dirToggleButton');
+        const dirIconLtr = document.getElementById('dirIconLtr');
+        const dirIconRtl = document.getElementById('dirIconRtl');
         const root = document.documentElement;
 
         // Theme
@@ -127,6 +130,29 @@
                 const next = root.classList.contains('dark') ? 'light' : 'dark';
                 localStorage.setItem('theme', next);
                 applyTheme(next);
+            });
+        }
+
+        // Direction (LTR/RTL)
+        const applyDir = (dir) => {
+            root.setAttribute('dir', dir);
+            if (dirIconLtr && dirIconRtl) {
+                if (dir === 'rtl') {
+                    dirIconLtr.classList.add('hidden');
+                    dirIconRtl.classList.remove('hidden');
+                } else {
+                    dirIconLtr.classList.remove('hidden');
+                    dirIconRtl.classList.add('hidden');
+                }
+            }
+        };
+        const storedDir = localStorage.getItem('dir');
+        applyDir(storedDir || 'ltr');
+        if (dirToggleButton) {
+            dirToggleButton.addEventListener('click', () => {
+                const next = root.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+                localStorage.setItem('dir', next);
+                applyDir(next);
             });
         }
 

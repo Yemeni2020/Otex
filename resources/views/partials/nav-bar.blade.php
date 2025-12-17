@@ -229,6 +229,14 @@
                             d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
                     </svg>
                 </button>
+                <button id="dirToggleButton" type="button" aria-label="Toggle direction" class="p-2 rounded-full hover:bg-black/5 transition-colors text-slate-700">
+                    <svg id="dirIconLtr" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7.5h11.25M4 12h7.25M4 16.5h11.25M14 9l3.5-1.5L14 6" />
+                    </svg>
+                    <svg id="dirIconRtl" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hidden">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7.5H8.75M20 12h-7.25M20 16.5H8.75M10 6l-3.5 1.5L10 9" />
+                    </svg>
+                </button>
 
                 <!-- User Dropdown -->
                 <div class="dropdown relative">
