@@ -108,3 +108,8 @@ Route::get('shop/{productId}', \App\Livewire\ProductDetail::class)->name('shop.s
 //     Route::get('/lighting', [ShopController::class, 'lighting'])->name('lighting');
 //     Route::get('/dash-cams', [ShopController::class, 'dashCams'])->name('dash-cams');
 // });
+
+// Fallback 404
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});

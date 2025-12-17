@@ -53,7 +53,8 @@
     {{-- @include('partials.hero') --}}
 
     <main class="bg-white expansion-alids-init">
-        {{ $slot }}
+        @yield('content')
+        {{ $slot ?? '' }}
     </main>
 
 
