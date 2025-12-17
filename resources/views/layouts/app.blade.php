@@ -34,10 +34,13 @@
     @include('partials.footer')
 
     <!-- Scroll to top -->
-    <button id="scrollToTop" aria-label="Scroll to top" class="scroll-to-top fixed bottom-6 right-4 z-40 hidden transition-opacity duration-300 opacity-0" type="button">
-        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path id="scrollToTopPath" d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;" class="stroke-[3] stroke-blue-500 fill-white drop-shadow"></path>
-        </svg>
+    <button id="scrollToTop" id="scrollToTopPath" aria-label="Scroll to top" class="scroll-to-top fixed bottom-20 right-4 z-35 hidden transition-opacity duration-300 opacity-0" type="button">
+        <svg class="progress-circle svg-content" width="56" height="56" viewBox="-1 -1 102 102">
+            <path id="scrollToTopPath" d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" 
+                  class="stroke-[3] stroke-blue-500 fill-white drop-shadow"
+                  style="stroke-dasharray: 307.919; stroke-dashoffset: 307.919; transition: stroke-dashoffset 0.5s ease;"></path>
+             <polyline points="50 28 35 45 42 45 42 70 58 70 58 45 65 45 50 28" class="fill-blue-500/10 stroke-blue-600 stroke-[3] rounded-sm"></polyline>
+          </svg>
     </button>
 
     <!-- Notifications region -->

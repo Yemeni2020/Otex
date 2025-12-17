@@ -10,12 +10,18 @@
 
         <div class="grid lg:grid-cols-2 gap-12 mb-16">
             <div class="space-y-4">
-                <div class="aspect-square bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <img src="{{ $product['image'] }}" alt="{{ $product['name'] }}" class="w-full h-full object-cover">
+                <div class="relative aspect-square bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                    <img id="pd-main-image" src="{{ $product['image'] }}" alt="{{ $product['name'] }}" class="w-full h-full object-cover transition duration-300">
+                    <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-slate-700 rounded-full h-10 w-10 shadow" data-slider-prev>
+                        ‹
+                    </button>
+                    <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-slate-700 rounded-full h-10 w-10 shadow" data-slider-next>
+                        ›
+                    </button>
                 </div>
                 <div class="grid grid-cols-4 gap-4">
                     @foreach ($product['thumbnails'] as $idx => $thumb)
-                        <button class="aspect-square rounded-xl overflow-hidden border-2 transition-colors {{ $idx === 0 ? 'border-blue-600' : 'border-transparent' }}">
+                        <button class="aspect-square rounded-xl overflow-hidden border-2 transition-colors {{ $idx === 0 ? 'border-blue-600' : 'border-transparent' }}" data-thumb data-index="{{ $idx }}">
                             <img src="{{ $thumb }}" alt="Thumbnail" class="w-full h-full object-cover">
                         </button>
                     @endforeach
@@ -89,6 +95,12 @@
                         </svg>
                         Add to Cart
                     </button>
+                    <button class="inline-flex items-center justify-center font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-5 rounded-full border border-slate-200 text-slate-700 hover:border-blue-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2">
+                            <path d="M19 14c0 4-7 8-7 8s-7-4-7-8a7 7 0 1 1 14 0Z"></path>
+                        </svg>
+                        Add to Wishlist
+                    </button>
                 </div>
 
                 <div class="grid grid-cols-3 gap-4 pt-4">
@@ -123,6 +135,52 @@
                             </svg>
                         </div>
                         <span class="text-xs font-medium text-slate-600">30 Day Returns</span>
+                    </div>
+                </div>
+
+                <!-- Tabs for description/reviews -->
+                <div class="pt-8">
+                    <div class="flex gap-6 border-b border-slate-200">
+                        <button class="py-3 text-sm font-semibold text-slate-900 border-b-2 border-blue-600" data-tab-button="description">Description</button>
+                        <button class="py-3 text-sm font-semibold text-slate-500 hover:text-slate-800" data-tab-button="reviews">Reviews</button>
+                    </div>
+                    <div class="pt-6">
+                        <div data-tab-panel="description">
+                            <p class="text-slate-700 leading-relaxed">Heavy-duty protection for your vehicle floor. Deep channels trap water, mud, and debris. Custom fit for most sedans and SUVs.</p>
+                            <ul class="mt-4 space-y-2 text-slate-600">
+                                @foreach ($product['features'] as $feature)
+                                    <li class="flex gap-2 items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500">
+                                            <path d="M20 6 9 17l-5-5"></path>
+                                        </svg>
+                                        {{ $feature }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div data-tab-panel="reviews" class="hidden">
+                            @php
+                                $reviews = [
+                                    ['name' => 'Alex M.', 'rating' => 5, 'text' => 'Fits my SUV perfectly, great quality.'],
+                                    ['name' => 'Sarah K.', 'rating' => 4, 'text' => 'Fast shipping and solid build.'],
+                                ];
+                            @endphp
+                            <div class="space-y-4">
+                                @foreach ($reviews as $review)
+                                    <div class="border border-slate-100 rounded-xl p-4">
+                                        <div class="flex items-center justify-between">
+                                            <div class="font-semibold text-slate-900">{{ $review['name'] }}</div>
+                                            <div class="flex text-yellow-400">
+                                                @for ($i = 0; $i < 5; $i++)
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="{{ $i < $review['rating'] ? '' : 'text-slate-300' }}"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
+                                                @endfor
+                                            </div>
+                                        </div>
+                                        <p class="text-slate-700 mt-2">{{ $review['text'] }}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -192,3 +250,52 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+(function initProductDetail() {
+    const run = () => {
+        const mainImage = document.getElementById('pd-main-image');
+        if (!mainImage || mainImage.dataset.initialized === 'true') return;
+        mainImage.dataset.initialized = 'true';
+
+        // Slider
+        const thumbs = Array.from(document.querySelectorAll('[data-thumb]'));
+        let current = 0;
+        const show = (idx) => {
+            if (!thumbs.length) return;
+            current = (idx + thumbs.length) % thumbs.length;
+            const img = thumbs[current].querySelector('img').src;
+            mainImage.src = img;
+            thumbs.forEach((t,i) => t.classList.toggle('border-blue-600', i === current));
+            thumbs.forEach((t,i) => t.classList.toggle('border-transparent', i !== current));
+        };
+        thumbs.forEach((btn, idx) => btn.addEventListener('click', () => show(idx)));
+        document.querySelector('[data-slider-prev]')?.addEventListener('click', () => show(current - 1));
+        document.querySelector('[data-slider-next]')?.addEventListener('click', () => show(current + 1));
+
+        // Tabs
+        const tabButtons = document.querySelectorAll('[data-tab-button]');
+        const tabPanels = document.querySelectorAll('[data-tab-panel]');
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.getAttribute('data-tab-button');
+                tabButtons.forEach(b => b.classList.toggle('text-slate-900 border-b-2 border-blue-600', b === btn));
+                tabButtons.forEach(b => b.classList.toggle('text-slate-500', b !== btn));
+                tabPanels.forEach(panel => {
+                    panel.classList.toggle('hidden', panel.getAttribute('data-tab-panel') !== target);
+                });
+            });
+        });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', run);
+    } else {
+        run();
+    }
+
+    window.addEventListener('livewire:navigated', run);
+})();
+</script>
+@endpush
