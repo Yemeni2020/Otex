@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Otex</title>
     @vite('resources/css/app.css')
     @livewireStyles
@@ -27,74 +28,86 @@
     @livewireScripts
     @stack('scripts')
     <script>
-    const cartButton = document.getElementById('cartButton'); // add id="cartButton" to your cart icon button
-    const cartSidebar = document.getElementById('cartSidebar');
-    const cartBackdrop = document.getElementById('cartBackdrop');
-    const closeCart = document.getElementById('closeCart');
+    (() => {
+        const cartButton = document.getElementById('cartButton');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartBackdrop = document.getElementById('cartBackdrop');
+        const closeCart = document.getElementById('closeCart');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const iconOpen = document.getElementById('mobileMenuIconOpen');
+        const iconClose = document.getElementById('mobileMenuIconClose');
+        const mobileSearchButton = document.getElementById('mobileSearchButton');
+        const mobileSearchBar = document.getElementById('mobileSearchBar');
 
-    // Open cart
-    cartButton.addEventListener('click', () => {
-        cartSidebar.classList.remove('translate-x-full');
-        cartBackdrop.classList.remove('hidden');
-    });
-
-    // Close cart
-    closeCart.addEventListener('click', () => {
-        cartSidebar.classList.add('translate-x-full');
-        cartBackdrop.classList.add('hidden');
-    });
-
-    // Close cart when clicking on backdrop
-    cartBackdrop.addEventListener('click', () => {
-        cartSidebar.classList.add('translate-x-full');
-        cartBackdrop.classList.add('hidden');
-    });
-    window.addEventListener('notify', event => {
-    alert(event.detail.message);
-});
-</script>
-<script>
-const sortButton = document.getElementById('sortButton');
-const sortMenu = document.getElementById('sortMenu');
-const productsContainer = document.getElementById('products');
-
-sortButton.addEventListener('click', () => {
-    sortMenu.classList.toggle('hidden');
-});
-
-sortMenu.addEventListener('click', (e) => {
-    if (!e.target.dataset.sort) return;
-
-    const products = Array.from(productsContainer.children);
-    const sortType = e.target.dataset.sort;
-
-    products.sort((a, b) => {
-        if (sortType === 'price-asc') {
-            return a.dataset.price - b.dataset.price;
+        if (cartButton && window.Livewire) {
+            cartButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.Livewire.dispatch('open-cart');
+            }, { passive: true });
         }
 
-        if (sortType === 'price-desc') {
-            return b.dataset.price - a.dataset.price;
+        if (cartSidebar && closeCart) {
+            const close = () => {
+                cartSidebar.classList.add('translate-x-full');
+                if (cartBackdrop) cartBackdrop.classList.add('hidden');
+            };
+            closeCart.addEventListener('click', close, { passive: true });
+            if (cartBackdrop) cartBackdrop.addEventListener('click', close, { passive: true });
         }
 
-        if (sortType === 'name-asc') {
-            return a.dataset.name.localeCompare(b.dataset.name);
+        if (mobileMenuButton && mobileMenu) {
+            const openMenu = () => {
+                mobileMenu.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    mobileMenu.classList.add('mobile-menu-open');
+                    mobileMenu.classList.remove('pointer-events-none');
+                });
+                if (iconOpen && iconClose) {
+                    iconOpen.classList.add('hidden');
+                    iconClose.classList.remove('hidden');
+                }
+            };
+            const closeMenu = () => {
+                mobileMenu.classList.remove('mobile-menu-open');
+                mobileMenu.classList.add('pointer-events-none');
+                setTimeout(() => mobileMenu.classList.add('hidden'), 180);
+                if (iconOpen && iconClose) {
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                }
+            };
+            let menuOpen = false;
+            mobileMenuButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                menuOpen ? closeMenu() : openMenu();
+                menuOpen = !menuOpen;
+            });
         }
-    });
 
-    products.forEach(product => productsContainer.appendChild(product));
-    sortMenu.classList.add('hidden');
-});
-
-// Close dropdown when clicking outside
-document.addEventListener('click', (e) => {
-    if (!sortButton.contains(e.target) && !sortMenu.contains(e.target)) {
-        sortMenu.classList.add('hidden');
-    }
-});
-
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+        if (mobileSearchButton && mobileSearchBar) {
+            const openSearch = () => {
+                mobileSearchBar.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    mobileSearchBar.classList.add('mobile-menu-open');
+                    mobileSearchBar.classList.remove('pointer-events-none');
+                });
+            };
+            const closeSearch = () => {
+                mobileSearchBar.classList.remove('mobile-menu-open');
+                mobileSearchBar.classList.add('pointer-events-none');
+                setTimeout(() => mobileSearchBar.classList.add('hidden'), 180);
+            };
+            let searchOpen = false;
+            mobileSearchButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                searchOpen ? closeSearch() : openSearch();
+                searchOpen = !searchOpen;
+            });
+        }
+    })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
 
 
 </body>
