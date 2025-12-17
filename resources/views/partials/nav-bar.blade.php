@@ -237,6 +237,17 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M20 7.5H8.75M20 12h-7.25M20 16.5H8.75M10 6l-3.5 1.5L10 9" />
                     </svg>
                 </button>
+                <!-- Desktop Cart -->
+                <button id="cartButton" type="button" class="hidden md:inline-flex items-center justify-center text-sm font-medium h-10 w-10 relative bg-slate-900/90 hover:bg-blue-600 text-white rounded-full transition-all duration-300 shadow-lg hover:shadow-blue-500/30 backdrop-blur-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="w-5 h-5">
+                        <circle cx="8" cy="21" r="1"></circle>
+                        <circle cx="19" cy="21" r="1"></circle>
+                        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                    </svg>
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 min-w-[20px] px-1 flex items-center justify-center">3</span>
+                </button>
 
                 <!-- User Dropdown -->
                 <div class="dropdown relative">

@@ -93,8 +93,11 @@
                         </div>
                         <div class="mt-6 space-y-4">
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1" for="cardNumber">Card Number</label>
-                                <input id="cardNumber" type="text" class="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="1234 5678 9012 3456" maxlength="19">
+                                <div class="flex items-center justify-between mb-1">
+                                    <label class="block text-sm font-medium text-slate-700" for="cardNumber">Card Number</label>
+                                    <span id="cardBrandDisplay" class="text-xs font-semibold text-slate-500">Card type</span>
+                                </div>
+                                <input id="cardNumber" type="text" class="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" autocomplete="cc-number">
                             </div>
                             <div class="grid md:grid-cols-2 gap-4">
                                 <div>
@@ -170,3 +173,30 @@
         </section>
     </main>
 </x-layouts.app>
+
+@push('scripts')
+<script>
+(() => {
+    const cardNumber = document.getElementById('cardNumber');
+    const brandDisplay = document.getElementById('cardBrandDisplay');
+    if (!cardNumber || !brandDisplay) return;
+
+    const brands = [
+        { name: 'Visa', regex: /^4/ },
+        { name: 'Mastercard', regex: /^(5[1-5]|2[2-7])/ },
+        { name: 'Amex', regex: /^3[47]/ },
+        { name: 'Discover', regex: /^6(?:011|5)/ },
+    ];
+
+    const formatNumber = (value) => value.replace(/\D/g, '').slice(0, 19).replace(/(.{4})/g, '$1 ').trim();
+
+    cardNumber.addEventListener('input', (e) => {
+        const formatted = formatNumber(e.target.value);
+        e.target.value = formatted;
+        const digits = formatted.replace(/\s+/g, '');
+        const brand = brands.find(b => b.regex.test(digits));
+        brandDisplay.textContent = brand ? brand.name : 'Card type';
+    });
+})();
+</script>
+@endpush
