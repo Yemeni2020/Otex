@@ -53,134 +53,117 @@
                     </div>
                 </div>
 
-                <div class="flex items-end gap-4 border-b border-slate-100 pb-8">
-                    <span class="text-4xl font-bold text-blue-600">${{ number_format($product['price'], 2) }}</span>
-                    <span class="text-slate-400 line-through mb-1.5">${{ number_format($product['old_price'], 2) }}</span>
-                </div>
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-10">
+                    <div class="flex items-end gap-4 border-b border-slate-100 pb-6">
+                        <span class="text-4xl font-bold text-blue-600">${{ number_format($product['price'], 2) }}</span>
+                        <span class="text-slate-400 line-through mb-1.5">${{ number_format($product['old_price'], 2) }}</span>
+                    </div>
 
-                <div class="prose prose-slate text-slate-600">
-                    <p>{{ $product['description'] }}</p>
-                    <ul class="space-y-2 list-none pl-0 mt-4">
-                        @foreach ($product['features'] as $feature)
-                            <li class="flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-5 h-5 text-green-500">
-                                    <path d="M20 6 9 17l-5-5"></path>
-                                </svg>
-                                {{ $feature }}
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
+                    <form class="space-y-8">
+                        <div>
+                            <h2 class="text-sm font-semibold text-slate-800">Color</h2>
+                            <fieldset aria-label="Choose a color" class="mt-4">
+                                <div class="flex items-center gap-3">
+                                    <label class="inline-flex items-center justify-center rounded-full border border-slate-200 p-1 cursor-pointer hover:border-blue-500 transition">
+                                        <input type="radio" name="color" value="black" checked class="sr-only peer">
+                                        <span class="h-10 w-10 rounded-full bg-slate-900 peer-checked:ring-2 peer-checked:ring-blue-500 peer-checked:ring-offset-2 peer-checked:ring-offset-white"></span>
+                                        <span class="sr-only">Black</span>
+                                    </label>
+                                    <label class="inline-flex items-center justify-center rounded-full border border-slate-200 p-1 cursor-pointer hover:border-blue-500 transition">
+                                        <input type="radio" name="color" value="heather-grey" class="sr-only peer">
+                                        <span class="h-10 w-10 rounded-full bg-slate-300 peer-checked:ring-2 peer-checked:ring-blue-500 peer-checked:ring-offset-2 peer-checked:ring-offset-white"></span>
+                                        <span class="sr-only">Heather Grey</span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
 
-                <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <div class="flex items-center border border-slate-200 rounded-full w-max">
-                        <button wire:click="decrement" class="p-3 hover:text-blue-600 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus w-4 h-4">
-                                <path d="M5 12h14"></path>
-                            </svg>
-                        </button>
-                        <span class="w-12 text-center font-bold">{{ $quantity }}</span>
-                        <button wire:click="increment" class="p-3 hover:text-blue-600 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-4 h-4">
-                                <path d="M5 12h14"></path>
-                                <path d="M12 5v14"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <button class="inline-flex items-center justify-center font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-11 px-8 flex-1 rounded-full bg-blue-600 hover:bg-blue-700 text-base">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart w-5 h-5 mr-2">
-                            <circle cx="8" cy="21" r="1"></circle>
-                            <circle cx="19" cy="21" r="1"></circle>
-                            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-                        </svg>
-                        Add to Cart
-                    </button>
-                    <button class="inline-flex items-center justify-center font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-5 rounded-full border border-slate-200 text-slate-700 hover:border-blue-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2">
-                            <path d="M19 14c0 4-7 8-7 8s-7-4-7-8a7 7 0 1 1 14 0Z"></path>
-                        </svg>
-                        Add to Wishlist
-                    </button>
-                </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-sm font-semibold text-slate-800">Size</h2>
+                                <a href="#" class="text-sm font-semibold text-blue-600 hover:underline">See sizing chart</a>
+                            </div>
+                            <fieldset aria-label="Choose a size">
+                                <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                                    @foreach (['XXS', 'XS', 'S', 'M', 'L', 'XL'] as $idx => $size)
+                                        @php($disabled = $size === 'XL')
+                                        <label class="relative flex items-center justify-center rounded-xl border text-sm font-semibold py-3 cursor-pointer {{ $disabled ? 'opacity-50 cursor-not-allowed bg-slate-100 border-slate-200' : 'border-slate-200 hover:border-blue-500 hover:text-blue-700' }}">
+                                            <input type="radio" name="size" value="{{ strtolower($size) }}" {{ $size === 'S' ? 'checked' : '' }} {{ $disabled ? 'disabled' : '' }} class="sr-only peer">
+                                            <span class="peer-checked:text-blue-700 peer-checked:border-blue-500">{{ $size }}</span>
+                                            <span class="absolute inset-0 rounded-xl ring-2 ring-blue-500 ring-offset-2 ring-offset-white opacity-0 peer-checked:opacity-100 pointer-events-none transition"></span>
+                                        </label>
+                                    @endforeach
+                                </div>
+                            </fieldset>
+                        </div>
 
-                <div class="grid grid-cols-3 gap-4 pt-4">
-                    <div class="flex flex-col items-center text-center gap-2">
-                        <div class="p-3 bg-slate-100 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck w-6 h-6 text-slate-600">
-                                <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
-                                <path d="M15 18H9"></path>
-                                <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
-                                <circle cx="17" cy="18" r="2"></circle>
-                                <circle cx="7" cy="18" r="2"></circle>
-                            </svg>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <div class="flex items-center border border-slate-200 rounded-full w-max">
+                                <button type="button" wire:click="decrement" class="p-3 hover:text-blue-600 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus w-4 h-4">
+                                        <path d="M5 12h14"></path>
+                                    </svg>
+                                </button>
+                                <span class="w-12 text-center font-bold">{{ $quantity }}</span>
+                                <button type="button" wire:click="increment" class="p-3 hover:text-blue-600 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-4 h-4">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5v14"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 flex-1 transition">
+                                Add to cart
+                            </button>
                         </div>
-                        <span class="text-xs font-medium text-slate-600">Free Shipping</span>
-                    </div>
-                    <div class="flex flex-col items-center text-center gap-2">
-                        <div class="p-3 bg-slate-100 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check w-6 h-6 text-slate-600">
-                                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
-                                <path d="m9 12 2 2 4-4"></path>
-                            </svg>
-                        </div>
-                        <span class="text-xs font-medium text-slate-600">1 Year Warranty</span>
-                    </div>
-                    <div class="flex flex-col items-center text-center gap-2">
-                        <div class="p-3 bg-slate-100 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-refresh-ccw w-6 h-6 text-slate-600">
-                                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-                                <path d="M3 3v5h5"></path>
-                                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
-                                <path d="M16 16h5v5"></path>
-                            </svg>
-                        </div>
-                        <span class="text-xs font-medium text-slate-600">30 Day Returns</span>
-                    </div>
-                </div>
+                    </form>
 
-                <!-- Tabs for description/reviews -->
-                <div class="pt-8">
-                    <div class="flex gap-6 border-b border-slate-200">
-                        <button class="py-3 text-sm font-semibold text-slate-900 border-b-2 border-blue-600" data-tab-button="description">Description</button>
-                        <button class="py-3 text-sm font-semibold text-slate-500 hover:text-slate-800" data-tab-button="reviews">Reviews</button>
-                    </div>
-                    <div class="pt-6">
-                        <div data-tab-panel="description">
-                            <p class="text-slate-700 leading-relaxed">Heavy-duty protection for your vehicle floor. Deep channels trap water, mud, and debris. Custom fit for most sedans and SUVs.</p>
-                            <ul class="mt-4 space-y-2 text-slate-600">
-                                @foreach ($product['features'] as $feature)
-                                    <li class="flex gap-2 items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500">
-                                            <path d="M20 6 9 17l-5-5"></path>
-                                        </svg>
-                                        {{ $feature }}
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <div data-tab-panel="reviews" class="hidden">
-                            @php
-                                $reviews = [
-                                    ['name' => 'Alex M.', 'rating' => 5, 'text' => 'Fits my SUV perfectly, great quality.'],
-                                    ['name' => 'Sarah K.', 'rating' => 4, 'text' => 'Fast shipping and solid build.'],
-                                ];
-                            @endphp
-                            <div class="space-y-4">
-                                @foreach ($reviews as $review)
-                                    <div class="border border-slate-100 rounded-xl p-4">
-                                        <div class="flex items-center justify-between">
-                                            <div class="font-semibold text-slate-900">{{ $review['name'] }}</div>
-                                            <div class="flex text-yellow-400">
-                                                @for ($i = 0; $i < 5; $i++)
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="{{ $i < $review['rating'] ? '' : 'text-slate-300' }}"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-                                                @endfor
-                                            </div>
-                                        </div>
-                                        <p class="text-slate-700 mt-2">{{ $review['text'] }}</p>
-                                    </div>
-                                @endforeach
+                    <div class="space-y-10">
+                        <div class="space-y-3">
+                            <h2 class="text-lg font-semibold text-slate-900">Description</h2>
+                            <div class="space-y-3 text-slate-700 leading-relaxed">
+                                <p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p>
+                                <p>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</p>
                             </div>
                         </div>
+
+                        <div class="space-y-3">
+                            <h2 class="text-lg font-semibold text-slate-900">Fabric &amp; Care</h2>
+                            <ul class="space-y-2 text-slate-700 list-disc pl-5">
+                                <li>Only the best materials</li>
+                                <li>Ethically and locally made</li>
+                                <li>Pre-washed and pre-shrunk</li>
+                                <li>Machine wash cold with similar colors</li>
+                            </ul>
+                        </div>
+
+                        <section aria-labelledby="policies-heading" class="space-y-4">
+                            <h2 id="policies-heading" class="text-lg font-semibold text-slate-900">Our Policies</h2>
+                            <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="flex gap-3 rounded-xl border border-slate-200 p-4 bg-slate-50">
+                                    <div class="shrink-0 text-blue-600">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-6 h-6">
+                                            <path d="m6.115 5.19.319 1.913A6 6 0 0 0 8.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 0 0 2.288-4.042 1.087 1.087 0 0 0-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 0 1-.98-.314l-.295-.295a1.125 1.125 0 0 1 0-1.591l.13-.132a1.125 1.125 0 0 1 1.3-.21l.603.302a.809.809 0 0 0 1.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 0 0 1.528-1.732l.146-.292M6.115 5.19A9 9 0 1 0 17.18 4.64M6.115 5.19A8.965 8.965 0 0 1 12 3c1.929 0 3.716.607 5.18 1.64" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <dt class="text-sm font-semibold text-slate-900">International delivery</dt>
+                                        <dd class="text-sm text-slate-600">Get your order in 2 years</dd>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3 rounded-xl border border-slate-200 p-4 bg-slate-50">
+                                    <div class="shrink-0 text-blue-600">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-6 h-6">
+                                            <path d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <dt class="text-sm font-semibold text-slate-900">Loyalty rewards</dt>
+                                        <dd class="text-sm text-slate-600">Don't look at other tees</dd>
+                                    </div>
+                                </div>
+                            </dl>
+                        </section>
                     </div>
                 </div>
             </div>
