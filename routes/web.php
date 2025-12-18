@@ -205,6 +205,7 @@ Route::get('/contact', function () {
 
 // Profile / Orders / Wishlist
 Route::view('/profile', 'profile')->name('profile');
+Route::view('/orders/history', 'orders.history')->name('orders.history');
 Route::get('/orders', function () {
     $orders = demoOrders();
     return view('orders', ['orders' => array_values($orders)]);

@@ -115,6 +115,7 @@
                                 Add to cart
                             </button>
                         </div>
+
                     </form>
 
                     <div class="space-y-10">
