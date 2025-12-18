@@ -52,8 +52,7 @@
                         <span class="text-slate-500 text-sm">{{ $product['reviews'] }} Reviews</span>
                     </div>
                 </div>
-
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-10">
+                
                     <div class="flex items-end gap-4 border-b border-slate-100 pb-6">
                         <span class="text-4xl font-bold text-blue-600">${{ number_format($product['price'], 2) }}</span>
                         <span class="text-slate-400 line-through mb-1.5">${{ number_format($product['old_price'], 2) }}</span>
@@ -165,7 +164,7 @@
                             </dl>
                         </section>
                     </div>
-                </div>
+                
             </div>
         </div>
 
