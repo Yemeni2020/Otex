@@ -6,6 +6,8 @@
     <title>Otex</title>
     @vite('resources/css/app.css')
     @livewireStyles
+    @stack('head')
+    <script>window.tailwind = window.tailwind || {};</script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
     <style>
         :root { color-scheme: light; }
@@ -290,7 +292,20 @@
         body.querySelector('button').addEventListener('click', remove, { once: true });
         setTimeout(remove, 3000);
     });
+
+    // Silence noisy message events from injected scripts (e.g., extensions/devtools)
+    window.addEventListener('message', (event) => {
+        if (event?.data?.source === 'react-devtools-content-script') {
+            event.stopImmediatePropagation();
+        }
+    }, true);
+
+    // Quiet console noise (leave warnings/errors intact)
+    ['log', 'info', 'debug'].forEach(fn => {
+        if (typeof console?.[fn] === 'function') {
+            console[fn] = () => {};
+        }
+    });
     </script>
-<script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
 </body>
 </html>

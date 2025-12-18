@@ -62,7 +62,7 @@
                         class="text-2xl font-bold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent leading-none filter drop-shadow-sm">
                         Otex</h1>
                     <p class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold leading-none mt-0.5">
-                        Automotive</p>
+                        Express</p>
                 </div>
             </a>
 
