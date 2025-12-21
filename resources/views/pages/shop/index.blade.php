@@ -672,22 +672,26 @@
                             @endphp
 
                             @foreach ($products as $product)
-                                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative"
+                                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group"
                                     data-product-card
                                     data-loaded="true"
+                                    data-id="{{ $product['id'] }}"
                                     data-name="{{ $product['name'] }}"
                                     data-price="{{ $product['price'] }}"
+                                    data-image="{{ $product['image'] }}"
+                                    data-description="{{ $product['description'] }}"
+                                    data-badge="{{ $product['badge'] ?? '' }}"
                                     data-category="{{ strtolower($product['category']) }}"
                                     data-color="{{ strtolower($product['color'] ?? '') }}"
                                     data-size="{{ strtolower($product['size'] ?? '') }}">
-                                    <div class="absolute top-3 right-3 z-20 flex gap-2">
-                                        <button type="button" class="p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Add to wishlist" data-wishlist="{{ $product['id'] }}">
+                                    <div class="absolute inset-0 z-20 flex items-center justify-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
+                                        <button type="button" class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Add to wishlist" data-wishlist="{{ $product['id'] }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.0" stroke="currentColor" class="size-4">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                                             </svg>
 
                                         </button>
-                                        <button type="button" class="p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Quick preview" data-preview="{{ $product['id'] }}">
+                                        <button type="button" class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Quick preview" data-preview="{{ $product['id'] }}" onclick="const dialog = document.getElementById('product-preview'); if (dialog) { dialog.showModal ? dialog.showModal() : dialog.setAttribute('open', 'open'); }">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
                                                 <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path>
                                                 <circle cx="12" cy="12" r="3"></circle>
@@ -729,16 +733,69 @@
                     </div>
                 </div>
             </section>
+
+            <dialog id="product-preview" class="fixed inset-0 z-50 m-0 h-full w-full overflow-y-auto bg-transparent p-4 backdrop:bg-black/60 backdrop:backdrop-blur-sm">
+                <div class="flex min-h-full items-center justify-center">
+                    <div class="relative w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+                        <button type="button" data-preview-close class="absolute right-4 top-4 inline-flex size-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition hover:bg-slate-50 hover:text-slate-700" onclick="const dialog = document.getElementById('product-preview'); if (dialog) { dialog.close ? dialog.close() : dialog.removeAttribute('open'); }">
+                            <span class="sr-only">Close</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="size-5">
+                                <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+
+                        <div class="grid gap-8 p-6 md:p-8 lg:grid-cols-[1fr,1.1fr]">
+                            <div class="space-y-4">
+                                <div class="overflow-hidden rounded-2xl bg-slate-100">
+                                    <img data-preview-image src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80" alt="Backseat Tablet Organizer" class="h-full w-full object-cover">
+                                </div>
+                                <div class="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                                    <span data-preview-badge class="rounded-full bg-amber-100 px-3 py-1 text-amber-700">Best Seller</span>
+                                    <span data-preview-category class="rounded-full bg-slate-100 px-3 py-1 text-slate-600">Category: Storage</span>
+                                    <span data-preview-color class="rounded-full bg-slate-100 px-3 py-1 text-slate-600">Color: Black</span>
+                                    <span data-preview-size class="rounded-full bg-slate-100 px-3 py-1 text-slate-600">Size: Standard</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="space-y-2">
+                                    <h2 data-preview-title class="text-2xl font-bold text-slate-900 md:text-3xl">Backseat Tablet Organizer</h2>
+                                    <p data-preview-price class="text-xl font-semibold text-blue-600">$29.99</p>
+                                </div>
+
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center text-amber-400">
+                                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4"><path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4"><path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4"><path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4"><path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4 text-slate-200"><path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-slate-500">3.9 out of 5</span>
+                                    <a href="#" class="text-sm font-semibold text-blue-600 hover:text-blue-500">See all reviews</a>
+                                </div>
+
+                                <p data-preview-description class="text-slate-600">Perfect for road trips with kids. Holds tablets up to 11 inches, drinks, snacks, and toys. Durable waterproof fabric.</p>
+
+                                <div class="flex flex-wrap gap-3">
+                                    <button type="button" class="inline-flex h-12 items-center justify-center rounded-full bg-blue-600 px-6 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition hover:bg-blue-500">Add to bag</button>
+                                    <a data-preview-link href="/shop/8" class="inline-flex h-12 items-center justify-center rounded-full border border-slate-200 px-6 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50">View full details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </dialog>
         </main>
     </div>
 </x-layouts.app>
 
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+const initShopPage = () => {
     const cards = Array.from(document.querySelectorAll('[data-product-card]'));
     const grid = document.querySelector('[data-product-grid]') || document.querySelector('.lg\\:col-span-3 > .grid');
-    if (!grid || !cards.length) return;
+    const hasCards = cards.length > 0;
 
     const mapCategory = (val) => ({
         'new-arrivals': 'interior',
@@ -767,6 +824,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const getChecked = (name, mapper = (v) => v) => Array.from(document.querySelectorAll(`input[name="${name}[]"]:checked`)).map(i => mapper(i.value.toLowerCase()));
 
     const applyFilters = () => {
+        if (!hasCards) return;
         const categories = getChecked('category', mapCategory);
         const colors = getChecked('color', mapColor);
         const sizes = getChecked('size', mapSize);
@@ -780,6 +838,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const applySort = (sort) => {
+        if (!hasCards || !grid) return;
         const visibleCards = cards.filter(c => c.style.display !== 'none');
         const sorter = {
             'price-asc': (a,b) => parseFloat(a.dataset.price) - parseFloat(b.dataset.price),
@@ -806,6 +865,12 @@ document.addEventListener('DOMContentLoaded', () => {
     applyFilters();
 
     // Products are already rendered; keep the sentinel only if you want lazy-load effects later.
-});
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initShopPage, { once: true });
+} else {
+    initShopPage();
+}
 </script>
 @endpush

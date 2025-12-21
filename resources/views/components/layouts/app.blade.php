@@ -8,9 +8,9 @@
     @livewireStyles
     <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
     <script>
-      tailwind.config = {
-        darkMode: 'class', // or 'media' or 'class'
-      }
+      window.tailwind = window.tailwind || {};
+      window.tailwind.config = window.tailwind.config || {};
+      window.tailwind.config.darkMode = 'class';
     </script>
     <style>
         :root { color-scheme: light; }
@@ -335,19 +335,22 @@
     </script>
     <script>
         const toggle = document.getElementById('toggle');
-    const html = document.documentElement;
+        const html = document.documentElement;
 
-    if(window.matchMedia && window.matchMedia('(perfers-color-scheme: dark)').matches){
-        html.classList('dark');
-        toggle.checked = true;
-    }
-    toggle.addEventListener('change', function(){
-        if(this.checked){
+        if (toggle && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             html.classList.add('dark');
-        }else{
-            html.classList.remove('dark');
+            toggle.checked = true;
         }
-    });
+
+        if (toggle) {
+            toggle.addEventListener('change', function() {
+                if (this.checked) {
+                    html.classList.add('dark');
+                } else {
+                    html.classList.remove('dark');
+                }
+            });
+        }
     </script>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
 </body>
