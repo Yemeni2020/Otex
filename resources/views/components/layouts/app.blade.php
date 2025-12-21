@@ -52,13 +52,25 @@
     </style>
     
 </head>
-<body class="bg-gray-100 text-gray-900 min-h-screen expansion-alids-init dark:bg-slate-900">
+<body class="bg-gray-100 text-gray-900 min-h-screen expansion-alids-init">
 
    
     @include('partials.top-bar')
     {{-- <livewire:navbar/> --}}
     @include('partials.nav-bar')
     
+    <div id="cookieBanner" class="fixed inset-x-0 bottom-4 px-4 z-50 hidden">
+        <div class="max-w-5xl mx-auto rounded-2xl bg-white shadow-xl border border-slate-200 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+            <div class="flex-1">
+                <p class="text-sm sm:text-base font-semibold text-slate-900">Cookie policy</p>
+                <p class="text-sm text-slate-600 mt-1">We use cookies to personalize content and analyze traffic. Manage your choice below.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="cookieReject" type="button" class="px-4 py-2 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 text-sm font-semibold">Reject all</button>
+                <button id="cookieAccept" type="button" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-500 text-sm font-semibold shadow-sm">Accept all</button>
+            </div>
+        </div>
+    </div>
 
     <main class="bg-white expansion-alids-init">
         @yield('content')
@@ -105,6 +117,9 @@
         const dirIconLtr = document.getElementById('dirIconLtr');
         const dirIconRtl = document.getElementById('dirIconRtl');
         const root = document.documentElement;
+        const cookieBanner = document.getElementById('cookieBanner');
+        const cookieAccept = document.getElementById('cookieAccept');
+        const cookieReject = document.getElementById('cookieReject');
 
         const applyTheme = (theme) => {
             root.dataset.theme = theme;
@@ -161,6 +176,25 @@
                 const next = root.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
                 localStorage.setItem('dir', next);
                 applyDir(next);
+            });
+        }
+
+        // Cookie banner
+        const storedCookieChoice = localStorage.getItem('cookieChoice');
+        if (!storedCookieChoice && cookieBanner) {
+            cookieBanner.classList.remove('hidden');
+        }
+        const hideBanner = () => cookieBanner?.classList.add('hidden');
+        if (cookieAccept) {
+            cookieAccept.addEventListener('click', () => {
+                localStorage.setItem('cookieChoice', 'accepted');
+                hideBanner();
+            });
+        }
+        if (cookieReject) {
+            cookieReject.addEventListener('click', () => {
+                localStorage.setItem('cookieChoice', 'rejected');
+                hideBanner();
             });
         }
 

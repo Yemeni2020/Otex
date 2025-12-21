@@ -22,6 +22,7 @@
 <header
     class="sticky top-0 z-50 transition-all duration-300 border-b border-white/20 bg-white/50 backdrop-blur-lg supports-[backdrop-filter]:bg-white/40">
     <!-- Main Header -->
+    
     <div class="container mx-auto px-4 py-4">
         <div class="flex items-center justify-between gap-4 lg:gap-8">
             <!-- Mobile Menu Button -->

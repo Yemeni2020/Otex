@@ -4,6 +4,19 @@
         window.tailwind = window.tailwind || {};
         window.tailwind.config = window.tailwind.config || {};
     </script>
+    <style>
+        .sff { width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; background: linear-gradient(120deg, #eef2ff, #e0f2fe); border: 1px solid #cbd5e1; box-shadow: 0 18px 40px -18px rgba(15, 23, 42, 0.35); border-radius: 18px; padding: 18px 24px; }
+        .sfg, .sfh, .sfi, .sfl, .sfn, .sfp, .sfq, .sfs, .sfu, .sfw, .sfz, .sgz, .sha, .shb { }
+        .sfj, .sgj { color: #0f172a; }
+        .sgd { color: #475569; }
+        .sge, .sgh, .sgs { color: #0f172a; text-decoration: underline; font-weight: 600; }
+        .sfi.sfk.sfm.sfo { display: flex; gap: 10px; flex-wrap: wrap; }
+        .sfr.sfv.sga.sgb.sgc.sge.sgj.sgm.sgn.sgo.sgq.sgv.sgw.sgy { background: linear-gradient(135deg, #2563eb, #1e3a8a); color: #fff; padding: 10px 16px; border-radius: 12px; font-weight: 700; box-shadow: 0 10px 25px -10px rgba(37, 99, 235, 0.6); border: 1px solid #1d4ed8; transition: transform 150ms ease, box-shadow 150ms ease; }
+        .sfr.sfv.sga.sgb.sgc.sge.sgj.sgm.sgn.sgo.sgq.sgv.sgw.sgy:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -14px rgba(37, 99, 235, 0.75); }
+        .sgd.sge.sgf.sgu { background: transparent; color: #0f172a; padding: 10px 14px; border-radius: 12px; border: 1px dashed #94a3b8; font-weight: 600; transition: border-color 150ms ease, color 150ms ease; }
+        .sgd.sge.sgf.sgu:hover { color: #0b1f44; border-color: #0b1f44; }
+        @media (max-width: 640px) { .sff { border-radius: 0; } }
+    </style>
 @endpush
 <x-layouts.app>
     <div class="bg-white">
@@ -659,7 +672,7 @@
                             @endphp
 
                             @foreach ($products as $product)
-                                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col"
+                                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative"
                                     data-product-card
                                     data-loaded="true"
                                     data-name="{{ $product['name'] }}"
@@ -667,12 +680,28 @@
                                     data-category="{{ strtolower($product['category']) }}"
                                     data-color="{{ strtolower($product['color'] ?? '') }}"
                                     data-size="{{ strtolower($product['size'] ?? '') }}">
+                                    <div class="absolute top-3 right-3 z-20 flex gap-2">
+                                        <button type="button" class="p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Add to wishlist" data-wishlist="{{ $product['id'] }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.0" stroke="currentColor" class="size-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                            </svg>
+
+                                        </button>
+                                        <button type="button" class="p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Quick preview" data-preview="{{ $product['id'] }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg>
+                                        </button>
+                                    </div>
                                     <a class="block relative overflow-hidden h-64 bg-slate-100 group" href="/shop/{{ $product['id'] }}">
                                         <img src="{{ $product['image'] }}" alt="{{ $product['name'] }}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                                        <div class="absolute top-3 right-3 bg-blue-600/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm">{{ $product['category'] }}</div>
-                                        @if(!empty($product['badge']))
-                                            <div class="absolute top-3 left-3 bg-amber-500/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm">{{ $product['badge'] }}</div>
-                                        @endif
+                                        <div class="absolute top-3 left-3 flex flex-col gap-2">
+                                            <div class="bg-blue-600/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm">{{ $product['category'] }}</div>
+                                            @if(!empty($product['badge']))
+                                                <div class="bg-amber-500/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm">{{ $product['badge'] }}</div>
+                                            @endif
+                                        </div>
                                     </a>
                                     <div class="p-5 flex flex-col flex-1">
                                         <a class="hover:text-blue-600 transition-colors" href="/shop/{{ $product['id'] }}">
@@ -681,14 +710,16 @@
                                         <p class="text-slate-600 text-sm mb-4 line-clamp-2 flex-grow">{{ $product['description'] }}</p>
                                         <div class="flex items-center justify-between mt-auto">
                                             <span class="text-xl font-bold text-blue-600"><x-currency :amount="number_format($product['price'], 2)" /></span>
-                                            <button class="inline-flex items-center justify-center text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart w-4 h-4 mr-2">
-                                                    <circle cx="8" cy="21" r="1"></circle>
-                                                    <circle cx="19" cy="21" r="1"></circle>
-                                                    <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-                                                </svg>
-                                                Add
-                                            </button>
+                                            <div class="flex items-center gap-2">
+                                                <button class="inline-flex items-center justify-center text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart w-4 h-4 mr-2">
+                                                        <circle cx="8" cy="21" r="1"></circle>
+                                                        <circle cx="19" cy="21" r="1"></circle>
+                                                        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                                                    </svg>
+                                                    Add
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -1,172 +1,220 @@
-<!-- ========== HERO SECTION ========== -->
-<section class="relative bg-slate-950 overflow-hidden min-h-[650px] flex items-center py-12 lg:py-0">
-    <div
-        class="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none">
-    </div>
-    <div
-        class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none">
-    </div>
-    <div
-        class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none">
-    </div>
+<section class="relative overflow-hidden bg-slate-950 text-white">
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-900 via-slate-900 to-black"></div>
+    <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-soft-light"></div>
 
-    <div class="container mx-auto px-4 relative z-10">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-            <!-- Left Content -->
-            <div class="text-left space-y-6 max-w-2xl">
-                <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/30 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="w-3 h-3 fill-blue-300">
-                        <path
-                            d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
-                        </path>
-                    </svg>
-                    <span>New Season Arrivals</span>
-                </div>
+    <div class="container mx-auto px-4 py-16 lg:py-24 relative z-10">
+        <div class="flex items-center justify-between gap-6 mb-8">
+            <div class="space-y-2">
+                <p class="text-xs font-semibold uppercase tracking-[0.3em] text-blue-300">Featured Collections</p>
+                <h1 class="text-3xl md:text-4xl font-bold leading-tight">The best slider ever — animated &amp; lazy loaded</h1>
+            </div>
+            <div class="hidden sm:flex items-center gap-3 text-sm text-slate-300">
+                <div class="h-px w-12 bg-blue-500/60"></div>
+                <span class="text-blue-200 font-semibold">Auto-play | Swipe | Lazy-load</span>
+            </div>
+        </div>
 
-                <h1 class="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight">
-                    Upgrade Your <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Driving
-                        Experience</span>
-                </h1>
+        <div class="relative">
+            <div id="hero-track" class="relative min-h-[520px] rounded-3xl bg-white/5 border border-white/10 overflow-hidden shadow-2xl shadow-blue-900/40">
+                <!-- Slides injected by JS -->
+            </div>
 
-                <p class="text-slate-400 text-lg md:text-xl leading-relaxed max-w-lg">
-                    Discover premium car accessories that blend style, comfort, and performance. Transform your vehicle
-                    into a masterpiece today.
-                </p>
-
-                <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <button id="shopBtn"
-                        class="inline-flex items-center justify-center font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-600 hover:bg-blue-500 text-white rounded-full px-8 h-12 text-base shadow-lg shadow-blue-600/25 group">
-                        Shop Collection
-                        <svg id="shopArrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-2">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
+            <div class="absolute inset-x-0 bottom-0 flex items-center justify-between px-6 py-4">
+                <div id="hero-dots" class="flex items-center gap-2"></div>
+                <div class="flex items-center gap-3">
+                    <button id="hero-prev" type="button" aria-label="Previous slide" class="size-11 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition flex items-center justify-center backdrop-blur">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                     </button>
-
-
-                    <button
-                        class="inline-flex items-center justify-center font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white rounded-full px-8 h-12 text-base backdrop-blur-sm group">
-                        View Special Deals
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-2">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
+                    <button id="hero-next" type="button" aria-label="Next slide" class="size-11 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition flex items-center justify-center backdrop-blur">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                     </button>
-                </div>
-
-                <div class="pt-8 flex items-center gap-8 text-slate-400 text-sm font-medium">
-                    <div class="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="w-5 h-5 text-blue-500">
-                            <path
-                                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z">
-                            </path>
-                            <path d="m9 12 2 2 4-4"></path>
-                        </svg>
-                        <span>Lifetime Warranty</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-star w-5 h-5 text-yellow-500 fill-yellow-500">
-                            <path
-                                d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
-                            </path>
-                        </svg>
-                        <span>4.9/5 Customer Rating</span>
-                    </div>
                 </div>
             </div>
 
-            <!-- Right Image -->
-            <div class="relative hidden lg:block h-full min-h-[500px]">
-                <div class="absolute inset-0 z-10 flex items-center justify-center">
-                    <div
-                        class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 group">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60 z-10">
-                        </div>
-                        <img alt="Luxury car interior with premium leather seats and modern dashboard accessories"
-                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                            src="https://images.unsplash.com/photo-1560438840-846c868a5cd3">
-                        <div class="absolute bottom-6 left-6 z-20">
-                            <p class="text-white font-bold text-xl">Premium Leather Series</p>
-                            <p class="text-slate-300 text-sm">Starting from <x-currency amount="199" /></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Stats Cards -->
-                <div
-                    class="absolute -top-4 -right-4 z-20 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl shadow-xl max-w-[180px] animate-bounce animate-infinite animate-duration-[100ms] animate-ease-in-out">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="p-2 bg-green-500/20 rounded-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="w-5 h-5 text-green-400">
-                                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-                                <polyline points="16 7 22 7 22 13"></polyline>
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-xs text-slate-300">Trending</p>
-                            <p class="text-white font-bold text-sm">+24% Sales</p>
-                        </div>
-                    </div>
-                    <div class="h-1 w-full bg-slate-700 rounded-full overflow-hidden">
-                        <div class="h-full bg-green-500 w-[70%]"></div>
-                    </div>
-                </div>
-
-                <div
-                    class="absolute bottom-12 -left-12 z-20 bg-gradient-to-br from-blue-600 to-indigo-600 p-4 rounded-2xl shadow-xl shadow-blue-900/40 flex items-center gap-3">
-                    <div class="bg-white/20 p-2 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="w-6 h-6 text-white">
-                            <path
-                                d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526">
-                            </path>
-                            <circle cx="12" cy="8" r="6"></circle>
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-white font-bold text-lg">#1 Choice</p>
-                        <p class="text-blue-100 text-xs">Car Enthusiasts</p>
-                    </div>
-                </div>
-
-                <div
-                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-dashed border-slate-700/50 rounded-full animate-spin-slow pointer-events-none">
-                </div>
+            <div class="absolute inset-x-0 bottom-0 h-1.5 bg-white/10 rounded-full overflow-hidden mt-4">
+                <div id="hero-progress" class="h-full w-0 bg-gradient-to-r from-blue-400 via-indigo-400 to-blue-600"></div>
             </div>
         </div>
     </div>
 </section>
+
+@push('scripts')
 <script>
-    const btn = document.getElementById('shopBtn');
-    const arrow = document.getElementById('shopArrow');
+document.addEventListener('DOMContentLoaded', () => {
+    const slides = [
+        {
+            eyebrow: 'Night Vision',
+            title: 'Illuminate every drive with adaptive ambient lighting',
+            copy: 'Premium LED kits, matrix headlights, and ambient strips that respond to your rhythm. Built for long hauls and late-night cruises.',
+            cta: { label: 'Shop Lighting', href: '/shop' },
+            secondary: { label: 'See installs', href: '/gallery' },
+            stats: ['4.9/5 from 1,200+ installs', 'Lifetime beam warranty'],
+            image: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1600&q=80'
+        },
+        {
+            eyebrow: 'Performance Comfort',
+            title: 'Ride-ready interiors engineered for every season',
+            copy: 'Breathable leather kits, precision floor mats, and cooling seat tech that keep cabins pristine in any climate.',
+            cta: { label: 'Explore Interiors', href: '/shop' },
+            secondary: { label: 'Build your set', href: '/shop' },
+            stats: ['52% less cabin heat', 'Designed for spill & snow'],
+            image: 'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1600&q=80'
+        },
+        {
+            eyebrow: 'Cargo Control',
+            title: 'Modular storage systems for road trips and workdays',
+            copy: 'Slide-out drawers, tie-down rails, and waterproof liners keep every haul organized, clean, and rattle-free.',
+            cta: { label: 'Shop Cargo', href: '/shop' },
+            secondary: { label: 'Bundles & kits', href: '/shop' },
+            stats: ['+38% cargo efficiency', 'Tool-less install in 15 min'],
+            image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80'
+        }
+    ];
 
-    btn.addEventListener('click', () => {
-        // Slide arrow left and fade out
-        arrow.style.transform = 'translateX(-30px)';
-        arrow.style.opacity = '0';
+    const track = document.getElementById('hero-track');
+    const dots = document.getElementById('hero-dots');
+    const prevBtn = document.getElementById('hero-prev');
+    const nextBtn = document.getElementById('hero-next');
+    const progress = document.getElementById('hero-progress');
 
-        // Optional: reset arrow after animation for repeated clicks
-        setTimeout(() => {
-            arrow.style.transform = '';
-            arrow.style.opacity = '1';
-        }, 600); // match the duration in Tailwind (500ms) + small buffer
+    if (!track || !dots || !prevBtn || !nextBtn || !progress) return;
+
+    let current = 0;
+    let timer;
+    let rafId;
+    let progressStart;
+
+    const createSlideEl = (slide, index) => {
+        const isFirst = index === 0;
+        const wrapper = document.createElement('article');
+        wrapper.className = `absolute inset-0 transition-all duration-700 ease-out ${index === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-[0.98] pointer-events-none'}`;
+        wrapper.dataset.heroSlide = index;
+        wrapper.innerHTML = `
+            <div class="absolute inset-0">
+                <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/25 via-transparent to-indigo-500/10 blur-3xl"></div>
+                <img data-lazy-src="${slide.image}" src="${isFirst ? slide.image : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='}" alt="${slide.title}" loading="lazy" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+            </div>
+            <div class="relative h-full flex items-end">
+                <div class="p-6 lg:p-10 space-y-6 max-w-4xl">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-semibold tracking-wide uppercase text-blue-200 border border-white/10">${slide.eyebrow}</span>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight drop-shadow">${slide.title}</h2>
+                    <p class="text-slate-200 text-lg leading-relaxed drop-shadow">${slide.copy}</p>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="${slide.cta.href}" class="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 hover:bg-blue-500 text-white px-6 h-12 font-semibold shadow-lg shadow-blue-600/30 transition">
+                            ${slide.cta.label}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
+                        <a href="${slide.secondary.href}" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 text-white px-6 h-12 font-semibold hover:bg-white/10 transition">
+                            ${slide.secondary.label}
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap gap-4 text-sm text-slate-100">
+                        ${slide.stats.map(stat => `<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20">${stat}</span>`).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
+        return wrapper;
+    };
+
+    const renderSlides = () => {
+        track.innerHTML = '';
+        slides.forEach((slide, idx) => track.appendChild(createSlideEl(slide, idx)));
+    };
+
+    const renderDots = () => {
+        dots.innerHTML = '';
+        slides.forEach((_, idx) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = `h-2 w-6 rounded-full transition-all duration-300 ${idx === current ? 'bg-white' : 'bg-white/30 hover:bg-white/60'}`;
+            btn.addEventListener('click', () => goTo(idx));
+            dots.appendChild(btn);
+        });
+    };
+
+    const loadImage = (idx) => {
+        const slideEl = track.querySelector(`[data-hero-slide="${idx}"]`);
+        if (!slideEl) return;
+        const img = slideEl.querySelector('img[data-lazy-src]');
+        if (img && !img.dataset.loaded) {
+            img.src = img.dataset.lazySrc;
+            img.dataset.loaded = 'true';
+        }
+    };
+
+    const updateSlides = () => {
+        const slideEls = track.querySelectorAll('[data-hero-slide]');
+        slideEls.forEach(el => {
+            const isActive = Number(el.dataset.heroSlide) === current;
+            el.classList.toggle('opacity-0', !isActive);
+            el.classList.toggle('scale-[0.98]', !isActive);
+            el.classList.toggle('pointer-events-none', !isActive);
+            el.classList.toggle('opacity-100', isActive);
+            el.classList.toggle('scale-100', isActive);
+        });
+        loadImage(current);
+        renderDots();
+    };
+
+    const goTo = (idx) => {
+        current = (idx + slides.length) % slides.length;
+        updateSlides();
+        restartProgress();
+    };
+
+    const next = () => goTo(current + 1);
+    const prev = () => goTo(current - 1);
+
+    const startTimer = () => {
+        timer = setInterval(next, 6500);
+    };
+
+    const stopTimer = () => {
+        if (timer) clearInterval(timer);
+    };
+
+    const animateProgress = (timestamp) => {
+        if (!progressStart) progressStart = timestamp;
+        const elapsed = timestamp - progressStart;
+        const duration = 6500;
+        const pct = Math.min(elapsed / duration, 1);
+        progress.style.width = `${pct * 100}%`;
+        if (pct >= 1) {
+            progressStart = null;
+            progress.style.width = '0%';
+        } else {
+            rafId = requestAnimationFrame(animateProgress);
+        }
+    };
+
+    const restartProgress = () => {
+        progressStart = null;
+        progress.style.width = '0%';
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(animateProgress);
+        stopTimer();
+        startTimer();
+    };
+
+    renderSlides();
+    loadImage(0);
+    updateSlides();
+    startTimer();
+    restartProgress();
+
+    nextBtn.addEventListener('click', () => { next(); });
+    prevBtn.addEventListener('click', () => { prev(); });
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            stopTimer();
+            if (rafId) cancelAnimationFrame(rafId);
+        } else {
+            restartProgress();
+        }
     });
+});
 </script>
+@endpush
