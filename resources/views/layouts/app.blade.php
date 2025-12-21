@@ -44,6 +44,8 @@
         .toggle-checkbox:checked { right: 0; border-color: #fff; }
         .toggle-checkbox { transition: all 0.3s ease; }
         .toggle-label { transition: background-color 0.3s ease; }
+        [data-theme="light"] .top-bar { background-color: #fff !important; border-color: #e2e8f0 !important; }
+        [data-theme="dark"] .top-bar { background-color: rgba(15, 23, 42, 0.95) !important; border-color: #1e293b !important; }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-900 min-h-screen expansion-alids-init">
@@ -102,6 +104,7 @@
 
         // Theme
         const applyTheme = (theme) => {
+            root.dataset.theme = theme;
             if (theme === 'dark') {
                 root.classList.add('dark');
                 if (themeToggle) themeToggle.checked = true;
@@ -119,8 +122,7 @@
             }
         };
         const storedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        applyTheme(storedTheme || (prefersDark ? 'dark' : 'light'));
+        applyTheme(storedTheme || 'light');
         if (themeToggle) {
             themeToggle.addEventListener('change', (e) => {
                 const next = e.target.checked ? 'dark' : 'light';
@@ -293,14 +295,20 @@
         setTimeout(remove, 3000);
     });
 
-    // Silence noisy message events from injected scripts (e.g., extensions/devtools)
+    // Silence noisy message events (keeps first-party messages working)
+    const shouldBlockMessageEvent = (event) => {
+        if (event?.data?.source === 'react-devtools-content-script') return true;
+        if (!event.origin || !window.location?.origin) return true;
+        return event.origin !== window.location.origin;
+    };
+
     window.addEventListener('message', (event) => {
-        if (event?.data?.source === 'react-devtools-content-script') {
+        if (shouldBlockMessageEvent(event)) {
             event.stopImmediatePropagation();
         }
     }, true);
 
-    // Quiet console noise (leave warnings/errors intact)
+    // Quiet console noise globally (leave warnings/errors intact)
     ['log', 'info', 'debug'].forEach(fn => {
         if (typeof console?.[fn] === 'function') {
             console[fn] = () => {};

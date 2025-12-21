@@ -102,7 +102,7 @@
                             src="https://images.unsplash.com/photo-1560438840-846c868a5cd3">
                         <div class="absolute bottom-6 left-6 z-20">
                             <p class="text-white font-bold text-xl">Premium Leather Series</p>
-                            <p class="text-slate-300 text-sm">Starting from $199</p>
+                            <p class="text-slate-300 text-sm">Starting from <x-currency amount="199" /></p>
                         </div>
                     </div>
                 </div>

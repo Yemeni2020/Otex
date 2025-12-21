@@ -36,14 +36,9 @@
         
         /* Dropdown styles */
         .dropdown-content {
-            display: none;
             position: absolute;
             min-width: 200px;
             z-index: 1000;
-        }
-        
-        .dropdown:hover .dropdown-content {
-            display: block;
         }
         
         .mobile-dropdown-content {

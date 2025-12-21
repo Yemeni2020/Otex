@@ -44,26 +44,19 @@
 
             <!-- Logo -->
             <a href="/" class="flex items-center gap-2 cursor-pointer">
-                <div
-                    class="bg-gradient-to-tr from-blue-600/90 to-blue-400/90 backdrop-blur-sm p-2 rounded-xl shadow-lg shadow-blue-500/20 ring-1 ring-white/30">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="w-6 h-6 text-white">
-                        <path
-                            d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
-                        </path>
-                        <circle cx="7" cy="17" r="2"></circle>
-                        <path d="M9 17h6"></path>
-                        <circle cx="17" cy="17" r="2"></circle>
-                    </svg>
+                <div class="p-1 rounded-xl">
+                    <img src="{{ asset('img/logo_avatar.svg') }}" alt="Otex logo" class="h-14 w-auto object-contain drop-shadow-sm">
                 </div>
-                <div class="hidden sm:block">
+                <div class="p-1 rounded-xl">
+                    <img src="{{ asset('img/logo_text.svg') }}" alt="Otex logo" class="h-14 w-auto object-contain drop-shadow-sm">
+                </div>
+                {{-- <div class="hidden sm:block">
                     <h1
                         class="text-2xl font-bold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent leading-none filter drop-shadow-sm">
                         Otex</h1>
                     <p class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold leading-none mt-0.5">
                         Express</p>
-                </div>
+                </div> --}}
             </a>
 
             <!-- Desktop Navigation -->
@@ -76,17 +69,18 @@
                 <!-- Shop Dropdown -->
                 @php $shopActive = $isActive(['shop', 'shop/*']); @endphp
                 <div class="dropdown relative">
-                    <a class="{{ $linkClass($shopActive) }} flex items-center cursor-pointer">
+                    <button type="button" class="{{ $linkClass($shopActive) }} flex items-center cursor-pointer desktop-dropdown-toggle" data-dropdown-target="desktop-shop-menu">
                         Shop
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="w-3 h-3 ml-1">
+                            stroke-linejoin="round" class="w-3 h-3 ml-1 dropdown-arrow transition-transform duration-200">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                         <span class="{{ $underlineClass($shopActive) }}"></span>
-                    </a>
+                    </button>
                     <div
-                        class="dropdown-content mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[280px]">
+                        id="desktop-shop-menu"
+                        class="dropdown-content mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[280px] hidden">
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <h4 class="font-bold text-slate-800 mb-2">Interior</h4>
@@ -126,17 +120,18 @@
                 <!-- Categories Dropdown -->
                 @php $categoriesActive = $isActive(['categories*']); @endphp
                 <div class="dropdown relative">
-                    <a class="{{ $linkClass($categoriesActive) }} flex items-center cursor-pointer">
+                    <button type="button" class="{{ $linkClass($categoriesActive) }} flex items-center cursor-pointer desktop-dropdown-toggle" data-dropdown-target="desktop-categories-menu">
                         Categories
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="w-3 h-3 ml-1">
+                            stroke-linejoin="round" class="w-3 h-3 ml-1 dropdown-arrow transition-transform duration-200">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                         <span class="{{ $underlineClass($categoriesActive) }}"></span>
-                    </a>
+                    </button>
                     <div
-                        class="dropdown-content mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[280px]">
+                        id="desktop-categories-menu"
+                        class="dropdown-content mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[280px] hidden">
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <h4 class="font-bold text-slate-800 mb-2">Performance</h4>
@@ -252,7 +247,9 @@
                 <!-- User Dropdown -->
                 <div class="dropdown relative">
                     <button
-                        class="inline-flex items-center justify-center text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-10 w-10 rounded-full hover:bg-black/5 relative group transition-colors">
+                        type="button"
+                        data-dropdown-target="desktop-user-menu"
+                        class="inline-flex items-center justify-center text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-10 w-10 rounded-full hover:bg-black/5 relative group transition-colors desktop-dropdown-toggle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round"
@@ -262,7 +259,8 @@
                         </svg>
                     </button>
                     <div
-                        class="dropdown-content mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[200px] right-0">
+                        id="desktop-user-menu"
+                        class="dropdown-content mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[200px] right-0 hidden">
                         <div class="space-y-3">
                             <h4 class="font-bold text-slate-800 mb-2">My Account</h4>
                             <a href="/profile"
@@ -412,3 +410,55 @@
         </a>
     </div>
 </nav>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const toggles = document.querySelectorAll('.desktop-dropdown-toggle');
+
+    const closeAll = () => {
+        toggles.forEach(toggle => {
+            const targetId = toggle.getAttribute('data-dropdown-target');
+            const menu = document.getElementById(targetId);
+            if (menu) {
+                menu.classList.add('hidden');
+                menu.classList.remove('opacity-100');
+            }
+            const arrow = toggle.querySelector('.dropdown-arrow');
+            if (arrow) arrow.classList.remove('rotate-180');
+        });
+    };
+
+    toggles.forEach(toggle => {
+        const targetId = toggle.getAttribute('data-dropdown-target');
+        const menu = document.getElementById(targetId);
+        if (!menu) return;
+
+        menu.classList.add('transition', 'duration-150', 'opacity-0');
+
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isOpen = !menu.classList.contains('hidden');
+            closeAll();
+            if (!isOpen) {
+                menu.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    menu.classList.add('opacity-100');
+                    menu.classList.remove('opacity-0');
+                });
+                const arrow = toggle.querySelector('.dropdown-arrow');
+                if (arrow) arrow.classList.add('rotate-180');
+            }
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        const isToggle = e.target.closest('.desktop-dropdown-toggle');
+        const isMenu = e.target.closest('.dropdown-content');
+        if (!isToggle && !isMenu) {
+            closeAll();
+        }
+    });
+});
+</script>
+@endpush

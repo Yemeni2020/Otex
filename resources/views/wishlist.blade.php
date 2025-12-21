@@ -21,7 +21,7 @@
                         </div>
                         <div class="p-4 flex flex-col flex-1">
                             <h3 class="font-semibold text-slate-900 mb-1">{{ $product['name'] }}</h3>
-                            <p class="text-blue-600 font-bold mb-4">${{ number_format($product['price'], 2) }}</p>
+                            <p class="text-blue-600 font-bold mb-4"><x-currency :amount="number_format($product['price'], 2)" /></p>
                             <div class="mt-auto flex gap-2">
                                 <button class="flex-1 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 transition-colors">Add to Cart</button>
                                 <button class="rounded-full border border-slate-200 text-slate-700 hover:border-blue-200 px-3 py-2 text-sm">Remove</button>

@@ -94,7 +94,7 @@
                         <h3 class="text-lg font-bold text-slate-800 mb-2 line-clamp-1">{{ $product['name'] }}</h3>
                     </a>
                     <div class="flex items-center justify-between mt-auto">
-                        <span class="text-xl font-bold text-blue-600">${{ number_format($product['price'],2) }}</span>
+                        <span class="text-xl font-bold text-blue-600"><x-currency :amount="number_format($product['price'], 2)" /></span>
                         <button wire:click="addToCart({{ $product['id'] }})" class="inline-flex hover:text-white items-center justify-center text-sm font-medium h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
                                     <circle cx="8" cy="21" r="1"></circle>
@@ -109,4 +109,3 @@
         @endforeach
     </div>
 </section>
-

@@ -47,6 +47,8 @@
         .toggle-checkbox:checked { right: 0; border-color: #fff; }
         .toggle-checkbox { transition: all 0.3s ease; }
         .toggle-label { transition: background-color 0.3s ease; }
+        [data-theme="light"] .top-bar { background-color: #fff !important; border-color: #e2e8f0 !important; }
+        [data-theme="dark"] .top-bar { background-color: rgba(15, 23, 42, 0.95) !important; border-color: #1e293b !important; }
     </style>
     
 </head>
@@ -105,6 +107,7 @@
         const root = document.documentElement;
 
         const applyTheme = (theme) => {
+            root.dataset.theme = theme;
             if (theme === 'dark') {
                 root.classList.add('dark');
                 if (themeToggle) themeToggle.checked = true;
@@ -122,8 +125,7 @@
             }
         };
         const storedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        applyTheme(storedTheme || (prefersDark ? 'dark' : 'light'));
+        applyTheme(storedTheme || 'light');
         if (themeToggle) {
             themeToggle.addEventListener('change', (e) => {
                 const next = e.target.checked ? 'dark' : 'light';

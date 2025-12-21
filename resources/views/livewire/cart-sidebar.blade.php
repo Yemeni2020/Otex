@@ -37,7 +37,7 @@
                     <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" class="w-20 h-20 object-cover rounded-md">
                     <div class="flex-1">
                         <h3 class="font-semibold text-slate-800 mb-1">{{ $item['name'] }}</h3>
-                        <p class="text-blue-600 font-bold mb-2">${{ number_format($item['price'], 2) }}</p>
+                        <p class="text-blue-600 font-bold mb-2"><x-currency :amount="number_format($item['price'], 2)" /></p>
                         <div class="flex items-center gap-2">
                             <button wire:click="decrement({{ $index }})"
                                 class="h-8 w-8 border rounded-md flex items-center justify-center hover:bg-blue-100">
@@ -71,7 +71,7 @@
     <div class="border-t border-slate-200 p-6 space-y-4">
         <div class="flex items-center justify-between text-lg">
             <span class="font-semibold text-slate-700">Subtotal:</span>
-            <span class="font-bold text-2xl text-blue-600">${{ number_format($this->subtotal, 2) }}</span>
+            <span class="font-bold text-2xl text-blue-600"><x-currency :amount="number_format($this->subtotal, 2)" /></span>
         </div>
         <button class="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-lg font-medium">
            <a href="{{ route('checkout') }}">Proceed to Checkout</a> 

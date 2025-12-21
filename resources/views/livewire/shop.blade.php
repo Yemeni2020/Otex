@@ -912,7 +912,7 @@ window.addEventListener('message', (event) => {
                     </p>
 
                     <div class="flex justify-between items-center">
-                        <span class="text-blue-600 font-bold text-xl">$189.99</span>
+                        <span class="text-blue-600 font-bold text-xl"><x-currency amount="189.99" /></span>
                         <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm">
                             Add
                         </button>
