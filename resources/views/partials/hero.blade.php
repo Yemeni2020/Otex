@@ -1,9 +1,9 @@
-<section class="relative overflow-hidden bg-slate-950 text-white">
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-900 via-slate-900 to-black"></div>
-    <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-soft-light"></div>
+<section class="relative overflow-hidden w-full text-white">
+        {{-- <div class="absolute inset-0 bg-gradient-to-br from-blue-900 via-slate-900 to-black"></div>
+        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-soft-light"></div> --}}
 
     <div class="container mx-auto px-4 py-16 lg:py-24 relative z-10">
-        <div class="flex items-center justify-between gap-6 mb-8">
+        {{-- <div class="flex items-center justify-between gap-6 mb-8">
             <div class="space-y-2">
                 <p class="text-xs font-semibold uppercase tracking-[0.3em] text-blue-300">Featured Collections</p>
                 <h1 class="text-3xl md:text-4xl font-bold leading-tight">The best slider ever — animated &amp; lazy loaded</h1>
@@ -12,10 +12,10 @@
                 <div class="h-px w-12 bg-blue-500/60"></div>
                 <span class="text-blue-200 font-semibold">Auto-play | Swipe | Lazy-load</span>
             </div>
-        </div>
+        </div> --}}
 
         <div class="relative">
-            <div id="hero-track" class="relative min-h-[520px] rounded-3xl bg-white/5 border border-white/10 overflow-hidden shadow-2xl shadow-blue-900/40">
+            <div id="hero-track" class="relative min-h-[520px] rounded-3xl bg-white/5 border border-white/10 overflow-hidden shadow-2xl ">
                 <!-- Slides injected by JS -->
             </div>
 
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             eyebrow: 'Night Vision',
             title: 'Illuminate every drive with adaptive ambient lighting',
-            copy: 'Premium LED kits, matrix headlights, and ambient strips that respond to your rhythm. Built for long hauls and late-night cruises.',
+            copy: '',
             cta: { label: 'Shop Lighting', href: '/shop' },
             secondary: { label: 'See installs', href: '/gallery' },
             stats: ['4.9/5 from 1,200+ installs', 'Lifetime beam warranty'],
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             eyebrow: 'Performance Comfort',
             title: 'Ride-ready interiors engineered for every season',
-            copy: 'Breathable leather kits, precision floor mats, and cooling seat tech that keep cabins pristine in any climate.',
+            copy: '',
             cta: { label: 'Explore Interiors', href: '/shop' },
             secondary: { label: 'Build your set', href: '/shop' },
             stats: ['52% less cabin heat', 'Designed for spill & snow'],
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             eyebrow: 'Cargo Control',
             title: 'Modular storage systems for road trips and workdays',
-            copy: 'Slide-out drawers, tie-down rails, and waterproof liners keep every haul organized, clean, and rattle-free.',
+            copy: '',
             cta: { label: 'Shop Cargo', href: '/shop' },
             secondary: { label: 'Bundles & kits', href: '/shop' },
             stats: ['+38% cargo efficiency', 'Tool-less install in 15 min'],
