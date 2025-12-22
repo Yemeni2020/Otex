@@ -7,6 +7,8 @@ use Livewire\Component;
 class BestSellers extends Component
 {
     public $products = [];
+    public int $page = 1;
+    public int $perPage = 4;
 
     public function mount()
     {
@@ -37,6 +39,23 @@ class BestSellers extends Component
                 'badge' => "Best Seller"
             ]
         ];
+    }
+
+    public function getVisibleProductsProperty(): array
+    {
+        return array_slice($this->products, 0, $this->page * $this->perPage);
+    }
+
+    public function getHasMoreProperty(): bool
+    {
+        return count($this->products) > ($this->page * $this->perPage);
+    }
+
+    public function loadMore(): void
+    {
+        if ($this->hasMore) {
+            $this->page++;
+        }
     }
 
     public function addToCart($productId)

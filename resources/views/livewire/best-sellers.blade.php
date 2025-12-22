@@ -1,5 +1,5 @@
 {{-- <div>
-<section class="bg-slate-50/50 rounded-3xl p-8 border border-slate-200/60 container mx-auto mb-16">
+<section class="bg-slate-50/50 rounded-3xl p-8 border border-slate-200/60 container mx-auto mb-16" data-infinite-scroll>
     <div class="flex items-center gap-3 mb-8">
         <div class="p-3 bg-amber-100 rounded-xl">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-amber-600">
@@ -76,8 +76,8 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        @foreach($products as $product)
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group">
+        @foreach($this->visibleProducts as $product)
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group" wire:key="best-seller-{{ $product['id'] }}">
                 <div class="absolute inset-0 z-20 flex items-center justify-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
                     <button type="button" class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Add to wishlist" data-wishlist="{{ $product['id'] }}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.0" stroke="currentColor" class="size-4">
@@ -121,4 +121,10 @@
             </div>
         @endforeach
     </div>
+    @if($this->hasMore)
+        <div data-infinite-scroll-sentinel class="flex items-center justify-center gap-2 py-6 text-sm text-slate-500">
+            <span class="h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-blue-500"></span>
+            <span>Loading more...</span>
+        </div>
+    @endif
 </section>

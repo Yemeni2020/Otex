@@ -7,6 +7,8 @@ use Livewire\Component;
 class NewArrivals extends Component
 {
     public $products = [];
+    public int $page = 1;
+    public int $perPage = 4;
 
     public function mount()
     {
@@ -48,19 +50,37 @@ class NewArrivals extends Component
             ],
         ];
     }
-     public function addToCart($productId)
-     {
-         $product = collect($this->products)->firstWhere('id', $productId);
 
-         if (! $product) {
-             return;
-         }
+    public function getVisibleProductsProperty(): array
+    {
+        return array_slice($this->products, 0, $this->page * $this->perPage);
+    }
 
-         session()->push('cart', $product);
+    public function getHasMoreProperty(): bool
+    {
+        return count($this->products) > ($this->page * $this->perPage);
+    }
 
-         // Livewire v3 browser event dispatch
-         $this->dispatch('notify', message: "{$product['name']} added to cart!");
-     }
+    public function loadMore(): void
+    {
+        if ($this->hasMore) {
+            $this->page++;
+        }
+    }
+
+    public function addToCart($productId)
+    {
+        $product = collect($this->products)->firstWhere('id', $productId);
+
+        if (! $product) {
+            return;
+        }
+
+        session()->push('cart', $product);
+
+        // Livewire v3 browser event dispatch
+        $this->dispatch('notify', message: "{$product['name']} added to cart!");
+    }
 
     public function render()
     {

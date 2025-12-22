@@ -46,17 +46,6 @@
         .toggle-label { transition: background-color 0.3s ease; }
         [data-theme="light"] .top-bar { background-color: #fff !important; border-color: #e2e8f0 !important; }
         [data-theme="dark"] .top-bar { background-color: rgba(15, 23, 42, 0.95) !important; border-color: #1e293b !important; }
-        /* Privacy banner */
-        .sff { width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; background: linear-gradient(120deg, #eef2ff, #e0f2fe); border: 1px solid #cbd5e1; box-shadow: 0 18px 40px -18px rgba(15, 23, 42, 0.35); border-radius: 18px; padding: 18px 24px; }
-        .sfj, .sgj { color: #0f172a; }
-        .sgd { color: #475569; }
-        .sge, .sgh, .sgs { color: #0f172a; text-decoration: underline; font-weight: 600; }
-        .sfi.sfk.sfm.sfo { display: flex; gap: 10px; flex-wrap: wrap; }
-        .sfr.sfv.sga.sgb.sgc.sge.sgj.sgm.sgn.sgo.sgq.sgv.sgw.sgy { background: linear-gradient(135deg, #2563eb, #1e3a8a); color: #fff; padding: 10px 16px; border-radius: 12px; font-weight: 700; box-shadow: 0 10px 25px -10px rgba(37, 99, 235, 0.6); border: 1px solid #1d4ed8; transition: transform 150ms ease, box-shadow 150ms ease; }
-        .sfr.sfv.sga.sgb.sgc.sge.sgj.sgm.sgn.sgo.sgq.sgv.sgw.sgy:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -14px rgba(37, 99, 235, 0.75); }
-        .sgd.sge.sgf.sgu { background: transparent; color: #0f172a; padding: 10px 14px; border-radius: 12px; border: 1px dashed #94a3b8; font-weight: 600; transition: border-color 150ms ease, color 150ms ease; }
-        .sgd.sge.sgf.sgu:hover { color: #0b1f44; border-color: #0b1f44; }
-        @media (max-width: 640px) { .sff { border-radius: 0; } }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-900 min-h-screen expansion-alids-init">
@@ -66,15 +55,22 @@
     @include('partials.nav-bar')
     {{-- @include('partials.hero') --}}
 
-    <div class="w-full px-4 sm:px-6 lg:px-8 py-4">
-        <div class="sff sfg sfh sfi sfl sfn sfp sfq sfs sfu sfw sfz sgz sha shb">
-            <p class="sfj sgd sgj">This website uses cookies to supplement a balanced diet and provide a much deserved reward to the senses after consuming bland but nutritious meals. Accepting our cookies is optional but recommended, as they are delicious. See our <a href="#" class="sge sgh sgs">cookie policy</a>.</p>
-            <div class="sfi sfk sfm sfo">
-                <button type="button" class="sfr sfv sga sgb sgc sge sgj sgm sgn sgo sgq sgv sgw sgy">Accept all</button>
-                <button type="button" class="sgd sge sgf sgu">Reject all</button>
+    {{-- <div class="w-full px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex w-full flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-gradient-to-r from-indigo-50 via-blue-50 to-sky-50 px-6 py-4 shadow-[0_18px_40px_-18px_rgba(15,23,42,0.35)] sm:rounded-2xl">
+            <p class="text-sm text-slate-700 leading-relaxed sm:text-base">
+                This website uses cookies to supplement a balanced diet and provide a much deserved reward to the senses after consuming bland but nutritious meals. Accepting our cookies is optional but recommended, as they are delicious. See our
+                <a href="#" class="font-semibold text-slate-900 underline">cookie policy</a>.
+            </p>
+            <div class="flex flex-wrap items-center gap-3">
+                <button type="button" class="inline-flex items-center justify-center rounded-xl border border-blue-700 bg-gradient-to-r from-blue-600 to-indigo-700 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition hover:-translate-y-0.5 hover:shadow-xl">
+                    Accept all
+                </button>
+                <button type="button" class="inline-flex items-center justify-center rounded-xl border border-dashed border-slate-300 px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-slate-500 hover:text-slate-900">
+                    Reject all
+                </button>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <main class="bg-white expansion-alids-init">
         @yield('content')

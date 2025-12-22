@@ -58,20 +58,6 @@
     @include('partials.top-bar')
     {{-- <livewire:navbar/> --}}
     @include('partials.nav-bar')
-    
-    <div id="cookieBanner" class="fixed inset-x-0 bottom-4 px-4 z-50 hidden">
-        <div class="max-w-5xl mx-auto rounded-2xl bg-white shadow-xl border border-slate-200 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-            <div class="flex-1">
-                <p class="text-sm sm:text-base font-semibold text-slate-900">Cookie policy</p>
-                <p class="text-sm text-slate-600 mt-1">We use cookies to personalize content and analyze traffic. Manage your choice below.</p>
-            </div>
-            <div class="flex items-center gap-3">
-                <button id="cookieReject" type="button" class="px-4 py-2 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 text-sm font-semibold">Reject all</button>
-                <button id="cookieAccept" type="button" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-500 text-sm font-semibold shadow-sm">Accept all</button>
-            </div>
-        </div>
-    </div>
-
     <main class="bg-white expansion-alids-init">
         @yield('content')
         {{ $slot ?? '' }}
@@ -117,9 +103,7 @@
         const dirIconLtr = document.getElementById('dirIconLtr');
         const dirIconRtl = document.getElementById('dirIconRtl');
         const root = document.documentElement;
-        const cookieBanner = document.getElementById('cookieBanner');
-        const cookieAccept = document.getElementById('cookieAccept');
-        const cookieReject = document.getElementById('cookieReject');
+        
 
         const applyTheme = (theme) => {
             root.dataset.theme = theme;
@@ -180,24 +164,6 @@
         }
 
         // Cookie banner
-        const storedCookieChoice = localStorage.getItem('cookieChoice');
-        if (!storedCookieChoice && cookieBanner) {
-            cookieBanner.classList.remove('hidden');
-        }
-        const hideBanner = () => cookieBanner?.classList.add('hidden');
-        if (cookieAccept) {
-            cookieAccept.addEventListener('click', () => {
-                localStorage.setItem('cookieChoice', 'accepted');
-                hideBanner();
-            });
-        }
-        if (cookieReject) {
-            cookieReject.addEventListener('click', () => {
-                localStorage.setItem('cookieChoice', 'rejected');
-                hideBanner();
-            });
-        }
-
         // Let Livewire handle toggling if available.
         if (cartButton) {
             cartButton.addEventListener('click', (e) => {
@@ -351,6 +317,41 @@
                 }
             });
         }
+    </script>
+    <script>
+        // Simple Livewire-aware infinite scroll helper.
+        document.addEventListener('livewire:init', () => {
+            const attach = () => {
+                document.querySelectorAll('[data-infinite-scroll]').forEach((section) => {
+                    const sentinel = section.querySelector('[data-infinite-scroll-sentinel]');
+                    if (!sentinel || sentinel.dataset.infiniteWatching) return;
+
+                    const componentEl = section.closest('[wire\\:id]');
+                    if (!componentEl) return;
+
+                    const componentId = componentEl.getAttribute('wire:id');
+                    const livewireInstance = () => window.Livewire?.find(componentId);
+
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                livewireInstance()?.call('loadMore');
+                            }
+                        });
+                    }, { rootMargin: '320px' });
+
+                    sentinel.dataset.infiniteWatching = '1';
+                    sentinel._infiniteObserver = observer;
+                    observer.observe(sentinel);
+                });
+            };
+
+            attach();
+
+            // Re-attach after DOM mutations (Livewire morphs).
+            const mo = new MutationObserver(() => attach());
+            mo.observe(document.body, { childList: true, subtree: true });
+        });
     </script>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
 </body>

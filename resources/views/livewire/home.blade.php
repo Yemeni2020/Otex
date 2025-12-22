@@ -28,6 +28,46 @@
 <div>
     @include('partials.hero')
 
+    <section class="bg-gray-50 py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                    <p class="text-sm font-semibold text-blue-600">Categories</p>
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-900">Shop by Category</h2>
+                    <p class="mt-1 text-sm text-slate-500">Browse curated collections that fit how you work and live.</p>
+                </div>
+                <a href="#" class="hidden text-sm font-semibold text-blue-600 hover:text-blue-500 sm:inline-flex sm:items-center sm:gap-1">
+                    Browse all categories
+                    <span aria-hidden="true">→</span>
+                </a>
+            </div>
+
+            <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                @foreach($categories as $category)
+                    <a href="{{ $category['href'] }}" class="group relative block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-lg" aria-label="Browse {{ $category['label'] }}">
+                        <div class="relative aspect-[4/5]">
+                            <img src="{{ $category['image'] }}" alt="{{ $category['label'] }} collection" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t {{ $category['accent'] }} to-transparent"></div>
+                            <div class="absolute inset-x-4 bottom-4 flex items-center justify-between">
+                                <span class="text-lg font-semibold text-white drop-shadow-sm">{{ $category['label'] }}</span>
+                                <span class="inline-flex size-9 items-center justify-center rounded-full border border-white/30 bg-white/20 text-white backdrop-blur transition group-hover:translate-x-1">
+                                    →
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+
+            <div class="mt-8 text-center sm:hidden">
+                <a href="#" class="text-sm font-semibold text-blue-600 hover:text-blue-500">
+                    Browse all categories
+                    <span aria-hidden="true">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <livewire:new-arrivals />
     <livewire:best-sellers />
     
