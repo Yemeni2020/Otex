@@ -49,6 +49,15 @@
         .toggle-label { transition: background-color 0.3s ease; }
         [data-theme="light"] .top-bar { background-color: #fff !important; border-color: #e2e8f0 !important; }
         [data-theme="dark"] .top-bar { background-color: rgba(15, 23, 42, 0.95) !important; border-color: #1e293b !important; }
+        .nav-press { transition: transform 120ms ease, filter 120ms ease; }
+        .nav-press:active { transform: translateY(1px) scale(0.96); }
+        .nav-bounce { animation: navBounce 420ms ease; }
+        @keyframes navBounce {
+            0% { transform: translateY(0) scale(1); }
+            35% { transform: translateY(-6px) scale(1.04); }
+            70% { transform: translateY(2px) scale(0.98); }
+            100% { transform: translateY(0) scale(1); }
+        }
     </style>
     
 </head>

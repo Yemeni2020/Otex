@@ -369,48 +369,86 @@
 @livewire('cart-sidebar')
 
 <!-- Mobile bottom nav -->
-<nav class="fixed bottom-0 inset-x-0 bg-white border-t border-slate-200 shadow-lg lg:hidden z-40">
-    <div class="grid grid-cols-4 text-xs font-semibold text-slate-600">
-        <a href="/" class="flex flex-col items-center py-3 hover:text-blue-600">
+@php
+    $bottomHomeActive = $isActive(['home', '/']);
+    $bottomShopActive = $isActive(['shop', 'shop/*']);
+    $bottomProfileActive = $isActive(['profile']);
+@endphp
+<nav class="fixed bottom-4 inset-x-4 bg-white/90 dark:bg-slate-950/85 backdrop-blur-xl border border-slate-200/70 dark:border-white/10 shadow-[0_18px_45px_-24px_rgba(15,23,42,0.55)] rounded-2xl lg:hidden z-40">
+    <div class="grid grid-cols-5 text-[11px] font-semibold text-slate-600 dark:text-slate-200 py-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)]">
+        <a href="/" class="nav-press group flex flex-col items-center gap-1 py-2 hover:text-blue-600 dark:hover:text-cyan-300 {{ $bottomHomeActive ? 'text-blue-600 dark:text-cyan-300' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-6">
+                stroke="currentColor" class="size-6 {{ $bottomHomeActive ? 'text-blue-600 dark:text-cyan-300' : 'text-slate-600 dark:text-slate-200' }} group-hover:text-blue-600 dark:group-hover:text-cyan-300">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
             </svg>
 
             Home
+            <span class="h-1 w-1 rounded-full {{ $bottomHomeActive ? 'bg-blue-600 dark:bg-cyan-300' : 'bg-transparent' }}"></span>
         </a>
-        <a href="/shop" class="flex flex-col items-center py-3 hover:text-blue-600">
+        <a href="/shop" class="nav-press group flex flex-col items-center gap-1 py-2 hover:text-blue-600 dark:hover:text-cyan-300 {{ $bottomShopActive ? 'text-blue-600 dark:text-cyan-300' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-6">
+                stroke="currentColor" class="size-6 {{ $bottomShopActive ? 'text-blue-600 dark:text-cyan-300' : 'text-slate-600 dark:text-slate-200' }} group-hover:text-blue-600 dark:group-hover:text-cyan-300">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
             </svg>
 
             Shop
+            <span class="h-1 w-1 rounded-full {{ $bottomShopActive ? 'bg-blue-600 dark:bg-cyan-300' : 'bg-transparent' }}"></span>
         </a>
-        <button type="button" onclick="window.Livewire?.dispatch('open-cart')"
-            class="relative flex flex-col items-center py-3 hover:text-blue-600">
+        <button type="button" data-bottom-action="quick" class="nav-press flex flex-col items-center gap-1 -mt-6 hover:text-blue-600 dark:hover:text-cyan-300">
+            <span class="nav-fab flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white text-2xl leading-none shadow-lg ring-4 ring-white/80 dark:ring-slate-900/90">+</span>
+            <span class="sr-only">Add</span>
+        </button>
+        <button type="button" data-bottom-action="cart"
+            class="nav-press group relative flex flex-col items-center gap-1 py-2 hover:text-blue-600 dark:hover:text-cyan-300">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-6">
+                stroke="currentColor" class="size-6 text-slate-600 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-cyan-300">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
             </svg>
             <span
-                class="absolute top-1 right-3 bg-red-500 text-white text-[10px] rounded-full h-4 min-w-[16px] px-1 flex items-center justify-center">3</span>
+                class="absolute top-1 right-3 bg-red-500 text-white text-[10px] rounded-full h-4 min-w-[16px] px-1 flex items-center justify-center ring-2 ring-white/80 dark:ring-slate-900/90">3</span>
             Cart
         </button>
-        <a href="/profile" class="flex flex-col items-center py-3 hover:text-blue-600">
+        <a href="/profile" class="nav-press group flex flex-col items-center gap-1 py-2 hover:text-blue-600 dark:hover:text-cyan-300 {{ $bottomProfileActive ? 'text-blue-600 dark:text-cyan-300' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="w-5 h-5 mb-1">
+                class="w-5 h-5 mb-1 {{ $bottomProfileActive ? 'text-blue-600 dark:text-cyan-300' : 'text-slate-600 dark:text-slate-200' }} group-hover:text-blue-600 dark:group-hover:text-cyan-300">
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
             </svg>
             Profile
+            <span class="h-1 w-1 rounded-full {{ $bottomProfileActive ? 'bg-blue-600 dark:bg-cyan-300' : 'bg-transparent' }}"></span>
         </a>
     </div>
 </nav>
+
+<!-- Mobile quick actions sheet -->
+<div id="bottomActionBackdrop" class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-200 lg:hidden z-40"></div>
+<div id="bottomActionSheet" class="fixed inset-x-4 bottom-24 translate-y-6 opacity-0 pointer-events-none transition-all duration-200 lg:hidden z-50">
+    <div class="rounded-2xl border border-slate-200/70 dark:border-white/10 bg-white/95 dark:bg-slate-950/90 backdrop-blur-xl shadow-[0_18px_40px_-24px_rgba(15,23,42,0.55)] p-4">
+        <div class="text-xs font-semibold tracking-wide text-slate-500 dark:text-slate-300 mb-3">Quick actions</div>
+        <div class="grid grid-cols-2 gap-3 text-sm font-semibold text-slate-700 dark:text-slate-100">
+            <button type="button" data-bottom-action="search" class="nav-press flex items-center gap-3 rounded-xl border border-slate-200/70 dark:border-white/10 px-3 py-3 bg-white/60 dark:bg-slate-900/60">
+                <span class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600/10 text-blue-700 dark:text-cyan-300">S</span>
+                Search
+            </button>
+            <a href="/wishlist" class="nav-press flex items-center gap-3 rounded-xl border border-slate-200/70 dark:border-white/10 px-3 py-3 bg-white/60 dark:bg-slate-900/60">
+                <span class="flex h-9 w-9 items-center justify-center rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-300">W</span>
+                Wishlist
+            </a>
+            <a href="/orders" class="nav-press flex items-center gap-3 rounded-xl border border-slate-200/70 dark:border-white/10 px-3 py-3 bg-white/60 dark:bg-slate-900/60">
+                <span class="flex h-9 w-9 items-center justify-center rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-300">O</span>
+                Orders
+            </a>
+            <a href="/contact" class="nav-press flex items-center gap-3 rounded-xl border border-slate-200/70 dark:border-white/10 px-3 py-3 bg-white/60 dark:bg-slate-900/60">
+                <span class="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-300">H</span>
+                Help
+            </a>
+        </div>
+    </div>
+</div>
 
 @push('scripts')
 <script>
@@ -460,6 +498,82 @@ document.addEventListener('DOMContentLoaded', () => {
             closeAll();
         }
     });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const bounce = (el) => {
+        if (!el) return;
+        el.classList.remove('nav-bounce');
+        void el.offsetWidth;
+        el.classList.add('nav-bounce');
+        setTimeout(() => el.classList.remove('nav-bounce'), 450);
+    };
+
+    const quickBtn = document.querySelector('[data-bottom-action="quick"]');
+    const cartBtn = document.querySelector('[data-bottom-action="cart"]');
+    const searchBtn = document.querySelector('[data-bottom-action="search"]');
+    const sheet = document.getElementById('bottomActionSheet');
+    const backdrop = document.getElementById('bottomActionBackdrop');
+    const mobileSearchButton = document.getElementById('mobileSearchButton');
+
+    const openSheet = () => {
+        if (!sheet || !backdrop) return;
+        backdrop.classList.remove('pointer-events-none', 'opacity-0');
+        backdrop.classList.add('opacity-100');
+        sheet.classList.remove('pointer-events-none', 'translate-y-6', 'opacity-0');
+        sheet.classList.add('translate-y-0', 'opacity-100');
+        bounce(quickBtn);
+    };
+
+    const closeSheet = () => {
+        if (!sheet || !backdrop) return;
+        backdrop.classList.add('opacity-0');
+        backdrop.classList.remove('opacity-100');
+        sheet.classList.add('translate-y-6', 'opacity-0', 'pointer-events-none');
+        sheet.classList.remove('translate-y-0', 'opacity-100');
+        backdrop.classList.add('pointer-events-none');
+    };
+
+    if (quickBtn) {
+        quickBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (sheet?.classList.contains('opacity-100')) {
+                closeSheet();
+            } else {
+                openSheet();
+            }
+        });
+    }
+
+    if (backdrop) {
+        backdrop.addEventListener('click', closeSheet, { passive: true });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeSheet();
+    });
+
+    if (cartBtn) {
+        cartBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (window.Livewire) {
+                window.Livewire.dispatch('open-cart');
+            }
+            bounce(cartBtn);
+        }, { passive: true });
+    }
+
+    if (searchBtn) {
+        searchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeSheet();
+            bounce(searchBtn);
+            if (mobileSearchButton) {
+                mobileSearchButton.click();
+            }
+        });
+    }
 });
 </script>
 @endpush

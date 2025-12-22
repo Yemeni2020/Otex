@@ -174,7 +174,7 @@
         </div>
     </footer> --}}
 
-<footer class="bg-white text-slate-900 dark:bg-gradient-to-b dark:from-[#1c1f1e] dark:to-[#0f1110] dark:text-gray-200">
+<footer class="relative bg-white/80 backdrop-blur-xl text-slate-900 border-t border-slate-200/60 dark:bg-[#0c0f10] dark:border-white/10 dark:text-gray-200">
 
     <!-- TOP -->
     <div class="container mx-auto px-4 py-16">
@@ -272,7 +272,7 @@
     </div>
 
     <!-- BOTTOM BAR -->
-    <div class="border-t border-white/10 bg-black">
+    <div class="border-t border-slate-200/40 bg-slate-950/95 backdrop-blur">
         <div class="container mx-auto flex flex-col gap-4 px-4 py-5 md:flex-row md:items-center md:justify-between">
 
             <!-- Payment icons -->
