@@ -261,8 +261,8 @@
                                 </path>
                             </svg>
                         </span>
-                        <a href="mailto:baharelectro@gmail.com" class="hover:text-slate-900 dark:hover:text-white">
-                            baharelectro@gmail.com
+                        <a href="example123@example.com" class="hover:text-slate-900 dark:hover:text-white">
+                            example123@example.com
                         </a>
                     </div>
                 </div>
