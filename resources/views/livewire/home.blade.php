@@ -113,14 +113,14 @@
                     </a>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency amount="35" /></span>
-                        <button class="inline-flex items-center justify-center text-sm font-medium h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4 text-white">
+                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
                                 <circle cx="8" cy="21" r="1"></circle>
                                 <circle cx="19" cy="21" r="1"></circle>
                                 <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
                             </svg>
                             Add
-                        </button>
+                        </x-button>
                     </div>
                     <h4 class="sr-only">Available colors</h4>
                     <ul role="list" class="mt-4 flex items-center gap-2">
@@ -161,14 +161,14 @@
                     </a>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency amount="28" /></span>
-                        <button class="inline-flex items-center justify-center text-sm font-medium h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4 text-white">
+                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
                                 <circle cx="8" cy="21" r="1"></circle>
                                 <circle cx="19" cy="21" r="1"></circle>
                                 <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
                             </svg>
                             Add
-                        </button>
+                        </x-button>
                     </div>
                     <h4 class="sr-only">Available colors</h4>
                     <ul role="list" class="mt-4 flex items-center gap-2">
@@ -206,14 +206,14 @@
                     </a>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency amount="50" /></span>
-                        <button class="inline-flex items-center justify-center text-sm font-medium h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4 text-white">
+                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
                                 <circle cx="8" cy="21" r="1"></circle>
                                 <circle cx="19" cy="21" r="1"></circle>
                                 <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
                             </svg>
                             Add
-                        </button>
+                        </x-button>
                     </div>
                     <h4 class="sr-only">Available colors</h4>
                     <ul role="list" class="mt-4 flex items-center gap-2">
@@ -254,14 +254,14 @@
                     </a>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency amount="50" /></span>
-                        <button class="inline-flex items-center justify-center text-sm font-medium h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4 text-white">
+                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
                                 <circle cx="8" cy="21" r="1"></circle>
                                 <circle cx="19" cy="21" r="1"></circle>
                                 <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
                             </svg>
                             Add
-                        </button>
+                        </x-button>
                     </div>
                     <h4 class="sr-only">Available colors</h4>
                     <ul role="list" class="mt-4 flex items-center gap-2">
@@ -324,7 +324,7 @@
                         <p class="text-slate-600">Perfect for road trips with kids. Holds tablets up to 11 inches, drinks, snacks, and toys. Durable waterproof fabric.</p>
 
                         <div class="flex flex-wrap gap-3">
-                            <button type="button" class="inline-flex h-12 items-center justify-center rounded-full bg-blue-600 px-6 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition hover:bg-blue-500">Add to bag</button>
+                            <x-button type="button" size="lg" variant="solid" class="rounded-full px-6">Add to bag</x-button>
                             <a href="/shop/8" class="inline-flex h-12 items-center justify-center rounded-full border border-slate-200 px-6 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50">View full details</a>
                         </div>
                     </div>

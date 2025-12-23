@@ -69,8 +69,8 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
-                            <button class="inline-flex items-center justify-center rounded-full text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 transition">Save</button>
-                            <button class="inline-flex items-center justify-center rounded-full text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 px-5 py-3 transition shadow-lg shadow-blue-600/20">Add to Cart</button>
+                            <x-button type="button" variant="outline" size="sm" class="rounded-full text-blue-600 bg-blue-50 hover:bg-blue-100 border-blue-50">Save</x-button>
+                            <x-button type="button" size="lg" variant="solid" class="rounded-full px-5">Add to Cart</x-button>
                         </div>
                     </div>
                 </div>
@@ -196,7 +196,7 @@
                                         </svg>
                                     </div>
                                     <p class="text-slate-500 mb-6" data-edit-id="src/pages/ProductDetails.jsx:254:33">Based on 124 reviews</p>
-                                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full" data-edit-id="src/pages/ProductDetails.jsx:255:33">Write a Review</button>
+                                    <x-button type="button" size="sm" class="w-full rounded-md" data-edit-id="src/pages/ProductDetails.jsx:255:33">Write a Review</x-button>
                                 </div>
                             </div>
                         </div>

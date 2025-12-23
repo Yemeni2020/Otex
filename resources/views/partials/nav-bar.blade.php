@@ -63,9 +63,7 @@
             <!-- Desktop Navigation -->
             <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-700">
                 @php $homeActive = $isActive(['home', '/']); @endphp
-                <a class="{{ $linkClass($homeActive) }}" href="{{ route('home') }}">Home
-                    <span class="{{ $underlineClass($homeActive) }}"></span>
-                </a>
+                <x-nav-link :href="route('home')" :active="$homeActive">Home</x-nav-link>
 
                 <!-- Shop Dropdown -->
                 @php $shopActive = $isActive(['shop', 'shop/*']); @endphp
@@ -169,32 +167,20 @@
                 </div>
 
                 @php $aboutActive = $isActive(['about']); @endphp
-                <a class="{{ $linkClass($aboutActive) }}" href="/about">About Us
-                    <span class="{{ $underlineClass($aboutActive) }}"></span>
-                </a>
+                <x-nav-link href="/about" :active="$aboutActive">About Us</x-nav-link>
 
                 @php $contactActive = $isActive(['contact']); @endphp
-                <a class="{{ $linkClass($contactActive) }}" href="/contact">Contact
-                    <span class="{{ $underlineClass($contactActive) }}"></span>
-                </a>
+                <x-nav-link href="/contact" :active="$contactActive">Contact</x-nav-link>
             </nav>
 
             <!-- Search Bar -->
             <div class="hidden md:flex flex-1 max-w-md relative group">
-                <form class="w-full relative">
-                    <input type="text"
-                        class="flex h-10 border px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full pl-4 pr-10 bg-white/50 border-slate-200/60 focus:bg-white/80 transition-all rounded-full focus:ring-2 focus:ring-blue-500/20 backdrop-blur-sm shadow-sm"
-                        placeholder="Search for parts..." />
-                    <button type="submit"
-                        class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-600 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="w-4 h-4">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.3-4.3"></path>
-                        </svg>
-                    </button>
-                </form>
+                <x-search
+                    placeholder="Search for parts..."
+                    inputClass="pl-4 pr-10 bg-white/50 border-slate-200/60 focus:bg-white/80 backdrop-blur-sm shadow-sm"
+                    buttonClass="text-slate-400 hover:text-blue-600"
+                    class="w-full"
+                />
             </div>
 
 
@@ -348,20 +334,11 @@
         <!-- Mobile search -->
         <div id="mobileSearchBar"
             class="lg:hidden mt-4 mobile-menu-transition opacity-0 -translate-y-2 pointer-events-none hidden">
-            <form class="w-full relative">
-                <input type="text"
-                    class="flex h-11 border px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full pl-4 pr-10 bg-white border-slate-200 focus:bg-white transition-all rounded-full focus:ring-2 focus:ring-blue-500/20 shadow-sm"
-                    placeholder="Search for parts...">
-                <button type="submit"
-                    class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-600 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="w-4 h-4">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="m21 21-4.3-4.3"></path>
-                    </svg>
-                </button>
-            </form>
+            <x-search
+                placeholder="Search for parts..."
+                inputClass="pl-4 pr-10 bg-white border-slate-200 focus:bg-white shadow-sm"
+                buttonClass="text-slate-400 hover:text-blue-600"
+            />
         </div>
     </div>
 </header>

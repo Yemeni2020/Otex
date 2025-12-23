@@ -61,7 +61,7 @@
 
     {{-- <livewire:navbar/> --}}
     @include('partials.top-bar')
-    @include('partials.nav-bar')
+    <x-navbar />
     {{-- @include('partials.hero') --}}
 
     {{-- <div class="w-full px-4 sm:px-6 lg:px-8 py-4">

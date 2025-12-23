@@ -17,15 +17,15 @@
                         <p class="text-slate-600 leading-relaxed">Today, we curate a selection of premium accessories from around the globe, testing each product rigorously to ensure it meets our standards for durability, aesthetics, and functionality. We're not just selling parts; we're upgrading your lifestyle on the road.</p>
                     </div>
                     <div class="grid grid-cols-2 gap-6">
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                        <x-card class="p-6">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check w-8 h-8 text-blue-600 mb-4">
                                 <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
                                 <path d="m9 12 2 2 4-4"></path>
                             </svg>
                             <h3 class="font-bold text-slate-900 mb-2">Quality First</h3>
                             <p class="text-sm text-slate-500">We never compromise on materials or build quality.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mt-8">
+                        </x-card>
+                        <x-card class="p-6 mt-8">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-8 h-8 text-indigo-600 mb-4">
                                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="9" cy="7" r="4"></circle>
@@ -34,8 +34,8 @@
                             </svg>
                             <h3 class="font-bold text-slate-900 mb-2">Community</h3>
                             <p class="text-sm text-slate-500">Building a community of passionate drivers.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                        </x-card>
+                        <x-card class="p-6">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target w-8 h-8 text-emerald-600 mb-4">
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <circle cx="12" cy="12" r="6"></circle>
@@ -43,8 +43,8 @@
                             </svg>
                             <h3 class="font-bold text-slate-900 mb-2">Precision</h3>
                             <p class="text-sm text-slate-500">Products that fit your vehicle perfectly, every time.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mt-8">
+                        </x-card>
+                        <x-card class="p-6 mt-8">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rocket w-8 h-8 text-amber-600 mb-4">
                                 <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
                                 <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
@@ -53,7 +53,7 @@
                             </svg>
                             <h3 class="font-bold text-slate-900 mb-2">Innovation</h3>
                             <p class="text-sm text-slate-500">Always looking for the next big thing in auto tech.</p>
-                        </div>
+                        </x-card>
                     </div>
                 </div>
             </section>

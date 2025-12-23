@@ -13,7 +13,7 @@
                         <div class="flex justify-end gap-2 flex-wrap">
                             <a href="{{ $downloadPdfUrl }}" class="inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold border border-slate-200 text-slate-700 hover:bg-slate-100 transition">Download PDF</a>
                             <a href="{{ $downloadExcelUrl }}" class="inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold border border-slate-200 text-slate-700 hover:bg-slate-100 transition">Download Excel</a>
-                            <button type="button" onclick="window.print()" class="inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 transition">Print</button>
+                            <x-button type="button" size="sm" variant="solid" class="rounded-full px-4" onclick="window.print()">Print</x-button>
                         </div>
                     @endif
                     <p class="text-sm text-slate-500">Payment</p>

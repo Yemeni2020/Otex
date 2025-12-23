@@ -4,6 +4,7 @@
 ])
 
 <a href="{{ $href }}"
+   @if($active) aria-current="page" @endif
    {{ $attributes->merge([
        'class' =>
            'hover:text-blue-600 transition-colors relative group py-2 ' .

@@ -66,7 +66,7 @@
    
     @include('partials.top-bar')
     {{-- <livewire:navbar/> --}}
-    @include('partials.nav-bar')
+    <x-navbar />
     <main class="bg-white expansion-alids-init">
         @yield('content')
         {{ $slot ?? '' }}

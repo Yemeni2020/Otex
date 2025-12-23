@@ -62,15 +62,15 @@
                         <div>
                             <h2 class="text-sm font-semibold text-slate-800">Color</h2>
                             <fieldset aria-label="Choose a color" class="mt-4">
-                                <div class="flex items-center gap-3">
+                                <div class="flex items-center ">
                                     <label class="inline-flex items-center justify-center rounded-full border border-slate-200 p-1 cursor-pointer hover:border-blue-500 transition">
                                         <input type="radio" name="color" value="black" checked class="sr-only peer">
-                                        <span class="h-10 w-10 rounded-full bg-slate-900 peer-checked:ring-2 peer-checked:ring-blue-500 peer-checked:ring-offset-2 peer-checked:ring-offset-white"></span>
+                                        <span class="h-8 w-8 rounded-full bg-slate-900 peer-checked:ring-2 peer-checked:ring-blue-500 peer-checked:ring-offset-2 peer-checked:ring-offset-white sm:h-10 sm:w-10"></span>
                                         <span class="sr-only">Black</span>
                                     </label>
                                     <label class="inline-flex items-center justify-center rounded-full border border-slate-200 p-1 cursor-pointer hover:border-blue-500 transition">
                                         <input type="radio" name="color" value="heather-grey" class="sr-only peer">
-                                        <span class="h-10 w-10 rounded-full bg-slate-300 peer-checked:ring-2 peer-checked:ring-blue-500 peer-checked:ring-offset-2 peer-checked:ring-offset-white"></span>
+                                        <span class="h-8 w-8 rounded-full bg-slate-300 peer-checked:ring-2 peer-checked:ring-blue-500 peer-checked:ring-offset-2 peer-checked:ring-offset-white sm:h-10 sm:w-10"></span>
                                         <span class="sr-only">Heather Grey</span>
                                     </label>
                                 </div>
@@ -83,10 +83,10 @@
                                 <a href="#" class="text-sm font-semibold text-blue-600 hover:underline">See sizing chart</a>
                             </div>
                             <fieldset aria-label="Choose a size">
-                                <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                                <div class="grid grid-cols-4 sm:grid-cols-6 gap-2">
                                     @foreach (['XXS', 'XS', 'S', 'M', 'L', 'XL'] as $idx => $size)
                                         @php($disabled = $size === 'XL')
-                                        <label class="relative flex items-center justify-center rounded-xl border text-sm font-semibold py-3 cursor-pointer {{ $disabled ? 'opacity-50 cursor-not-allowed bg-slate-100 border-slate-200' : 'border-slate-200 hover:border-blue-500 hover:text-blue-700' }}">
+                                        <label class="relative flex items-center justify-center rounded-xl border text-sm font-semibold py-2.5 cursor-pointer sm:text-base sm:py-3.5 {{ $disabled ? 'opacity-50 cursor-not-allowed bg-slate-100 border-slate-200' : 'border-slate-200 hover:border-blue-500 hover:text-blue-700' }}">
                                             <input type="radio" name="size" value="{{ strtolower($size) }}" {{ $size === 'S' ? 'checked' : '' }} {{ $disabled ? 'disabled' : '' }} class="sr-only peer">
                                             <span class="peer-checked:text-blue-700 peer-checked:border-blue-500">{{ $size }}</span>
                                             <span class="absolute inset-0 rounded-xl ring-2 ring-blue-500 ring-offset-2 ring-offset-white opacity-0 peer-checked:opacity-100 pointer-events-none transition"></span>
@@ -96,24 +96,24 @@
                             </fieldset>
                         </div>
 
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <div class="flex items-center border border-slate-200 rounded-full w-max">
-                                <button type="button" wire:click="decrement" class="p-3 hover:text-blue-600 transition-colors">
+                        <div class="flex   gap-2 ">
+                            <div class="flex w-full items-center justify-between border border-slate-200 rounded-full w-max">
+                                <button type="button" wire:click="decrement" class="p-2 hover:text-blue-600 transition-colors sm:p-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus w-4 h-4">
                                         <path d="M5 12h14"></path>
                                     </svg>
                                 </button>
                                 <span class="w-12 text-center font-bold">{{ $quantity }}</span>
-                                <button type="button" wire:click="increment" class="p-3 hover:text-blue-600 transition-colors">
+                                <button type="button" wire:click="increment" class="p-2 hover:text-blue-600 transition-colors sm:p-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-4 h-4">
                                         <path d="M5 12h14"></path>
                                         <path d="M12 5v14"></path>
                                     </svg>
                                 </button>
                             </div>
-                            <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 flex-1 transition">
+                            <x-button type="submit" size="lg" variant="solid" class=" rounded-full px-6  sm:flex-1 sm:px-8">
                                 Add to cart
-                            </button>
+                            </x-button>
                         </div>
 
                     </form>

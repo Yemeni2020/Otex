@@ -16,6 +16,31 @@
         .sgd.sge.sgf.sgu { background: transparent; color: #0f172a; padding: 10px 14px; border-radius: 12px; border: 1px dashed #94a3b8; font-weight: 600; transition: border-color 150ms ease, color 150ms ease; }
         .sgd.sge.sgf.sgu:hover { color: #0b1f44; border-color: #0b1f44; }
         @media (max-width: 640px) { .sff { border-radius: 0; } }
+        [data-product-grid][data-view="grid"] { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        [data-product-grid][data-view="two-column"] { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        [data-product-grid][data-view="list"] { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        @media (min-width: 640px) {
+            [data-product-grid][data-view="grid"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            [data-product-grid][data-view="two-column"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (min-width: 1024px) {
+            [data-product-grid][data-view="grid"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            [data-product-grid][data-view="two-column"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (min-width: 768px) {
+            [data-product-grid][data-view="list"] [data-product-card] {
+                display: grid;
+                grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+                align-items: stretch;
+            }
+            [data-product-grid][data-view="list"] [data-product-card] > a {
+                height: 100%;
+                min-height: 100%;
+            }
+            [data-product-grid][data-view="list"] [data-product-card] > a img {
+                height: 100%;
+            }
+        }
     </style>
 @endpush
 <x-layouts.app>
@@ -225,7 +250,7 @@
         </el-dialog>
 
 
-        <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <main class="container mx-auto px-4">
             <div class="flex items-baseline justify-between border-b border-gray-200 pt-24 pb-6">
                 <h1 class="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
 
@@ -249,10 +274,22 @@
                         </el-menu>
                     </el-dropdown>
 
-                    <button type="button" class="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
+                    <button type="button" data-view-grid aria-pressed="true" class="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7" onclick="window.setShopView && window.setShopView('grid')">
                         <span class="sr-only">View grid</span>
                         <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5">
                             <path d="M4.25 2A2.25 2.25 0 0 0 2 4.25v2.5A2.25 2.25 0 0 0 4.25 9h2.5A2.25 2.25 0 0 0 9 6.75v-2.5A2.25 2.25 0 0 0 6.75 2h-2.5Zm0 9A2.25 2.25 0 0 0 2 13.25v2.5A2.25 2.25 0 0 0 4.25 18h2.5A2.25 2.25 0 0 0 9 15.75v-2.5A2.25 2.25 0 0 0 6.75 11h-2.5Zm9-9A2.25 2.25 0 0 0 11 4.25v2.5A2.25 2.25 0 0 0 13.25 9h2.5A2.25 2.25 0 0 0 18 6.75v-2.5A2.25 2.25 0 0 0 15.75 2h-2.5Zm0 9A2.25 2.25 0 0 0 11 13.25v2.5A2.25 2.25 0 0 0 13.25 18h2.5A2.25 2.25 0 0 0 18 15.75v-2.5A2.25 2.25 0 0 0 15.75 11h-2.5Z" clip-rule="evenodd" fill-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <button type="button" data-view-two-column aria-pressed="false" class="-m-2 ml-1 p-2 text-gray-400 hover:text-gray-500" onclick="window.setShopView && window.setShopView('two-column')">
+                        <span class="sr-only">View two column</span>
+                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5">
+                            <path d="M4.25 2A2.25 2.25 0 0 0 2 4.25v11.5A2.25 2.25 0 0 0 4.25 18h2.5A2.25 2.25 0 0 0 9 15.75V4.25A2.25 2.25 0 0 0 6.75 2h-2.5Zm9 0A2.25 2.25 0 0 0 11 4.25v11.5A2.25 2.25 0 0 0 13.25 18h2.5A2.25 2.25 0 0 0 18 15.75V4.25A2.25 2.25 0 0 0 15.75 2h-2.5Z" clip-rule="evenodd" fill-rule="evenodd"/>
+                        </svg>
+                    </button>
+                    <button type="button" data-view-list aria-pressed="false" class="-m-2 ml-1 p-2 text-gray-400 hover:text-gray-500" onclick="window.setShopView && window.setShopView('list')">
+                        <span class="sr-only">View list</span>
+                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5">
+                            <path d="M4 5.25A1.25 1.25 0 0 1 5.25 4h9.5a1.25 1.25 0 0 1 0 2.5h-9.5A1.25 1.25 0 0 1 4 5.25Zm0 5A1.25 1.25 0 0 1 5.25 9h9.5a1.25 1.25 0 0 1 0 2.5h-9.5A1.25 1.25 0 0 1 4 10.25Zm1.25 4.75a1.25 1.25 0 0 0 0 2.5h9.5a1.25 1.25 0 0 0 0-2.5h-9.5Z" clip-rule="evenodd" fill-rule="evenodd"/>
                         </svg>
                     </button>
                     <button type="button" command="show-modal" commandfor="mobile-filters" class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden">
@@ -555,7 +592,7 @@
 
                     <!-- Product grid -->
                     <div class="lg:col-span-3">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-product-grid>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-product-grid data-view="grid">
                             @php
                                 $products = [
                                     [
@@ -715,14 +752,14 @@
                                         <div class="flex items-center justify-between mt-auto">
                                             <span class="text-xl font-bold text-blue-600"><x-currency :amount="number_format($product['price'], 2)" /></span>
                                             <div class="flex items-center gap-2">
-                                                <button class="inline-flex items-center justify-center text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4">
+                                                <x-button type="button" size="sm" variant="solid" class="rounded-full px-4">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart w-4 h-4 mr-2">
                                                         <circle cx="8" cy="21" r="1"></circle>
                                                         <circle cx="19" cy="21" r="1"></circle>
                                                         <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
                                                     </svg>
                                                     Add
-                                                </button>
+                                                </x-button>
                                             </div>
                                         </div>
                                     </div>
@@ -778,7 +815,7 @@
                                 <p data-preview-description class="text-slate-600">Perfect for road trips with kids. Holds tablets up to 11 inches, drinks, snacks, and toys. Durable waterproof fabric.</p>
 
                                 <div class="flex flex-wrap gap-3">
-                                    <button type="button" class="inline-flex h-12 items-center justify-center rounded-full bg-blue-600 px-6 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition hover:bg-blue-500">Add to bag</button>
+                                    <x-button type="button" size="lg" variant="solid" class="rounded-full px-6">Add to bag</x-button>
                                     <a data-preview-link href="/shop/8" class="inline-flex h-12 items-center justify-center rounded-full border border-slate-200 px-6 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50">View full details</a>
                                 </div>
                             </div>
@@ -792,10 +829,42 @@
 
 @push('scripts')
 <script>
+const setShopView = (view) => {
+    const grid = document.querySelector('[data-product-grid]') || document.querySelector('.lg\\:col-span-3 > .grid');
+    if (!grid) return;
+    const viewGridButton = document.querySelector('[data-view-grid]');
+    const viewTwoColumnButton = document.querySelector('[data-view-two-column]');
+    const viewListButton = document.querySelector('[data-view-list]');
+    const gridColumnClasses = ['sm:grid-cols-2', 'lg:grid-cols-2', 'lg:grid-cols-3'];
+
+    grid.dataset.view = view;
+    grid.classList.remove(...gridColumnClasses);
+    if (view === 'grid') {
+        grid.classList.add('sm:grid-cols-2', 'lg:grid-cols-3');
+    } else if (view === 'two-column') {
+        grid.classList.add('sm:grid-cols-2', 'lg:grid-cols-2');
+    }
+
+    [viewGridButton, viewTwoColumnButton, viewListButton].forEach(button => {
+        if (!button) return;
+        const isActive = button.dataset.viewGrid !== undefined ? view === 'grid'
+            : button.dataset.viewTwoColumn !== undefined ? view === 'two-column'
+            : view === 'list';
+        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        button.classList.toggle('text-gray-900', isActive);
+    });
+};
+
+window.setShopView = setShopView;
+
 const initShopPage = () => {
     const cards = Array.from(document.querySelectorAll('[data-product-card]'));
     const grid = document.querySelector('[data-product-grid]') || document.querySelector('.lg\\:col-span-3 > .grid');
     const hasCards = cards.length > 0;
+    const viewGridButton = document.querySelector('[data-view-grid]');
+    const viewTwoColumnButton = document.querySelector('[data-view-two-column]');
+    const viewListButton = document.querySelector('[data-view-list]');
+    const gridColumnClasses = ['sm:grid-cols-2', 'lg:grid-cols-2', 'lg:grid-cols-3'];
 
     const mapCategory = (val) => ({
         'new-arrivals': 'interior',
@@ -862,7 +931,48 @@ const initShopPage = () => {
         });
     });
 
+    const setActiveButton = (activeButton) => {
+        [viewGridButton, viewTwoColumnButton, viewListButton].forEach(button => {
+            if (!button) return;
+            const isActive = button === activeButton;
+            button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            button.classList.toggle('text-gray-900', isActive);
+        });
+    };
+
+    const applyGridView = () => {
+        if (!grid) return;
+        setShopView('grid');
+    };
+
+    const applyTwoColumnView = () => {
+        if (!grid) return;
+        setShopView('two-column');
+    };
+
+    const applyListView = () => {
+        if (!grid) return;
+        setShopView('list');
+    };
+
+    if (viewGridButton) {
+        viewGridButton.addEventListener('click', () => {
+            applyGridView();
+        });
+    }
+    if (viewTwoColumnButton) {
+        viewTwoColumnButton.addEventListener('click', () => {
+            applyTwoColumnView();
+        });
+    }
+    if (viewListButton) {
+        viewListButton.addEventListener('click', () => {
+            applyListView();
+        });
+    }
+
     applyFilters();
+    applyGridView();
 
     // Products are already rendered; keep the sentinel only if you want lazy-load effects later.
 };

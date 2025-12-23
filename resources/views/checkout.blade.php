@@ -1,319 +1,416 @@
 <x-layouts.app>
-    <main class="flex-grow bg-slate-50">
-        <section class="bg-slate-900 text-white py-16">
-            <div class="container mx-auto px-4">
-                <h1 class="text-4xl font-bold mb-2">Checkout</h1>
-                <p class="text-slate-300">Securely complete your purchase.</p>
+    @push('head')
+        <style>
+            :root {
+                --primary: #2563eb;
+                --line: #e2e8f0;
+                --warn: #fde68a;
+                --shadow: 0 18px 40px -24px rgba(15, 23, 42, 0.35);
+            }
+            .dark {
+                --primary: #38bdf8;
+                --line: #1f2937;
+                --warn: #fcd34d;
+                --shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.6);
+            }
+        </style>
+    @endpush
+
+    <div id="applePayAlert" class="bg-[color:var(--warn)] text-slate-900">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between gap-3 text-xs">
+            <button class="opacity-70 hover:opacity-100" aria-label="close" type="button" data-dismiss-alert>×</button>
+            <div class="flex-1 text-center">
+                Apple Pay is available only in Safari. Please open this checkout in Safari to pay.
             </div>
-        </section>
+            <button id="copyCheckoutLink" class="inline-flex items-center gap-2 rounded-md border border-black/20 bg-black/10 px-3 py-1.5 hover:bg-black/15" type="button">
+                Copy link
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.7">
+                    <path d="M9 9h10v10H9z"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+            </button>
+        </div>
+    </div>
 
-        <section class="container mx-auto px-4 py-12">
-            <div class="grid lg:grid-cols-3 gap-8">
-                <!-- Billing / Shipping -->
-                <div class="lg:col-span-2 space-y-8">
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-                        <h2 class="text-xl font-bold text-slate-900 mb-4">Contact Information</h2>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1" for="first_name">First
-                                    Name</label>
-                                <input id="first_name" type="text"
-                                    class="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="John">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1" for="last_name">Last
-                                    Name</label>
-                                <input id="last_name" type="text"
-                                    class="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Doe">
-                            </div>
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-slate-700 mb-1"
-                                    for="email">Email</label>
-                                <input id="email" type="email"
-                                    class="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="you@example.com">
-                            </div>
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-slate-700 mb-1"
-                                    for="phone">Phone</label>
-                                <div class="flex gap-2">
-                                    <select
-                                        class="rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        <option value="+1">+1 (US)</option>
-                                        <option value="+44">+44 (UK)</option>
-                                        <option value="+61">+61 (AU)</option>
-                                        <option value="+971">+971 (UAE)</option>
-                                        <option value="+91">+91 (IN)</option>
-                                    </select>
-                                    <input id="phone" type="tel"
-                                        class="flex-1 rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        placeholder="(555) 123-4567">
-                                </div>
+    <main class="py-12 bg-gradient-to-b from-slate-50 via-white to-slate-50">
+        <div class="container mx-auto px-4 space-y-5">
+            <!-- Store header -->
+            <x-card class="p-6 border-slate-200/70 bg-white/90 backdrop-blur">
+                <div class="flex items-center justify-between gap-6">
+                    <div class="flex items-center gap-4">
+                        <a class="grid h-14 w-14 place-items-center rounded-xl border border-[color:var(--line)] bg-white overflow-hidden shadow-sm" href="#">
+                            <img class="h-full w-full object-contain" src="{{ asset('img/logo_avatar.svg') }}" alt="logo">
+                        </a>
+                        <div>
+                            <h1 class="text-lg font-bold leading-6 text-slate-900">Osama Osama</h1>
+                            <div class="mt-1 text-xs text-slate-500">
+                                <a class="hover:text-slate-700" href="cart.html">Cart</a>
+                                <span class="mx-2">/</span>
+                                <span class="text-slate-700">Checkout</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-                        <h2 class="text-xl font-bold text-slate-900 mb-4">Shipping Address</h2>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-slate-700 mb-1" for="street">Street
-                                    Address</label>
-                                <input id="street" type="text"
-                                    class="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="123 Performance Drive">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1" for="city">City</label>
-                                <input id="city" type="text"
-                                    class="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Detroit">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1"
-                                    for="state">State</label>
-                                <input id="state" type="text"
-                                    class="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="MI">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1" for="zip">ZIP</label>
-                                <input id="zip" type="text"
-                                    class="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="48201">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1"
-                                    for="country">Country</label>
-                                <select id="country"
-                                    class="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    <option>United States</option>
-                                    <option>Canada</option>
-                                    <option>United Kingdom</option>
-                                </select>
-                            </div>
-                        </div>
+                    <div class="grid h-14 w-14 place-items-center rounded-xl border border-[color:var(--line)] bg-white shadow-sm">
+                        <svg viewBox="0 0 24 24" class="h-10 w-10 text-[color:var(--primary)]" fill="currentColor">
+                            <path d="M12 2a10 10 0 1 0 7.07 17.07l-2.12-2.12A7 7 0 1 1 19 12h-7v3h10A10 10 0 0 0 12 2z"/>
+                        </svg>
+                    </div>
+                </div>
+            </x-card>
+
+            <!-- Totals + coupon -->
+            <x-card class="mt-5 border-slate-200/70 bg-white/90 backdrop-blur">
+                <div class="p-6 flex items-center justify-between">
+                    <div class="text-xl font-extrabold text-slate-900">113.45 <span class="text-slate-400">SAR</span></div>
+                    <div class="text-xl font-bold text-slate-900">Order total</div>
+                </div>
+
+                <div class="px-6 pb-6">
+                    <div class="mb-2 text-sm text-[color:var(--primary)]">Have a discount code?</div>
+
+                    <div class="flex gap-2">
+                        <x-input placeholder="Enter coupon code" class="rounded-lg px-4 py-3 text-sm bg-white/90" />
+                        <x-button type="button" size="md" variant="solid" class="rounded-lg px-5">Apply</x-button>
                     </div>
 
-                    <!-- Payment moved above summary -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-                        <h3 class="text-xl font-bold text-slate-800 mb-4">Payment Method</h3>
-                        <div class="grid grid-cols-2 gap-2 bg-slate-100 rounded-md p-1 text-slate-500">
-                            <button type="button"
-                                class="flex items-center justify-center gap-2 rounded-sm px-3 py-2 text-sm font-medium bg-white text-slate-900 shadow-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
-                                </svg>
+                    <div class="mt-4 flex justify-center">
+                        <button id="openOrderDetails"
+                            class="rounded-full border border-[color:var(--line)] bg-white px-5 py-2 text-xs text-slate-600 shadow-sm hover:bg-slate-50" type="button">
+                            Order details
+                        </button>
+                    </div>
+                </div>
+            </x-card>
 
-                                Card
-                            </button>
-                            <button type="button"
-                                class="flex items-center justify-center gap-2 rounded-sm px-3 py-2 text-sm font-medium">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-                                </svg>
+            <!-- Main accordion card -->
+            <x-card class="mt-5 border-slate-200/70 bg-white/90 backdrop-blur">
+                <!-- Shipping Address header -->
+                <button class="w-full p-6 flex items-center justify-between" type="button">
+                    <div class="flex items-center gap-2 text-slate-700">
+                        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7">
+                            <path d="M12 22s7-4.4 7-11a7 7 0 0 0-14 0c0 6.6 7 11 7 11z"/>
+                            <circle cx="12" cy="11" r="2.5"/>
+                        </svg>
+                    </div>
+                    <div class="text-lg font-bold text-slate-900">Shipping address</div>
+                </button>
 
-                                Online
-                            </button>
+                <div class="px-6 pb-6">
+                    <div class="text-xs text-slate-500 mb-4">
+                        Commodo Magnam Facil - Saudi Arabia - Dammam - Al Khalidiyah North - Saad Bin Saud
+                    </div>
+
+                    <div class="rounded-xl border border-[color:var(--line)]">
+                        <div class="flex items-center justify-between px-4 py-3 bg-slate-50">
+                            <div class="text-sm font-bold text-slate-700">Saved addresses</div>
+                            <svg viewBox="0 0 24 24" class="h-5 w-5 text-slate-500" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="m6 15 6-6 6 6"/>
+                            </svg>
                         </div>
-                        <div class="mt-6 space-y-4">
-                            <div>
-                                <div class="flex items-center justify-between mb-2">
-                                    <label class="block text-sm font-medium text-slate-700" for="cardNumber">Card
-                                        Number</label>
-                                    <span id="cardBrandDisplay" class="text-xs font-semibold text-slate-500">Card
-                                        type</span>
+
+                        <div class="px-4 py-3">
+                            <label class="flex items-start justify-between gap-3">
+                                <div class="flex items-start gap-3">
+                                    <input type="radio" checked class="mt-1 accent-[color:var(--primary)]">
+                                    <span class="text-sm text-slate-700">
+                                        Saudi Arabia - Dammam - Al Khalidiyah North - Saad Bin Saud
+                                    </span>
                                 </div>
+
                                 <div class="flex items-center gap-3">
-                                    <div id="cardBrandIcon"
-                                        class="w-14 h-9 rounded-md shadow-sm shrink-0 overflow-hidden">
-                                        <svg viewBox="0 0 36 24" aria-hidden="true" class="w-full h-full">
-                                            <rect width="36" height="24" rx="4" fill="#e2e8f0">
-                                            </rect>
+                                    <button class="text-slate-500 hover:text-slate-800" aria-label="edit" type="button">
+                                        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.7">
+                                            <path d="M12 20h9"/>
+                                            <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
                                         </svg>
-                                    </div>
-                                    <input id="cardNumber" type="text"
-                                        class="flex-1 rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric"
-                                        autocomplete="cc-number">
+                                    </button>
+                                    <button class="text-red-500 hover:text-red-600" aria-label="delete" type="button">
+                                        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7">
+                                            <path d="M3 6h18"/>
+                                            <path d="M8 6V4h8v2"/>
+                                            <path d="M19 6l-1 16H6L5 6"/>
+                                            <path d="M10 11v6M14 11v6"/>
+                                        </svg>
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-slate-700 mb-1" for="expiry">Expiry
-                                        Date</label>
-                                    <input id="expiry" type="text"
-                                        class="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        placeholder="MM/YY" maxlength="5">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-slate-700 mb-1"
-                                        for="cvc">CVV</label>
-                                    <input id="cvc" type="password"
-                                        class="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        placeholder="123" maxlength="4">
-                                </div>
-                            </div>
-                            <div class="space-y-3">
-                                <div class="text-xs uppercase tracking-wide text-slate-500">Pay later options</div>
-                                <div class="space-y-2">
-                                    <label class="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 hover:border-blue-500 transition">
-                                        <input type="radio" name="payment_option" class="mt-1 h-4 w-4 border-slate-300 text-blue-600 focus:ring-blue-500">
-                                        <div class="flex flex-col gap-1 flex-1">
-                                            <div class="flex items-center gap-3">
-                                                <span class="text-sm font-semibold text-slate-900">Tamara</span>
-                                                <img src="//img.ltwebstatic.com/images3_pi/2022/03/21/1647843011d63546403e4943fe1dafa426e9f5a120.png" alt="Tamara" class="h-6">
-                                            </div>
-                                            <p class="text-sm text-slate-700">Pay in 4 installments with no fees or interest.</p>
-                                        </div>
-                                    </label>
-                                    <label class="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 hover:border-blue-500 transition">
-                                        <input type="radio" name="payment_option" class="mt-1 h-4 w-4 border-slate-300 text-blue-600 focus:ring-blue-500">
-                                        <div class="flex flex-col gap-1 flex-1">
-                                            <div class="flex items-center gap-3">
-                                                <span class="text-sm font-semibold text-slate-900">Tabby</span>
-                                                <img src="//img.ltwebstatic.com/images3_pi/2022/03/24/16481147309c374cb9e7791c2d59dce8ba2d8efa79.png" alt="Tabby" class="h-6">
-                                            </div>
-                                            <p class="text-sm text-slate-700">Split your purchase into 4 monthly payments.</p>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-                            <button
-                                class="inline-flex items-center justify-center rounded-md font-medium bg-green-600 hover:bg-green-700 text-white w-full py-3 text-lg transition-colors">
-                                Complete Order - $97.18
+                            </label>
+
+                            <button class="mt-4 w-full rounded-lg border border-[color:var(--line)] bg-white px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50" type="button">
+                                Add new address
                             </button>
+
+                            <label class="mt-4 flex items-start gap-3 text-sm text-slate-700">
+                                <input type="checkbox" class="mt-1 accent-[color:var(--primary)]">
+                                <span>
+                                    Someone else will receive the order?
+                                    <span class="block text-xs text-slate-400 mt-1">
+                                        If someone else will receive your order, the carrier will contact them on delivery.
+                                    </span>
+                                </span>
+                            </label>
+
+                            <x-button type="button" size="lg" variant="solid" class="mt-5 w-full rounded-lg text-sm font-extrabold">Confirm address</x-button>
                         </div>
-                        <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                            
-                            <div class="flex items-start gap-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class=" text-green-600 mt-0.5">
-                                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2">
-                                    </rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </div>
+
+                    <!-- SHIPPING COMPANIES (click to open) -->
+                    <div class="mt-6 border-t border-[color:var(--line)] pt-5">
+                        <button id="toggleShipping" class="w-full flex items-start justify-between gap-3" type="button">
+                            <div class="text-xs text-slate-500">SMSA | Express shipping, 2-3 business days</div>
+                            <div class="flex items-center gap-2 font-bold">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" class="text-slate-800">
+                                    <circle cx="17" cy="18" r="2" stroke="currentColor" stroke-width="1.5"></circle>
+                                    <circle cx="7" cy="18" r="2" stroke="currentColor" stroke-width="1.5"></circle>
+                                    <path d="M5 17.9724C3.90328 17.9178 3.2191 17.7546 2.73223 17.2678C2.24536 16.7809 2.08222 16.0967 2.02755 15M9 18H15M19 17.9724C20.0967 17.9178 20.7809 17.7546 21.2678 17.2678C22 16.5355 22 15.357 22 13V11H17.3C16.5555 11 16.1832 11 15.882 10.9021C15.2731 10.7043 14.7957 10.2269 14.5979 9.61803C14.5 9.31677 14.5 8.94451 14.5 8.2C14.5 7.08323 14.5 6.52485 14.3532 6.07295C14.0564 5.15964 13.3404 4.44358 12.4271 4.14683C11.9752 4 11.4168 4 10.3 4H2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M2 8H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M2 11H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M14.5 6H16.3212C17.7766 6 18.5042 6 19.0964 6.35371C19.6886 6.70742 20.0336 7.34811 20.7236 8.6295L22 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
+                                <span>Shipping carrier</span>
+                            </div>
+                        </button>
 
+                        <!-- shipping panel -->
+                        <div id="shippingPanel" class="hidden mt-4 rounded-xl border border-[color:var(--line)] p-4">
+                            <ul class="space-y-3">
+                                <li class="rounded-md border border-[color:var(--line)] px-4 py-3 hover:bg-slate-50">
+                                    <label class="flex items-center justify-between gap-3 cursor-pointer">
+                                        <div class="flex items-center gap-3">
+                                            <input type="radio" name="ship" checked class="accent-[color:var(--primary)]">
+                                            <img class="h-8 w-8" src="https://cdn.assets.salla.network/prod/stores/images/shipping_logo.svg" alt="SMSA">
+                                            <div class="flex flex-col">
+                                                <span class="text-sm font-semibold">SMSA | Express shipping</span>
+                                                <span class="text-xs text-slate-500">2-3 business days</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-sm font-bold">12 <span class="text-slate-400">SAR</span></div>
+                                    </label>
+                                </li>
+                            </ul>
 
-                                <div class="text-sm">
-                                    <p class="font-semibold text-green-800">Secure Checkout</p>
-                                    <p class="text-green-700">Your payment information is encrypted and secure</p>
+                            <x-button type="button" size="lg" variant="solid" class="mt-4 w-full rounded-lg text-sm font-extrabold">
+                                Confirm carrier
+                            </x-button>
+                        </div>
+                    </div>
+
+                    <!-- PAYMENT (click to open) -->
+                    <div class="mt-6 border pt-5">
+                        <button id="togglePayment" class="w-full flex items-start justify-between gap-3" type="button">
+                            <div class="text-xs text-slate-500">Mada</div>
+                            <div class="flex items-center gap-2 font-bold">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" class="text-slate-800">
+                                    <path d="M14.4998 12.001C14.4998 13.3817 13.3805 14.501 11.9998 14.501C10.6191 14.501 9.49982 13.3817 9.49982 12.001C9.49982 10.6203 10.6191 9.50098 11.9998 9.50098C13.3805 9.50098 14.4998 10.6203 14.4998 12.001Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M16 5.00098C18.4794 5.00098 20.1903 5.38518 21.1329 5.6773C21.6756 5.84549 22 6.35987 22 6.92803V16.6833C22 17.7984 20.7719 18.6374 19.6762 18.4305C18.7361 18.253 17.5107 18.1104 16 18.1104C11.2491 18.1104 10.1096 19.9161 3.1448 18.3802C2.47265 18.232 2 17.6275 2 16.9392V6.92214C2 5.94628 2.92079 5.23464 3.87798 5.42458C10.1967 6.67844 11.4209 5.00098 16 5.00098Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M2 9.00098C3.95133 9.00098 5.70483 7.40605 5.92901 5.75514M18.5005 5.50098C18.5005 7.54062 20.2655 9.46997 22 9.46997M22 15.001C20.1009 15.001 18.2601 16.3112 18.102 18.0993M6.00049 18.4971C6.00049 16.2879 4.20963 14.4971 2.00049 14.4971" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                <span>Payment</span>
+                            </div>
+                        </button>
+
+                        <!-- payment panel -->
+                        <div id="paymentPanel" class="hidden mt-4 rounded-xl border border-[color:var(--line)] p-4">
+                            <!-- payment options row -->
+                            <div class="flex flex-wrap gap-3">
+                                <button class="h-12 w-12 rounded-full border border-[color:var(--line)] bg-white grid place-items-center ring-2 ring-[color:var(--primary)]/30 " type="button">
+                                    <img class="h-7" src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-mada.svg" alt="mada">
+                                </button>
+                                <button class="h-12 w-12 rounded-full border border-[color:var(--line)] bg-white grid place-items-center hover:bg-slate-50 " type="button">
+                                    <img class="h-7" src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-credit-2.svg" alt="credit">
+                                </button>
+                                <button class="h-12 w-12 rounded-full border border-[color:var(--line)] bg-white grid place-items-center hover:bg-slate-50 " type="button">
+                                    <img class="h-7" src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-tabby_en.png?v=0.0.1" alt="tabby">
+                                </button>
+                                <button class="h-12 w-16 rounded-full border border-[color:var(--line)] bg-white grid place-items-center hover:bg-slate-50 px-2 " type="button">
+                                    <img class="h-6" src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/tamara/ar-tamara-label.svg" alt="tamara">
+                                </button>
+                                <button class="h-12 rounded-full border border-[color:var(--line)] bg-white px-4 text-sm font-semibold hover:bg-slate-50 " type="button">
+                                    Bank transfer
+                                </button>
+                                <button class="h-12 rounded-full border border-[color:var(--line)] bg-white px-4 text-sm font-semibold hover:bg-slate-50 relative" type="button">
+                                    Cash on delivery
+                                    <span class="absolute -left-2 -top-2 rounded-full bg-sky-100 text-sky-700 text-[11px] px-2 py-0.5 border border-sky-200">+10 SAR</span>
+                                </button>
+                            </div>
+
+                            <!-- card form -->
+                            <div class="mt-5 grid gap-4 md:grid-cols-6">
+                                <div class="md:col-span-3">
+                                    <label class="text-sm font-semibold">Card number</label>
+                                    <div class="mt-2 relative">
+                                        <x-input placeholder="Card number" class="rounded-lg px-4 py-3 text-sm bg-white/90" />
+                                        <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">💳</span>
+                                    </div>
+                                </div>
+
+                                <div class="md:col-span-2">
+                                    <label class="text-sm font-semibold">Expiry date</label>
+                                    <div class="mt-2 flex gap-2">
+                                        <x-input placeholder="Month" class="rounded-lg px-4 py-3 text-sm bg-white/90" />
+                                        <x-input placeholder="Year" class="rounded-lg px-4 py-3 text-sm bg-white/90" />
+                                    </div>
+                                </div>
+
+                                <div class="md:col-span-1">
+                                    <label class="text-sm font-semibold">CVC</label>
+                                    <x-input placeholder="CVC" class="mt-2 rounded-lg px-4 py-3 text-sm bg-white/90" />
                                 </div>
                             </div>
+
+                            <x-button type="button" size="lg" variant="solid" class="mt-5 w-full rounded-lg text-sm font-extrabold">
+                                Confirm payment
+                            </x-button>
+                        </div>
+                    </div>
+                </div>
+            </x-card>
+
+            <!-- bottom text -->
+            <div class="mt-10 text-center text-sm text-slate-500 leading-7">
+                Every order gives back.<br>
+                We donate a portion of your order to the Rukn Al-Hiwar charity.
+            </div>
+        </div>
+    </main>
+
+    <!-- ===================== ORDER DETAILS DRAWER ===================== -->
+    <div id="drawerOverlay" class="fixed inset-0 z-50 hidden">
+        <!-- backdrop -->
+        <div class="absolute inset-0 bg-black/40" data-close-drawer></div>
+
+        <!-- drawer -->
+        <aside id="drawer"
+            class="absolute left-0 top-0 h-full w-full max-w-md bg-white shadow-[var(--shadow)]
+                translate-x-[-100%] transition-transform duration-300 bg-white">
+            <div class="cart-drawer-cont h-full flex flex-col">
+                <div class="cart-drawer__header flex items-center justify-between border-b border-[color:var(--line)] px-5 py-4">
+                    <h3 class="cart-drawer__title text-base font-extrabold">Order details</h3>
+                    <button id="closeDrawer" class="cart-drawer__close text-slate-500 hover:text-slate-900" aria-label="close" type="button">
+                        ×
+                    </button>
+                </div>
+
+                <div class="cart-drawer__content flex-1 overflow-hidden">
+                    <div class="cart-drawer__items h-full">
+                        <div class="cart-drawer__scroll-content h-full overflow-auto p-5 space-y-4">
+                            <!-- item -->
+                            <div class="cart-item flex gap-3">
+                                <div class="cart-item__image relative h-14 w-14 overflow-hidden rounded-xl border border-[color:var(--line)] bg-white">
+                                    <img class="h-full w-full object-cover" src="https://cdn.salla.sa/zvEDg/XxtyuVHPUfp7nGe7xyUPmfiUGqEqbSEzXGgDrabr.png" alt="Smart Vlog Kit 4-in-1">
+                                    <div class="cart-item__quantity-badge absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-[color:var(--primary)] text-xs font-bold text-white">1</div>
+                                </div>
+                                <div class="cart-item__details flex-1">
+                                    <div class="cart-item__info">
+                                        <h4 class="cart-item__name text-sm font-semibold leading-6">
+                                            Smart Vlog Kit 4-in-1
+                                        </h4>
+                                        <div class="cart-item__meta text-xs text-slate-400 mt-1">
+                                            <span class="cart-item__specs"></span>
+                                        </div>
+                                    </div>
+                                    <div class="cart-item__bottom mt-2">
+                                        <div class="cart-item__price text-sm font-bold">
+                                            56.35 <small class="cart-item__currency text-slate-400">SAR</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- item -->
+                            <div class="cart-item flex gap-3">
+                                <div class="cart-item__image relative h-14 w-14 overflow-hidden rounded-xl border border-[color:var(--line)] bg-white">
+                                    <img class="h-full w-full object-cover" src="https://cdn.salla.sa/zvEDg/Wto2h6hhbNNWCqh7OsM0gZqPC5I157wqFmlpW5Qp.png" alt="Home Sensor (TUYA)">
+                                    <div class="cart-item__quantity-badge absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-[color:var(--primary)] text-xs font-bold text-white">1</div>
+                                </div>
+                                <div class="cart-item__details flex-1">
+                                    <div class="cart-item__info">
+                                        <h4 class="carMt-item__name text-sm font-semibold leading-6">
+                                            Home Sensor (TUYA)
+                                        </h4>
+                                    </div>
+                                    <div class="cart-item__bottom mt-2">
+                                        <div class="cart-item__price text-sm font-bold">
+                                            43.30 <small class="cart-item__currency text-slate-400">SAR</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
-                <!-- Order Summary -->
-                <aside class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-6">
-
-                    <div class="space-y-4">
-                        @foreach ([['name' => 'All-Weather Floor Mats Pro', 'price' => 49.99, 'qty' => 1, 'image' => 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=300&q=80'], ['name' => 'Smart Trunk Organizer', 'price' => 34.99, 'qty' => 1, 'image' => 'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=300&q=80']] as $item)
-                            <div class="flex gap-3">
-                                <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}"
-                                    class="w-16 h-16 rounded-lg object-cover">
-                                <div class="flex-1">
-                                    <p class="font-semibold text-slate-800">{{ $item['name'] }}</p>
-                                    <p class="text-sm text-slate-500">Qty: {{ $item['qty'] }}</p>
-                                </div>
-                                <span class="font-bold text-slate-900">${{ number_format($item['price'], 2) }}</span>
-                            </div>
-                        @endforeach
+                <!-- footer summary -->
+                <div class="border-t border-[color:var(--line)] p-5 space-y-4">
+                    <div class="flex items-center justify-between text-lg">
+                        <span class="font-semibold text-slate-700">Subtotal</span>
+                        <span class="font-bold text-2xl text-blue-600">113.45 <span class="text-slate-400">SAR</span></span>
                     </div>
-                    <h2 class="text-xl font-bold text-slate-900">Order Summary</h2>
-                    <div class="space-y-2">
-                        <p class="text-sm font-semibold text-slate-800">Do you have a discount code?</p>
-                        <div class="flex gap-2">
-                            <input type="text" placeholder="SAVE20"
-                                class="flex-1 rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            <button
-                                class="rounded-lg px-4 py-2 bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition">Apply</button>
-                        </div>
-                        <p class="text-xs text-slate-500">Enter your code to apply available discounts.</p>
-                    </div>
-                    <div class="border-t border-slate-200 pt-4 space-y-2 text-sm">
-                        <div class="flex justify-between text-slate-600">
-                            <span>Subtotal</span>
-                            <span>$84.98</span>
-                        </div>
-                        <div class="flex justify-between text-slate-600">
-                            <span>Shipping</span>
-                            <span>$5.00</span>
-                        </div>
-                        <div class="flex justify-between text-slate-600">
-                            <span>Tax</span>
-                            <span>$7.20</span>
-                        </div>
-                        <div class="flex justify-between font-bold text-slate-900 text-lg">
-                            <span>Total</span>
-                            <span>$97.18</span>
-                        </div>
-                    </div>
-                    <button
-                        class="w-full h-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors">Place
-                        Order</button>
-                    <p class="text-xs text-slate-500 text-center">By placing your order, you agree to our Terms and
-                        Privacy Policy.</p>
-                </aside>
+                    <x-button type="button" size="lg" variant="solid" class="w-full rounded-md">Continue checkout</x-button>
+                </div>
             </div>
-        </section>
-    </main>
-</x-layouts.app>
+        </aside>
+    </div>
 
-@push('scripts')
-    <script>
-        (() => {
-            const cardNumber = document.getElementById('cardNumber');
-            const brandDisplay = document.getElementById('cardBrandDisplay');
-            const cardBrandIcon = document.getElementById('cardBrandIcon');
-            if (!cardNumber || !brandDisplay) return;
+    @push('scripts')
+        <script>
+            const overlay = document.getElementById('drawerOverlay');
+            const drawer = document.getElementById('drawer');
+            const openBtn = document.getElementById('openOrderDetails');
+            const closeBtn = document.getElementById('closeDrawer');
+            const alertBox = document.getElementById('applePayAlert');
+            const copyBtn = document.getElementById('copyCheckoutLink');
 
-            const brands = [{
-                    name: 'Visa',
-                    regex: /^4/
-                },
-                {
-                    name: 'Mastercard',
-                    regex: /^(5[1-5]|2[2-7])/
-                },
-                {
-                    name: 'Amex',
-                    regex: /^3[47]/
-                },
-                {
-                    name: 'Discover',
-                    regex: /^6(?:011|5)/
-                },
-            ];
+            function openDrawer() {
+                if (!overlay || !drawer) return;
+                overlay.classList.remove('hidden');
+                requestAnimationFrame(() => drawer.classList.remove('translate-x-[-100%]'));
+                document.body.style.overflow = 'hidden';
+            }
+            function closeDrawer() {
+                if (!overlay || !drawer) return;
+                drawer.classList.add('translate-x-[-100%]');
+                setTimeout(() => overlay.classList.add('hidden'), 250);
+                document.body.style.overflow = '';
+            }
 
-            const brandSvgs = {
-                Visa: `<svg width="780px" height="780px" viewBox="0 -140 780 780" xmlns="http://www.w3.org/2000/svg"><rect width="780" height="500" fill="#0E4595"/><path d="m293.2 348.73l33.361-195.76h53.36l-33.385 195.76h-53.336zm246.11-191.54c-10.57-3.966-27.137-8.222-47.822-8.222-52.725 0-89.865 26.55-90.18 64.603-0.299 28.13 26.514 43.822 46.752 53.186 20.771 9.595 27.752 15.714 27.654 24.283-0.131 13.121-16.586 19.116-31.922 19.116-21.357 0-32.703-2.967-50.227-10.276l-6.876-3.11-7.489 43.823c12.463 5.464 35.51 10.198 59.438 10.443 56.09 0 92.5-26.246 92.916-66.882 0.199-22.269-14.016-39.216-44.801-53.188-18.65-9.055-30.072-15.099-29.951-24.268 0-8.137 9.668-16.839 30.557-16.839 17.449-0.27 30.09 3.535 39.938 7.5l4.781 2.26 7.232-42.429m137.31-4.223h-41.232c-12.773 0-22.332 3.487-27.941 16.234l-79.244 179.4h56.031s9.16-24.123 11.232-29.418c6.125 0 60.555 0.084 68.338 0.084 1.596 6.853 6.49 29.334 6.49 29.334h49.514l-43.188-195.64zm-65.418 126.41c4.412-11.279 21.26-54.723 21.26-54.723-0.316 0.522 4.379-11.334 7.074-18.684l3.605 16.879s10.219 46.729 12.354 56.528h-44.293zm-363.3-126.41l-52.24 133.5-5.567-27.13c-9.725-31.273-40.025-65.155-73.898-82.118l47.766 171.2 56.456-0.064 84.004-195.39h-56.521" fill="#fff"/><path d="m146.92 152.96h-86.041l-0.681 4.073c66.938 16.204 111.23 55.363 129.62 102.41l-18.71-89.96c-3.23-12.395-12.597-16.094-24.186-16.527" fill="#F2AE14"/></svg>`,
-                Mastercard: `<svg viewBox="0 -54.25 482.51 482.51" xmlns="http://www.w3.org/2000/svg"><g><path d="M220.13,421.67V396.82c0-9.53-5.8-15.74-15.32-15.74-5,0-10.35,1.66-14.08,7-2.9-4.56-7-7-13.25-7a14.07,14.07,0,0,0-12,5.8v-5h-7.87v39.76h7.87V398.89c0-7,4.14-10.35,9.94-10.35s9.11,3.73,9.11,10.35v22.78h7.87V398.89c0-7,4.14-10.35,9.94-10.35s9.11,3.73,9.11,10.35v22.78Zm129.22-39.35h-14.5v-12H327v12h-8.28v7H327V408c0,9.11,3.31,14.5,13.25,14.5A23.17,23.17,0,0,0,351,419.6l-2.49-7a13.63,13.63,0,0,1-7.46,2.07c-4.14,0-6.21-2.49-6.21-6.63V389h14.5v-6.63Zm73.72-1.24a12.39,12.39,0,0,0-10.77,5.8v-5h-7.87v39.76h7.87V399.31c0-6.63,3.31-10.77,8.7-10.77a24.24,24.24,0,0,1,5.38.83l2.49-7.46a28,28,0,0,0-5.8-.83Zm-111.41,4.14c-4.14-2.9-9.94-4.14-16.15-4.14-9.94,0-16.15,4.56-16.15,12.43,0,6.63,4.56,10.35,13.25,11.6l4.14.41c4.56.83,7.46,2.49,7.46,4.56,0,2.9-3.31,5-9.53,5a21.84,21.84,0,0,1-13.25-4.14l-4.14,6.21c5.8,4.14,12.84,5,17,5,11.6,0,17.81-5.38,17.81-12.84,0-7-5-10.35-13.67-11.6l-4.14-.41c-3.73-.41-7-1.66-7-4.14,0-2.9,3.31-5,7.87-5,5,0,9.94,2.07,12.43,3.31Zm120.11,16.57c0,12,7.87,20.71,20.71,20.71,5.8,0,9.94-1.24,14.08-4.56l-4.14-6.21a16.74,16.74,0,0,1-10.35,3.73c-7,0-12.43-5.38-12.43-13.25S445,389,452.07,389a16.74,16.74,0,0,1,10.35,3.73l4.14-6.21c-4.14-3.31-8.28-4.56-14.08-4.56-12.43-.83-20.71,7.87-20.71,19.88h0Zm-55.5-20.71c-11.6,0-19.47,8.28-19.47,20.71s8.28,20.71,20.29,20.71a25.33,25.33,0,0,0,16.15-5.38l-4.14-5.8a19.79,19.79,0,0,1-11.6,4.14c-5.38,0-11.18-3.31-12-10.35h29.41v-3.31c0-12.43-7.46-20.71-18.64-20.71h0Zm-.41,7.46c5.8,0,9.94,3.73,10.35,9.94H364.68c1.24-5.8,5-9.94,11.18-9.94ZM268.59,401.79V381.91h-7.87v5c-2.9-3.73-7-5.8-12.84-5.8-11.18,0-19.47,8.7-19.47,20.71s8.28,20.71,19.47,20.71c5.8,0,9.94-2.07,12.84-5.8v5h7.87V401.79Zm-31.89,0c0-7.46,4.56-13.25,12.43-13.25,7.46,0,12,5.8,12,13.25,0,7.87-5,13.25-12,13.25-7.87.41-12.43-5.8-12.43-13.25Zm306.08-20.71a12.39,12.39,0,0,0-10.77,5.8v-5h-7.87v39.76H532V399.31c0-6.63,3.31-10.77,8.7-10.77a24.24,24.24,0,0,1,5.38.83l2.49-7.46a28,28,0,0,0-5.8-.83Zm-30.65,20.71V381.91h-7.87v5c-2.9-3.73-7-5.8-12.84-5.8-11.18,0-19.47,8.7-19.47,20.71s8.28,20.71,19.47,20.71c5.8,0,9.94-2.07,12.84-5.8v5h7.87V401.79Zm-31.89,0c0-7.46,4.56-13.25,12.43-13.25,7.46,0,12,5.8,12,13.25,0,7.87-5,13.25-12,13.25-7.87.41-12.43-5.8-12.43-13.25Zm111.83,0V366.17h-7.87v20.71c-2.9-3.73-7-5.8-12.84-5.8-11.18,0-19.47,8.7-19.47,20.71s8.28,20.71,19.47,20.71c5.8,0,9.94-2.07,12.84-5.8v5h7.87V401.79Zm-31.89,0c0-7.46,4.56-13.25,12.43-13.25,7.46,0,12,5.8,12,13.25,0,7.87-5,13.25-12,13.25C564.73,415.46,560.17,409.25,560.17,401.79Z"/><g><rect x="169.81" y="31.89" width="143.72" height="234.42" fill="#ff5f00"/><path d="M317.05,197.6A149.5,149.5,0,0,1,373.79,80.39a149.1,149.1,0,1,0,0,234.42A149.5,149.5,0,0,1,317.05,197.6Z" fill="#eb001b"/><path d="M615.26,197.6a148.95,148.95,0,0,1-241,117.21,149.43,149.43,0,0,0,0-234.42,148.95,148.95,0,0,1,241,117.21Z" fill="#f79e1b"/></g></g></svg>`,
-                Amex: `<svg viewBox="0 0 291.764 291.764" xmlns="http://www.w3.org/2000/svg"><g><path fill="#E4E7E7" d="M18.235,41.029h255.294c10.066,0,18.235,8.16,18.235,18.235V232.5c0,10.066-8.169,18.235-18.235,18.235H18.235C8.169,250.735,0,242.566,0,232.5V59.265C0,49.19,8.169,41.029,18.235,41.029z"/><path fill="#324D5B" d="M58.681,77.491H36.452v72.978h22.11c11.734,0,20.223-2.617,27.663-8.425c8.826-6.893,14.069-17.296,14.069-28.037C100.294,92.462,83.189,77.491,58.681,77.491z M75.148,127.756c-3.948,3.064-9.026,4.376-17.105,4.376h-3.346V95.808h3.346c8.078,0,12.965,1.231,17.105,4.431c4.322,3.301,6.902,8.406,6.902,13.676C82.05,119.186,79.469,124.483,75.148,127.756z M109.43,150.459h18.108V77.363H109.43V150.459z M168.649,105.619c-9.254-3.027-11.971-5.042-11.971-8.799c0-4.395,4.851-7.768,11.488-7.768c4.623,0,8.406,1.678,12.446,5.662l8.042-9.327c-6.638-5.142-14.561-7.768-23.214-7.768c-13.95,0-24.618,8.598-24.618,20.022c0,9.665,4.969,14.588,19.421,19.202c6.036,1.887,9.109,3.136,10.649,3.994c3.082,1.787,4.632,4.285,4.632,7.221c0,5.68-5.106,9.865-11.971,9.865c-7.34,0-13.257-3.237-16.813-9.327l-9.929,8.516c7.075,9.218,15.609,13.33,27.335,13.33c15.983,0,27.225-9.455,27.225-22.986C191.37,116.341,186.173,111.308,168.649,105.619z M218.878,113.87c0-11.361,9.163-20.323,20.825-20.323c5.908,0,10.412,1.951,15.573,6.647l-0.009-18.436c-6.081-3.009-11.105-4.258-17.077-4.258c-21.025,0-37.875,16.193-37.875,36.452c0,20.496,16.439,36.361,37.565,36.361c5.972,0,11.096-1.14,17.387-4.057l0.009-18.445c-4.978,4.623-9.364,6.483-15.008,6.483C227.759,134.294,218.878,125.851,218.878,113.87z"/><path fill="#F4B459" d="M273.529,250.735c10.066,0,18.235-8.169,18.235-18.235v-72.941l-164.118,91.176L273.529,250.735L273.529,250.735z"/></g></svg>`,
-                Discover: `<svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="24" rx="4" fill="#FF6000"/><text x="8" y="14" font-size="6" fill="#fff" font-family="Arial" font-weight="bold">DISC</text></svg>`,
-                Default: `<svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="24" rx="4" fill="#e2e8f0"/></svg>`
-            };
+            openBtn?.addEventListener('click', openDrawer);
+            closeBtn?.addEventListener('click', closeDrawer);
+            overlay?.addEventListener('click', (e) => {
+                if (e.target.hasAttribute('data-close-drawer')) closeDrawer();
+            });
 
-            const formatNumber = (value) => value.replace(/\D/g, '').slice(0, 19).replace(/(.{4})/g, '$1 ').trim();
-
-            cardNumber.addEventListener('input', (e) => {
-                const formatted = formatNumber(e.target.value);
-                e.target.value = formatted;
-                const digits = formatted.replace(/\s+/g, '');
-                const brand = brands.find(b => b.regex.test(digits));
-                brandDisplay.textContent = brand ? brand.name : 'Card type';
-                if (cardBrandIcon) {
-                    const svg = brand ? brandSvgs[brand.name] : brandSvgs.Default;
-                    cardBrandIcon.innerHTML = svg;
+            alertBox?.addEventListener('click', (e) => {
+                if (e.target && e.target.hasAttribute('data-dismiss-alert')) {
+                    alertBox.classList.add('hidden');
                 }
             });
-        })();
-    </script>
-@endpush
+
+            copyBtn?.addEventListener('click', async () => {
+                const url = window.location.href;
+                try {
+                    await navigator.clipboard.writeText(url);
+                } catch (err) {
+                    const temp = document.createElement('input');
+                    temp.value = url;
+                    document.body.appendChild(temp);
+                    temp.select();
+                    document.execCommand('copy');
+                    temp.remove();
+                }
+            });
+
+            const shippingBtn = document.getElementById('toggleShipping');
+            const shippingPanel = document.getElementById('shippingPanel');
+            const payBtn = document.getElementById('togglePayment');
+            const payPanel = document.getElementById('paymentPanel');
+
+            shippingBtn?.addEventListener('click', () => {
+                shippingPanel?.classList.toggle('hidden');
+            });
+            payBtn?.addEventListener('click', () => {
+                payPanel?.classList.toggle('hidden');
+            });
+        </script>
+    @endpush
+</x-layouts.app>
