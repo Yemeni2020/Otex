@@ -266,8 +266,22 @@
         </div>
 
         <div class="border-t border-slate-200 pt-16">
-            <h2 class="text-2xl font-bold text-slate-900 mb-8">You Might Also Like</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="flex items-center justify-between gap-4 mb-8">
+                <h2 class="text-2xl font-bold text-slate-900">You Might Also Like</h2>
+                <div class="flex items-center gap-2">
+                    <button type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-900/10 bg-gradient-to-br from-slate-900 to-slate-700 text-white shadow-md transition hover:shadow-lg hover:-translate-y-0.5" data-related-prev aria-label="Scroll previous">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-5 w-5" aria-hidden="true">
+                            <path d="M15 6 9 12l6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+                    <button type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-900/10 bg-gradient-to-br from-slate-900 to-slate-700 text-white shadow-md transition hover:shadow-lg hover:-translate-y-0.5" data-related-next aria-label="Scroll next">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-5 w-5" aria-hidden="true">
+                            <path d="m9 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 touch-pan-x [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden rounded-2xl border border-slate-200 bg-[linear-gradient(135deg,#f8fafc_0%,#eef2ff_100%)]" data-related-slider>
                 @foreach ([
                     [
                         'name' => 'Premium Leather Seat Covers',
@@ -297,13 +311,41 @@
                         'category' => 'Storage',
                         'badge' => null
                     ],
+                    [
+                        'name' => 'All-Weather Floor Mats Pro',
+                        'price' => 49.99,
+                        'image' => 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&q=80',
+                        'category' => 'Interior',
+                        'badge' => null
+                    ],
+                    [
+                        'name' => 'RGB Ambient Lighting Kit',
+                        'price' => 39.99,
+                        'image' => 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80',
+                        'category' => 'Electronics',
+                        'badge' => 'Best Seller'
+                    ],
+                    [
+                        'name' => 'Ceramic Coating Spray',
+                        'price' => 24.99,
+                        'image' => 'https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=800&q=80',
+                        'category' => 'Car Care',
+                        'badge' => null
+                    ],
+                    [
+                        'name' => 'Digital Tire Pressure Gauge',
+                        'price' => 15.99,
+                        'image' => 'https://images.unsplash.com/photo-1595167440058-20412e87c53d?w=800&q=80',
+                        'category' => 'Tools',
+                        'badge' => null
+                    ],
                 ] as $related)
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col">
+                    <div class="group bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full flex flex-col min-w-[260px] sm:min-w-[300px] lg:min-w-[320px] snap-start ring-1 ring-slate-100">
                         <a class="block relative overflow-hidden h-64 bg-slate-100 group" href="/shop/1">
                             <img src="{{ $related['image'] }}" alt="{{ $related['name'] }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                            <div class="absolute top-3 right-3 bg-blue-600/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm">{{ $related['category'] }}</div>
+                            <div class="absolute top-3 right-3 bg-black/80 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm">{{ $related['category'] }}</div>
                             @if(!empty($related['badge']))
-                                <div class="absolute top-3 left-3 bg-amber-500/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm">{{ $related['badge'] }}</div>
+                                <div class="absolute top-3 left-3 bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm">{{ $related['badge'] }}</div>
                             @endif
                         </a>
                         <div class="p-5 flex flex-col flex-1">
@@ -374,6 +416,54 @@
                 });
             });
         });
+
+        const slider = document.querySelector('[data-related-slider]');
+        const prevBtn = document.querySelector('[data-related-prev]');
+        const nextBtn = document.querySelector('[data-related-next]');
+        if (slider && prevBtn && nextBtn) {
+            const scrollByCard = (direction) => {
+                const card = slider.querySelector(':scope > div');
+                const amount = card ? card.getBoundingClientRect().width + 24 : 320;
+                slider.scrollBy({ left: direction * amount, behavior: 'smooth' });
+            };
+            prevBtn.addEventListener('click', () => scrollByCard(-1));
+            nextBtn.addEventListener('click', () => scrollByCard(1));
+        }
+
+        if (slider) {
+            let isDown = false;
+            let startX = 0;
+            let scrollLeft = 0;
+            let moved = false;
+
+            slider.addEventListener('pointerdown', (event) => {
+                if (event.pointerType === 'mouse' && event.button !== 0) return;
+                isDown = true;
+                moved = false;
+                startX = event.clientX;
+                scrollLeft = slider.scrollLeft;
+                slider.setPointerCapture(event.pointerId);
+            });
+
+            slider.addEventListener('pointermove', (event) => {
+                if (!isDown) return;
+                const dx = event.clientX - startX;
+                if (Math.abs(dx) > 5) moved = true;
+                slider.scrollLeft = scrollLeft - dx;
+            });
+
+            const endDrag = (event) => {
+                if (!isDown) return;
+                isDown = false;
+                slider.releasePointerCapture(event.pointerId);
+                if (moved) {
+                    event.preventDefault();
+                }
+            };
+
+            slider.addEventListener('pointerup', endDrag);
+            slider.addEventListener('pointercancel', endDrag);
+        }
     };
 
     if (document.readyState === 'loading') {
