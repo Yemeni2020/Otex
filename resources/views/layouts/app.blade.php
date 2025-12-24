@@ -59,8 +59,8 @@
 </head>
 <body class="bg-gray-100 text-gray-900 min-h-screen expansion-alids-init">
 
-    {{-- <livewire:navbar/> --}}
     @include('partials.top-bar')
+    {{-- <livewire:navbar/> --}}
     <x-navbar />
     {{-- @include('partials.hero') --}}
 

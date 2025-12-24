@@ -1,5 +1,5 @@
-<div class="relative z-[60] hidden md:block bg-white text-slate-600 text-xs py-1.5 backdrop-blur-sm border-b border-slate-200 dark:bg-slate-900/95 dark:text-slate-300 dark:border-slate-800 transition-colors">
-{{-- <div class="bg-slate-900/95 text-slate-300 text-xs py-1.5 hidden md:block backdrop-blur-sm"> --}}
+{{-- <div class="relative  hidden md:block  text-slate-600 text-xs py-1.5 backdrop-blur-sm border-b border-slate-200 dark:bg-slate-900/95 dark:text-slate-300 dark:border-slate-800 transition-colors"> --}}
+<div class="bg-slate-900/95 text-slate-300 text-xs py-1.5 hidden md:block backdrop-blur-sm">
     <div class="container mx-auto px-4 flex items-center justify-between">
         <div class="flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 text-slate-600 dark:text-slate-300">

@@ -255,10 +255,9 @@
 
                     <!-- SHIPPING COMPANIES (click to open) -->
                     <div class="mt-6 border-t border-slate-200/70 pt-5">
-                        <button id="toggleShipping" class="w-full flex items-start justify-between gap-3"
+                        <button id="toggleShipping" class="w-full p-6 flex items-center justify-between hover:bg-slate-50/70 transition"
                             type="button">
-                            <div id="shippingSummary" class="text-xs text-slate-500">SMSA | Express shipping, 2-3 business days</div>
-                            <div class="flex items-center gap-2 font-bold">
+                            <div class="flex items-center gap-2 font-bold text-slate-900">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"
                                     height="22" fill="none" class="text-slate-800">
                                     <circle cx="17" cy="18" r="2" stroke="currentColor"
@@ -280,6 +279,7 @@
                                 </svg>
                                 <span>Shipping carrier</span>
                             </div>
+                            <div id="shippingSummary" class="text-xs text-slate-500">SMSA | Express shipping, 2-3 business days</div>
                         </button>
 
                         <!-- shipping panel -->
@@ -329,10 +329,9 @@
 
                     <!-- PAYMENT (click to open) -->
                     <div class="mt-6 border-t border-slate-200/70 pt-5">
-                        <button id="togglePayment" class="w-full flex items-start justify-between gap-3"
+                        <button id="togglePayment" class="w-full p-6 flex items-center justify-between hover:bg-slate-50/70 transition"
                             type="button">
-                            <div class="text-xs text-slate-500">Mada</div>
-                            <div class="flex items-center gap-2 font-bold">
+                            <div class="flex items-center gap-2 font-bold text-slate-900">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"
                                     height="22" fill="none" class="text-slate-800">
                                     <path
@@ -350,61 +349,66 @@
                                 </svg>
                                 <span>Payment</span>
                             </div>
+                            <div id="paymentSummary" class="text-xs text-slate-500">Mada</div>
                         </button>
 
                         <!-- payment panel -->
                         <div id="paymentPanel" class="hidden mt-4 rounded-xl border border-slate-200/70 bg-white shadow-sm p-4">
                             <!-- payment options row -->
-                            <div class="flex flex-wrap gap-3">
+                            <div class="flex flex-wrap gap-2 hidden" id="paymentOptionsRow">
                                 <button
-                                    class="payment-option apple-pay-option hidden h-12 rounded-full border border-slate-200/70 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
-                                    type="button" aria-pressed="false" data-payment="apple-pay">
+                                    class="payment-option apple-pay-option hidden h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                    type="button" aria-pressed="false" data-payment="apple-pay" data-label="Apple Pay">
                                     <svg viewBox="0 0 24 24" class="h-4 w-4 text-slate-800" fill="currentColor" aria-hidden="true">
                                         <path d="M17.9 12.6c-.02-1.54 1.26-2.27 1.31-2.31-.72-1.06-1.84-1.2-2.24-1.22-.95-.1-1.86.56-2.34.56-.48 0-1.22-.55-2-.53-1.03.02-1.98.6-2.5 1.51-1.07 1.85-.27 4.57.77 6.07.5.73 1.1 1.56 1.89 1.53.76-.03 1.05-.49 1.97-.49.92 0 1.18.49 1.99.48.82-.02 1.34-.73 1.84-1.46.58-.84.82-1.65.83-1.69-.02-.01-1.6-.62-1.62-2.45Zm-1.53-4.23c.42-.5.7-1.2.62-1.9-.61.02-1.35.41-1.79.91-.39.45-.74 1.18-.65 1.87.68.05 1.38-.36 1.82-.88Z" />
                                     </svg>
                                     Apple Pay
                                 </button>
                                 <button
-                                    class="payment-option google-pay-option hidden h-12 rounded-full border border-slate-200/70 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition"
-                                    type="button" aria-pressed="false" data-payment="google-pay">
+                                    class="payment-option google-pay-option hidden h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                    type="button" aria-pressed="false" data-payment="google-pay" data-label="Google Pay">
                                     Google Pay
                                 </button>
                                 <button
-                                    class="payment-option is-active h-auto w-auto rounded-xl border border-slate-200/70 bg-white grid place-items-center shadow-sm"
-                                    type="button" aria-pressed="true" data-payment="mada">
-                                    <img class="h-4"
+                                    class="payment-option is-active h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                    type="button" aria-pressed="true" data-payment="mada" data-label="Mada">
+                                    <img class="h-4 w-auto"
                                         src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-mada.svg"
                                         alt="mada">
+                                    Mada
                                 </button>
                                 <button
-                                    class="payment-option h-auto w-auto rounded-xl border border-slate-200/70 bg-white grid place-items-center shadow-sm hover:border-slate-300 hover:bg-slate-50 transition"
-                                    type="button" aria-pressed="false" data-payment="credit">
-                                    <img class="h-4"
+                                    class="payment-option h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                    type="button" aria-pressed="false" data-payment="credit" data-label="Card">
+                                    <img class="h-4 w-auto"
                                         src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-credit-2.svg"
                                         alt="credit">
+                                    Card
                                 </button>
                                 <button
-                                    class="payment-option h-auto w-auto rounded-xl border border-slate-200/70 bg-white grid place-items-center shadow-sm hover:border-slate-300 hover:bg-slate-50 transition"
-                                    type="button" aria-pressed="false" data-payment="tabby">
-                                    <img class="h-4"
+                                    class="payment-option h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                    type="button" aria-pressed="false" data-payment="tabby" data-label="Tabby">
+                                    <img class="h-4 w-auto"
                                         src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-tabby_en.png?v=0.0.1"
                                         alt="tabby">
+                                    Tabby
                                 </button>
                                 <button
-                                    class="payment-option h-12 w-16 rounded-xl border border-slate-200/70 bg-white grid place-items-center px-2 shadow-sm hover:border-slate-300 hover:bg-slate-50 transition"
-                                    type="button" aria-pressed="false" data-payment="tamara">
-                                    <img class="h-4"
+                                    class="payment-option h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                    type="button" aria-pressed="false" data-payment="tamara" data-label="Tamara">
+                                    <img class="h-4 w-auto"
                                         src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/tamara/ar-tamara-label.svg"
                                         alt="tamara">
+                                    Tamara
                                 </button>
                                 <button
-                                    class="payment-option h-12 rounded-full border border-slate-200/70 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition"
-                                    type="button" aria-pressed="false" data-payment="bank-transfer">
+                                    class="payment-option h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition"
+                                    type="button" aria-pressed="false" data-payment="bank-transfer" data-label="Bank transfer">
                                     Bank transfer
                                 </button>
                                 <button
-                                    class="payment-option h-12 rounded-full border border-slate-200/70 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition relative"
-                                    type="button" aria-pressed="false" data-payment="cod">
+                                    class="payment-option h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition relative"
+                                    type="button" aria-pressed="false" data-payment="cod" data-label="Cash on delivery">
                                     Cash on delivery
                                     <span
                                         class="absolute -left-2 -top-2 rounded-full bg-sky-100 text-sky-700 text-[11px] px-2 py-0.5 border border-sky-200">+10
@@ -413,39 +417,56 @@
                             </div>
 
                             <div data-payment-panel="card">
-                                <!-- card form -->
-                                <div class="mt-5 grid gap-4 md:grid-cols-6">
-                                    <div class="md:col-span-3">
-                                        <label class="text-sm font-semibold">Card number</label>
-                                        <div class="mt-2 relative">
-                                            <x-input placeholder="Card number"
-                                                class="rounded-xl border border-slate-200/70 bg-white px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200/60" />
-                                            <span
-                                                class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">💳</span>
+                                <div class="mt-4 rounded-2xl border border-slate-200/70 bg-white p-4 shadow-sm">
+                                    <div class="grid gap-4 md:grid-cols-3">
+                                        <div class="md:col-span-2">
+                                            <label class="text-sm font-semibold text-slate-700" for="Field-numberInput">Card number</label>
+                                            <div class="mt-2 relative">
+                                                <input dir="ltr" type="text" inputmode="numeric" name="number" id="Field-numberInput" placeholder="1234 1234 1234 1234" autocomplete="cc-number" aria-invalid="false" aria-describedby="cardBrandIconsDesc cardNumberError" aria-required="true" class="w-full rounded-xl border border-slate-200/70 bg-white px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200/60 pr-28">
+                                                <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 text-slate-500">
+                                                    <span id="cardBrandBadge" class="hidden rounded-md bg-slate-900 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"></span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18" fill="none" class="h-4 w-auto" aria-hidden="true">
+                                                        <rect x="1" y="1" width="26" height="16" rx="3" fill="#0f172a"/>
+                                                        <rect x="3" y="4" width="8" height="4" rx="1" fill="#e2e8f0"/>
+                                                        <rect x="3" y="11" width="10" height="2" rx="1" fill="#94a3b8"/>
+                                                        <circle cx="18" cy="9" r="4" fill="#f59e0b"/>
+                                                        <circle cx="22" cy="9" r="4" fill="#ef4444" fill-opacity="0.9"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div id="cardBrandIconsDesc" class="mt-2 text-xs text-slate-500">
+                                                Supported cards include Visa and Mastercard.
+                                            </div>
+                                            <div id="cardNumberError" class="mt-2 hidden text-xs text-red-600">Your card number is invalid.</div>
                                         </div>
-                                    </div>
 
-                                    <div class="md:col-span-2">
-                                        <label class="text-sm font-semibold">Expiry date</label>
-                                        <div class="mt-2 flex gap-2">
-                                            <x-input placeholder="Month"
-                                                class="rounded-xl border border-slate-200/70 bg-white px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200/60" />
-                                            <x-input placeholder="Year"
-                                                class="rounded-xl border border-slate-200/70 bg-white px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200/60" />
+                                        
+                                    </div>
+                                    <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-2 grid-cols-2">
+                                            <div>
+                                                <div class="rounded-2xl bg-slate-50 px-4 py-2">
+                                                    <label class="text-xs font-semibold text-slate-500" for="Field-expiryInput">Expiration (MM/YY)</label>
+                                                    <input dir="ltr" type="text" inputmode="numeric" name="expiry" id="Field-expiryInput" placeholder="MM / YY" autocomplete="cc-exp" aria-invalid="false" aria-required="true" class="mt-1 w-full bg-transparent text-sm font-semibold text-slate-700 placeholder:text-slate-400 focus:outline-none">
+                                                </div>
+                                                <div id="expiryError" class="mt-2 hidden text-xs text-red-600">Expiration date is in the past.</div>
+                                            </div>
+
+                                            <div>
+                                                <div class="rounded-xl bg-slate-50 px-4 py-2">
+                                                    <label class="text-xs font-semibold text-slate-500" for="Field-cvcInput">Security code</label>
+                                                    <div class="mt-1 relative">
+                                                        <input dir="ltr" type="text" inputmode="numeric" name="cvc" id="Field-cvcInput" placeholder="CVC" autocomplete="cc-csc" aria-invalid="false" aria-describedby="cvcDesc" aria-required="true" class="w-full bg-transparent text-sm font-semibold text-slate-700 placeholder:text-slate-400 focus:outline-none pr-10">
+                                                        <div class="absolute right-0 top-1/2 -translate-y-1/2 text-slate-500">
+                                                            <svg class="h-4 w-auto" width="30" height="20" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true">
+                                                                <path opacity="0.74" d="M25.2061 0.00488281C27.3194 0.112115 29 1.85996 29 4V11.3291C28.5428 11.0304 28.0336 10.8304 27.5 10.7188V8H1.5V16C1.5 17.3807 2.61929 18.5 4 18.5H10.1104V20H4L3.79395 19.9951C1.7488 19.8913 0.108652 18.2512 0.00488281 16.2061L0 16V4C0 1.85996 1.68056 0.112115 3.79395 0.00488281L4 0H25L25.2061 0.00488281ZM4 1.5C2.61929 1.5 1.5 2.61929 1.5 4V5H27.5V4C27.5 2.61929 26.3807 1.5 25 1.5H4Z"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="cvcDesc" class="mt-2 text-xs text-slate-500">3-digit code on back of card</div>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="md:col-span-1">
-                                        <label class="text-sm font-semibold">CVC</label>
-                                        <x-input placeholder="CVC"
-                                            class="mt-2 rounded-xl border border-slate-200/70 bg-white px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200/60" />
-                                    </div>
                                 </div>
-
-                                <x-button type="button" size="lg" variant="solid"
-                                    class="mt-5 w-full rounded-xl text-sm font-extrabold shadow-sm">
-                                    Confirm payment
-                                </x-button>
                             </div>
 
                             <div data-payment-panel="tabby" class="hidden mt-5 space-y-4">
@@ -681,6 +702,7 @@
             const applePayPanel = document.querySelector('[data-payment-panel="apple-pay"]');
             const googlePayOption = document.querySelector('.google-pay-option');
             const googlePayPanel = document.querySelector('[data-payment-panel="google-pay"]');
+            const paymentOptionsRow = document.getElementById('paymentOptionsRow');
             const addressList = document.getElementById('addressList');
             const addAddressBtn = document.querySelector('[data-add-address]');
             const addressDialog = document.getElementById('addressDialog');
@@ -697,6 +719,14 @@
             const shippingOptions = document.querySelectorAll('.shipping-option');
             const confirmShippingBtn = document.querySelector('[data-confirm-shipping]');
             const shippingSummary = document.getElementById('shippingSummary');
+            const paymentSummary = document.getElementById('paymentSummary');
+            const expiryInput = document.getElementById('Field-expiryInput');
+            const expiryError = document.getElementById('expiryError');
+            const cardNumberInput = document.getElementById('Field-numberInput');
+            const cardBrandBadge = document.getElementById('cardBrandBadge');
+            const cardNumberError = document.getElementById('cardNumberError');
+            const cvcInput = document.getElementById('Field-cvcInput');
+            let currentCardBrand = '';
 
             shippingBtn?.addEventListener('click', () => {
                 shippingPanel?.classList.toggle('hidden');
@@ -739,7 +769,136 @@
                         payPanel.classList.remove('hidden');
                     }
                     showPaymentPanel(option.getAttribute('data-payment'));
+                    const label = option.getAttribute('data-label');
+                    if (label && paymentSummary) paymentSummary.textContent = label;
                 });
+            });
+
+            expiryInput?.addEventListener('input', (e) => {
+                const input = e.target;
+                let value = input.value.replace(/\D/g, '').slice(0, 4);
+                if (value.length === 1 && value !== '0' && Number(value) >= 2) {
+                    value = `0${value}`;
+                }
+                if (value.length >= 3) {
+                    value = `${value.slice(0, 2)} / ${value.slice(2)}`;
+                } else if (value.length >= 2) {
+                    value = `${value.slice(0, 2)} / `;
+                }
+                input.value = value;
+
+                const digits = input.value.replace(/\D/g, '');
+                const month = Number(digits.slice(0, 2));
+                const year = Number(digits.slice(2, 4));
+                const isMonthInvalid = digits.length >= 2 && (month < 1 || month > 12);
+
+                if (expiryError) {
+                    if (isMonthInvalid) {
+                        expiryError.textContent = 'Month must be between 01 and 12.';
+                        expiryError.classList.remove('hidden');
+                        input.setAttribute('aria-invalid', 'true');
+                        return;
+                    }
+                    expiryError.textContent = 'Expiration date is in the past.';
+                }
+
+                if (digits.length === 4) {
+                    const now = new Date();
+                    const currentYear = Number(String(now.getFullYear()).slice(-2));
+                    const currentMonth = now.getMonth() + 1;
+                    const isPast = year < currentYear || (year === currentYear && month < currentMonth);
+                    if (expiryError) {
+                        expiryError.classList.toggle('hidden', !isPast);
+                    }
+                    input.setAttribute('aria-invalid', String(isPast));
+                } else if (expiryError) {
+                    expiryError.classList.add('hidden');
+                    input.setAttribute('aria-invalid', 'false');
+                }
+            });
+
+            function luhnCheck(number) {
+                let sum = 0;
+                let shouldDouble = false;
+                for (let i = number.length - 1; i >= 0; i -= 1) {
+                    let digit = Number(number[i]);
+                    if (shouldDouble) {
+                        digit *= 2;
+                        if (digit > 9) digit -= 9;
+                    }
+                    sum += digit;
+                    shouldDouble = !shouldDouble;
+                }
+                return sum % 10 === 0;
+            }
+
+            function detectCardBrand(digits) {
+                if (/^4/.test(digits)) return 'visa';
+                if (/^(5[1-5])/.test(digits) || /^(222[1-9]|22[3-9]\\d|2[3-6]\\d{2}|27[01]\\d|2720)/.test(digits)) return 'mastercard';
+                if (/^3[47]/.test(digits)) return 'amex';
+                if (/^6(011|5|4[4-9])/.test(digits)) return 'discover';
+                if (/^35(2[8-9]|[3-8]\\d)/.test(digits)) return 'jcb';
+                return '';
+            }
+
+            function updateBrandBadge(brand) {
+                if (!cardBrandBadge) return;
+                if (!brand) {
+                    cardBrandBadge.classList.add('hidden');
+                    cardBrandBadge.textContent = '';
+                    return;
+                }
+                const labels = {
+                    visa: 'Visa',
+                    mastercard: 'MC',
+                    amex: 'Amex',
+                    discover: 'Discover',
+                    jcb: 'JCB',
+                };
+                cardBrandBadge.textContent = labels[brand] || brand;
+                cardBrandBadge.classList.remove('hidden');
+                cardBrandBadge.classList.toggle('bg-blue-600', brand === 'visa');
+                cardBrandBadge.classList.toggle('bg-black', brand === 'mastercard');
+                cardBrandBadge.classList.toggle('bg-sky-600', brand === 'amex');
+                cardBrandBadge.classList.toggle('bg-amber-500', brand === 'discover');
+                cardBrandBadge.classList.toggle('bg-emerald-600', brand === 'jcb');
+            }
+
+            function updateCvcRules(brand) {
+                if (!cvcInput) return;
+                const isAmex = brand === 'amex';
+                cvcInput.maxLength = isAmex ? 4 : 3;
+                cvcInput.placeholder = isAmex ? '4-digit CVC' : 'CVC';
+            }
+
+            cardNumberInput?.addEventListener('input', (e) => {
+                const input = e.target;
+                const digits = input.value.replace(/\D/g, '').slice(0, 19);
+                const parts = digits.match(/.{1,4}/g) || [];
+                input.value = parts.join(' ');
+
+                const brand = detectCardBrand(digits);
+                updateBrandBadge(brand);
+                currentCardBrand = brand;
+                updateCvcRules(brand);
+
+                let isInvalid = false;
+                if (digits.length >= 13) {
+                    isInvalid = !luhnCheck(digits);
+                }
+                if (cardNumberError) {
+                    cardNumberError.classList.toggle('hidden', !isInvalid);
+                }
+                input.setAttribute('aria-invalid', String(isInvalid));
+                input.classList.toggle('border-red-500', isInvalid);
+                input.classList.toggle('text-red-600', isInvalid);
+            });
+
+            cvcInput?.addEventListener('input', (e) => {
+                const input = e.target;
+                const digits = input.value.replace(/\D/g, '');
+                const maxLen = currentCardBrand === 'amex' ? 4 : 3;
+                input.value = digits.slice(0, maxLen);
             });
 
             function updateAddressActive() {
@@ -756,18 +915,30 @@
             });
 
             const ua = navigator.userAgent || '';
-            const isIOS = /iP(hone|ad|od)/.test(ua);
+            const isIOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && 'ontouchend' in document);
+            const isAndroid = /Android/.test(ua);
             const isSafari = /Safari/.test(ua) && !/Chrome|CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
             if (isIOS && isSafari) {
                 alertBox?.classList.remove('hidden');
             }
+            paymentOptionsRow?.classList.remove('hidden');
+            applePayOption?.classList.add('hidden');
+            googlePayOption?.classList.add('hidden');
             if (isIOS) {
                 applePayOption?.classList.remove('hidden');
             } else {
                 applePayOption?.classList.add('hidden');
                 applePayPanel?.classList.add('hidden');
+                if (applePayOption?.classList.contains('is-active')) {
+                    applePayOption.classList.remove('is-active');
+                    applePayOption.setAttribute('aria-pressed', 'false');
+                    const fallback = document.querySelector('.payment-option[data-payment="mada"]');
+                    fallback?.classList.add('is-active');
+                    fallback?.setAttribute('aria-pressed', 'true');
+                    showPaymentPanel('mada');
+                    if (paymentSummary) paymentSummary.textContent = 'Mada';
+                }
             }
-            const isAndroid = /Android/.test(ua);
             if (isAndroid) {
                 googlePayOption?.classList.remove('hidden');
             } else {
