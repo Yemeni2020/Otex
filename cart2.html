@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سلة المشتريات</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root{
+      --primary:#A12B6A;         /* اللون البنفسجي */
+      --muted:#9aa3af;
+      --bg:#f6f7f9;              /* خلفية خفيفة */
+      --radius:18px;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-slate-800">
+  <main class="py-12">
+    <div class="mx-auto max-w-6xl px-4">
+      <!-- breadcrumb (top right in screenshot) -->
+      <div class="mb-6 flex items-center justify-end gap-2 text-sm text-slate-400">
+        <span class="inline-flex h-7 w-7 items-center justify-center rounded-md border border-slate-200">
+          <!-- home -->
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.7">
+            <path d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1v-10.5z"/>
+          </svg>
+        </span>
+        <span>/</span>
+        <span class="text-slate-500">سلة المشتريات</span>
+      </div>
+
+      <!-- progress -->
+      <div class="mb-8 flex items-center justify-between">
+        <!-- step 2 (left) -->
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <div class="text-sm font-semibold text-[color:var(--primary)]">اتمام الطلب</div>
+            <div class="text-xs text-slate-400">الخطوة الثانية</div>
+          </div>
+          <div class="relative grid h-12 w-12 place-items-center rounded-lg border border-slate-200 bg-white">
+            <!-- wallet icon -->
+            <svg viewBox="0 0 24 24" class="h-6 w-6 text-slate-700" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M3 7.5A3.5 3.5 0 0 1 6.5 4h11A3.5 3.5 0 0 1 21 7.5V18a2 2 0 0 1-2 2H6.5A3.5 3.5 0 0 1 3 16.5V7.5z"/>
+              <path d="M17 12h4v4h-4a2 2 0 0 1 0-4z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- line -->
+        <div class="mx-4 hidden flex-1 lg:block">
+          <div class="h-[2px] w-full bg-slate-100"></div>
+        </div>
+
+        <!-- step 1 (right active) -->
+        <div class="flex items-center gap-3">
+          <div class="relative grid h-12 w-12 place-items-center rounded-lg bg-[color:var(--primary)] text-white">
+            <!-- cart icon -->
+            <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M6 6h15l-2 9H7L6 6z"/>
+              <path d="M6 6 5 3H2"/>
+              <circle cx="9" cy="20" r="1.2"/>
+              <circle cx="18" cy="20" r="1.2"/>
+            </svg>
+            <span class="absolute -right-2 -top-2 grid h-5 w-5 place-items-center rounded-full bg-white text-xs font-bold text-[color:var(--primary)] shadow">
+              2
+            </span>
+          </div>
+          <div class="text-right">
+            <div class="text-sm font-semibold text-[color:var(--primary)]">سلة المشتريات</div>
+            <div class="text-xs text-slate-400">الخطوة الاولى</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- wrapper -->
+      <section class="rounded-[var(--radius)] bg-[color:var(--bg)] p-6">
+        <!-- desktop table head -->
+        <div class="hidden rounded-[14px] bg-white px-6 py-4 text-sm text-slate-500 md:flex md:items-center md:justify-between">
+          <div class="font-semibold text-slate-600">المنتج</div>
+          <div class="flex items-center gap-16">
+            <span>السعر</span>
+            <span>الكمية</span>
+            <span class="w-14 text-left">المجموع</span>
+          </div>
+        </div>
+
+        <!-- item 1 -->
+        <article class="mt-6 rounded-[14px] bg-white px-5 py-5 shadow-sm md:px-6">
+          <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <!-- product -->
+            <div class="flex items-center gap-4">
+              <button class="grid h-8 w-8 place-items-center rounded-full bg-red-500/90 text-white" aria-label="delete">×</button>
+
+              <div class="flex items-center gap-3">
+                <div class="grid h-12 w-12 place-items-center rounded-full border border-slate-200 bg-white overflow-hidden">
+                  <img alt="product" class="h-full w-full object-cover" src="https://cdn.salla.sa/zvEDg/XxtyuVHPUfp7nGe7xyUPmfiUGqEqbSEzXGgDrabr.png">
+                </div>
+                <a href="#" class="text-sm font-semibold text-[color:var(--primary)] hover:underline">
+                  سمارت فلوغ - ملحقات 4 بـ 1 للتصوير
+                </a>
+              </div>
+            </div>
+
+            <!-- desktop values -->
+            <div class="hidden md:flex md:items-center md:gap-16">
+              <div class="text-sm font-semibold text-slate-700">٥٦٫٣٥ <span class="text-slate-400">﷼</span></div>
+
+              <!-- qty -->
+              <div class="inline-flex items-center overflow-hidden rounded-full border border-slate-200 bg-white">
+                <button class="px-4 py-2 text-slate-500 hover:bg-slate-50">−</button>
+                <span class="w-10 text-center text-sm font-semibold">1</span>
+                <button class="px-4 py-2 text-slate-500 hover:bg-slate-50">+</button>
+              </div>
+
+              <div class="w-14 text-left text-sm font-bold text-slate-800">٥٦٫٣٥ <span class="text-slate-400">﷼</span></div>
+            </div>
+
+            <!-- mobile values (stack like screenshot) -->
+            <div class="grid gap-3 md:hidden">
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-400">السعر</span>
+                <span class="font-semibold">٥٦٫٣٥ ﷼</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-400">الكمية</span>
+                <div class="inline-flex items-center overflow-hidden rounded-full border border-slate-200 bg-white">
+                  <button class="px-4 py-2 text-slate-500">−</button>
+                  <span class="w-10 text-center text-sm font-semibold">1</span>
+                  <button class="px-4 py-2 text-slate-500">+</button>
+                </div>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-400">المجموع</span>
+                <span class="font-semibold">٥٦٫٣٥ ﷼</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- item 2 -->
+        <article class="mt-6 rounded-[14px] bg-white px-5 py-5 shadow-sm md:px-6">
+          <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div class="flex items-center gap-4">
+              <button class="grid h-8 w-8 place-items-center rounded-full bg-red-500/90 text-white" aria-label="delete">×</button>
+
+              <div class="flex items-center gap-3">
+                <div class="grid h-12 w-12 place-items-center rounded-full border border-slate-200 bg-white overflow-hidden">
+                  <img alt="product" class="h-full w-full object-cover" src="https://cdn.salla.sa/zvEDg/Wto2h6hhbNNWCqh7OsM0gZqPC5I157wqFmlpW5Qp.png">
+                </div>
+                <a href="#" class="text-sm font-semibold text-[color:var(--primary)] hover:underline">
+                  هوم سينسر - جهاز كشف درجة الحرارة والرطوبة الداخلي من TUYA...
+                </a>
+              </div>
+            </div>
+
+            <div class="hidden md:flex md:items-center md:gap-16">
+              <div class="text-sm font-semibold text-slate-700">٤٣٫٣٠ <span class="text-slate-400">﷼</span></div>
+
+              <div class="inline-flex items-center overflow-hidden rounded-full border border-slate-200 bg-white">
+                <button class="px-4 py-2 text-slate-500 hover:bg-slate-50">−</button>
+                <span class="w-10 text-center text-sm font-semibold">1</span>
+                <button class="px-4 py-2 text-slate-500 hover:bg-slate-50">+</button>
+              </div>
+
+              <div class="w-14 text-left text-sm font-bold text-slate-800">٤٣٫٣٠ <span class="text-slate-400">﷼</span></div>
+            </div>
+
+            <div class="grid gap-3 md:hidden">
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-400">السعر</span>
+                <span class="font-semibold">٤٣٫٣٠ ﷼</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-400">الكمية</span>
+                <div class="inline-flex items-center overflow-hidden rounded-full border border-slate-200 bg-white">
+                  <button class="px-4 py-2 text-slate-500">−</button>
+                  <span class="w-10 text-center text-sm font-semibold">1</span>
+                  <button class="px-4 py-2 text-slate-500">+</button>
+                </div>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-400">المجموع</span>
+                <span class="font-semibold">٤٣٫٣٠ ﷼</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- totals -->
+        <div class="mt-6 rounded-[14px] shadow-sm bg-white p-6">
+          <div class="grid gap text-sm">
+            <div class="flex items-center justify-between">
+              <span class="text-slate-500">عدد الأصناف</span>
+              <span class="font-semibold">٢</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-500">مجموع المنتجات</span>
+              <span class="font-semibold">٨٦٫٦٥ ﷼</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-500">تكلفة الشحن</span>
+              <span class="font-semibold">١٢ ﷼</span>
+            </div>
+
+            <div class="pt-2 flex items-center justify-between border-t border-slate-100">
+              <span class="font-semibold text-[color:var(--primary)]">الإجمالي</span>
+              <span class="font-extrabold text-[color:var(--primary)]">١١٣٫٤٥ ﷼</span>
+            </div>
+          </div>
+
+          <div class="mt-6 text-xs text-slate-400">* الأسعار شاملة للضريبة</div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-6">
+          <button class="w-full rounded-full bg-[color:var(--primary)] py-4 text-center text-sm font-extrabold text-white shadow-sm hover:brightness-95">
+            اتمام الطلب
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
