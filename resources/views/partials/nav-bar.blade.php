@@ -20,7 +20,9 @@
 @endphp
 
 <header
-    class="sticky top-0 z-50 transition-all duration-300 border-b border-white/20 bg-white/50 backdrop-blur-lg supports-[backdrop-filter]:bg-white/40">
+    id="siteHeader"
+    class="fixed inset-x-0 z-50 transition-all duration-300 border-b border-white/20 bg-white/50 backdrop-blur-lg supports-[backdrop-filter]:bg-white/40"
+    style="top: var(--topbar-height, 0px);">
     <!-- Main Header -->
     
     <div class="container mx-auto px-4 py-4">

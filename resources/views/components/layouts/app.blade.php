@@ -67,7 +67,7 @@
     @include('partials.top-bar')
     {{-- <livewire:navbar/> --}}
     <x-navbar />
-    <main class="bg-white expansion-alids-init">
+    <main class="bg-white expansion-alids-init" style="padding-top: var(--header-stack-height, 0px);">
         @yield('content')
         {{ $slot ?? '' }}
     </main>
@@ -94,6 +94,17 @@
     @stack('scripts')
     <script>
     (() => {
+        const header = document.getElementById('siteHeader');
+        const topbar = document.getElementById('siteTopbar');
+        const setHeaderOffset = () => {
+            const topbarHeight = topbar ? topbar.offsetHeight : 0;
+            const headerHeight = header ? header.offsetHeight : 0;
+            document.documentElement.style.setProperty('--topbar-height', `${topbarHeight}px`);
+            document.documentElement.style.setProperty('--header-stack-height', `${topbarHeight + headerHeight}px`);
+        };
+        setHeaderOffset();
+        window.addEventListener('resize', setHeaderOffset);
+
         const cartButton = document.getElementById('cartButton');
         const cartSidebar = document.getElementById('cartSidebar');
         const cartBackdrop = document.getElementById('cartBackdrop');

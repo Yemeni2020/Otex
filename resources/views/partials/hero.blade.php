@@ -1,18 +1,7 @@
 <section class="relative overflow-hidden w-full text-white">
-        {{-- <div class="absolute inset-0 bg-gradient-to-br from-blue-900 via-slate-900 to-black"></div>
-        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-soft-light"></div> --}}
-
+       
     <div class="container mx-auto px-4 py-16 lg:py-24 relative z-10">
-        {{-- <div class="flex items-center justify-between gap-6 mb-8">
-            <div class="space-y-2">
-                <p class="text-xs font-semibold uppercase tracking-[0.3em] text-blue-300">Featured Collections</p>
-                <h1 class="text-3xl md:text-4xl font-bold leading-tight">The best slider ever — animated &amp; lazy loaded</h1>
-            </div>
-            <div class="hidden sm:flex items-center gap-3 text-sm text-slate-300">
-                <div class="h-px w-12 bg-blue-500/60"></div>
-                <span class="text-blue-200 font-semibold">Auto-play | Swipe | Lazy-load</span>
-            </div>
-        </div> --}}
+       
 
         <div class="relative">
             <div id="hero-track" class="relative min-h-[520px] rounded-3xl bg-white/5 border border-white/10 overflow-hidden shadow-2xl ">
@@ -105,13 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${slide.cta.label}
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                         </a>
-                        <a href="${slide.secondary.href}" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 text-white px-6 h-12 font-semibold hover:bg-white/10 transition">
-                            ${slide.secondary.label}
-                        </a>
+                        
                     </div>
-                    <div class="flex flex-wrap gap-4 text-sm text-slate-100">
-                        ${slide.stats.map(stat => `<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20">${stat}</span>`).join('')}
-                    </div>
+                    <br>
                 </div>
             </div>
         `;
