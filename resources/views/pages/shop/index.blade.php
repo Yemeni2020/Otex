@@ -41,6 +41,30 @@
                 height: 100%;
             }
         }
+        @keyframes preview-fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes preview-pop-in {
+            from { opacity: 0; transform: translateY(18px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        dialog.preview-dialog[open] {
+            animation: preview-fade-in 180ms ease-out;
+        }
+        dialog.preview-dialog::backdrop {
+            animation: preview-fade-in 200ms ease-out;
+        }
+        dialog.preview-dialog[open] .preview-panel {
+            animation: preview-pop-in 220ms ease-out;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            dialog.preview-dialog[open],
+            dialog.preview-dialog::backdrop,
+            dialog.preview-dialog[open] .preview-panel {
+                animation: none;
+            }
+        }
     </style>
 @endpush
 <x-layouts.app>
@@ -752,14 +776,17 @@
                                         <div class="flex items-center justify-between mt-auto">
                                             <span class="text-xl font-bold text-blue-600"><x-currency :amount="number_format($product['price'], 2)" /></span>
                                             <div class="flex items-center gap-2">
-                                                <x-button type="button" size="sm" variant="solid" class="rounded-full px-4">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart w-4 h-4 mr-2">
+                                            <x-button type="button" size="sm" variant="solid" class="rounded-full px-4" data-add-to-cart>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart w-4 h-4 mr-2" data-cart-icon>
                                                         <circle cx="8" cy="21" r="1"></circle>
                                                         <circle cx="19" cy="21" r="1"></circle>
                                                         <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
                                                     </svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                    </svg>
                                                     Add
-                                                </x-button>
+                                            </x-button>
                                             </div>
                                         </div>
                                     </div>
@@ -771,9 +798,9 @@
                 </div>
             </section>
 
-            <dialog id="product-preview" class="fixed inset-0 z-50 m-0 h-full w-full overflow-y-auto bg-transparent p-4 backdrop:bg-black/60 backdrop:backdrop-blur-sm">
+            <dialog id="product-preview" class="preview-dialog fixed inset-0 z-50 m-0 h-full w-full overflow-y-auto bg-transparent p-4 backdrop:bg-black/60 backdrop:backdrop-blur-sm">
                 <div class="flex min-h-full items-center justify-center">
-                    <div class="relative w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+                    <div class="preview-panel relative w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-2xl">
                         <button type="button" data-preview-close class="absolute right-4 top-4 inline-flex size-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition hover:bg-slate-50 hover:text-slate-700" onclick="const dialog = document.getElementById('product-preview'); if (dialog) { dialog.close ? dialog.close() : dialog.removeAttribute('open'); }">
                             <span class="sr-only">Close</span>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="size-5">

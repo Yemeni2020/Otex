@@ -207,6 +207,27 @@
             }
         }
 
+        const handleAddToCartFeedback = (event) => {
+            const button = event.target.closest('[data-add-to-cart]');
+            if (!button) return;
+            const cartIcon = button.querySelector('[data-cart-icon]');
+            const checkIcon = button.querySelector('[data-check-icon]');
+            if (!cartIcon || !checkIcon) return;
+
+            cartIcon.classList.add('hidden');
+            checkIcon.classList.remove('hidden');
+
+            if (button._cartFeedbackTimer) {
+                clearTimeout(button._cartFeedbackTimer);
+            }
+            button._cartFeedbackTimer = setTimeout(() => {
+                cartIcon.classList.remove('hidden');
+                checkIcon.classList.add('hidden');
+            }, 1400);
+        };
+
+        document.addEventListener('click', handleAddToCartFeedback);
+
         if (mobileMenuButton && mobileMenu) {
             const openMenu = () => {
                 mobileMenu.classList.remove('hidden');

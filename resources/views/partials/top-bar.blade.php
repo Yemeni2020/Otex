@@ -20,7 +20,7 @@
                 </button>
                 <div id="currencyMenu" class="absolute right-0 mt-1 w-44 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-100 text-xs rounded shadow-lg border border-slate-200 dark:border-slate-700 hidden z-[70]">
                     <button type="button" class="w-full flex items-center gap-2 px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" data-currency="SAR">
-                        <img src="{{ asset('img/Saudi_Riyal_Symbol-2_2.svg') }}" alt="Saudi Riyal" class="h-4 w-auto">
+                        <img src="{{ asset('img/Saudi_Riyal_Symbol-2_2.svg') }}" alt="Saudi Riyal" class="h-4 w-auto text-white">
                         <span>SAR - Saudi Riyal</span>
                     </button>
                     <button type="button" class="w-full flex items-center gap-2 px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" data-currency="USD">

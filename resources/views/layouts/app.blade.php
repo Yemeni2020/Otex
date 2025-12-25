@@ -220,6 +220,46 @@
             }
         }
 
+        const handleAddToCartFeedback = (event) => {
+            const button = event.target.closest('[data-add-to-cart]');
+            if (!button) return;
+            const cartIcon = button.querySelector('[data-cart-icon]');
+            const checkIcon = button.querySelector('[data-check-icon]');
+            if (!cartIcon || !checkIcon) return;
+
+            cartIcon.classList.add('hidden');
+            checkIcon.classList.remove('hidden');
+
+            if (button._cartFeedbackTimer) {
+                clearTimeout(button._cartFeedbackTimer);
+            }
+            button._cartFeedbackTimer = setTimeout(() => {
+                cartIcon.classList.remove('hidden');
+                checkIcon.classList.add('hidden');
+            }, 1400);
+        };
+
+        document.addEventListener('click', handleAddToCartFeedback);
+
+        const handleWishlistToggle = (event) => {
+            const button = event.target.closest('[data-wishlist]');
+            if (!button) return;
+
+            const icon = button.querySelector('svg');
+            const isActive = button.getAttribute('aria-pressed') === 'true';
+            const nextActive = !isActive;
+
+            button.setAttribute('aria-pressed', nextActive ? 'true' : 'false');
+            button.classList.toggle('text-red-500', nextActive);
+            button.classList.toggle('text-slate-700', !nextActive);
+
+            if (icon) {
+                icon.classList.toggle('fill-current', nextActive);
+            }
+        };
+
+        document.addEventListener('click', handleWishlistToggle);
+
         if (mobileMenuButton && mobileMenu) {
             const openMenu = () => {
                 mobileMenu.classList.remove('hidden');

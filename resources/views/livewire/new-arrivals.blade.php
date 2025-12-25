@@ -200,11 +200,14 @@
                         <p class="text-slate-600 text-sm mb-4 line-clamp-2 flex-grow">${product.description}</p>
                         <div class="flex items-center justify-between mt-auto">
                             <span class="text-xl font-bold text-blue-600 inline-flex items-center gap-1"><img src="/img/Saudi_Riyal_Symbol-2_2.svg" alt="Saudi Riyal" class="h-4 w-auto"> ${product.price.toFixed(2)}</span>
-                            <button class="inline-flex items-center justify-center text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4 add-to-cart" data-id="${product.id}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
+                            <button class="inline-flex items-center justify-center text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4 add-to-cart" data-id="${product.id}" data-add-to-cart>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
                                     <circle cx="8" cy="21" r="1"></circle>
                                     <circle cx="19" cy="21" r="1"></circle>
                                     <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
+                                    <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
                                 Add
                             </button>
@@ -306,11 +309,14 @@
                 <p class="text-slate-600 text-sm mb-4 line-clamp-2 flex-grow">Transform your car interior with our premium leather seat covers. Designed for durability and maximum comfort.</p>
                 <div class="flex items-center justify-between mt-auto">
                     <span class="text-xl font-bold text-blue-600"><x-currency amount="189.99" /></span>
-                    <button class="inline-flex items-center justify-center text-sm font-medium h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4 add-to-cart" data-id="1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
+                    <button class="inline-flex items-center justify-center text-sm font-medium h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4 add-to-cart" data-id="1" data-add-to-cart>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
                             <circle cx="8" cy="21" r="1"></circle>
                             <circle cx="19" cy="21" r="1"></circle>
                             <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
+                            <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                         Add
                     </button>

@@ -25,6 +25,35 @@
 
 
 
+@push('head')
+    <style>
+        @keyframes preview-fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes preview-pop-in {
+            from { opacity: 0; transform: translateY(18px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        dialog.preview-dialog[open] {
+            animation: preview-fade-in 180ms ease-out;
+        }
+        dialog.preview-dialog::backdrop {
+            animation: preview-fade-in 200ms ease-out;
+        }
+        dialog.preview-dialog[open] .preview-panel {
+            animation: preview-pop-in 220ms ease-out;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            dialog.preview-dialog[open],
+            dialog.preview-dialog::backdrop,
+            dialog.preview-dialog[open] .preview-panel {
+                animation: none;
+            }
+        }
+    </style>
+@endpush
+
 <div>
     @include('partials.hero')
 
@@ -65,6 +94,52 @@
                     <span aria-hidden="true">→</span>
                 </a>
             </div>
+        </div>
+    </section>
+
+    <section class="bg-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="flex items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Best Sellers</h2>
+                    <p class="mt-1 text-sm text-zinc-600">Shop trending products, updated daily.</p>
+                </div>
+
+                <div class="hidden sm:flex items-center gap-2">
+                    <button id="bestSellersPrev"
+                        class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                        aria-label="Previous products" type="button">&lt;</button>
+                    <button id="bestSellersNext"
+                        class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                        aria-label="Next products" type="button">&gt;</button>
+                </div>
+            </div>
+
+            <section class="relative mt-6">
+                <div class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent"></div>
+                <div class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent"></div>
+
+                <div
+                    id="bestSellersViewport"
+                    class="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] cursor-grab active:cursor-grabbing"
+                    aria-roledescription="carousel"
+                    aria-label="Product carousel"
+                    tabindex="0"
+                ></div>
+
+                <div class="mt-4 flex sm:hidden items-center justify-center gap-2">
+                    <button id="bestSellersPrevM"
+                        class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                        aria-label="Previous products" type="button">&lt;</button>
+                    <button id="bestSellersNextM"
+                        class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                        aria-label="Next products" type="button">&gt;</button>
+                </div>
+
+                <div id="bestSellersDots" class="mt-4 flex items-center justify-center gap-2"></div>
+
+                <div id="bestSellersLive" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+            </section>
         </div>
     </section>
 
@@ -113,11 +188,14 @@
                     </a>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency amount="35" /></span>
-                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
+                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white" data-add-to-cart>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
                                 <circle cx="8" cy="21" r="1"></circle>
                                 <circle cx="19" cy="21" r="1"></circle>
                                 <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
+                                <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                             Add
                         </x-button>
@@ -161,11 +239,14 @@
                     </a>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency amount="28" /></span>
-                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
+                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white" data-add-to-cart>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
                                 <circle cx="8" cy="21" r="1"></circle>
                                 <circle cx="19" cy="21" r="1"></circle>
                                 <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
+                                <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                             Add
                         </x-button>
@@ -206,11 +287,14 @@
                     </a>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency amount="50" /></span>
-                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
+                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white" data-add-to-cart>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
                                 <circle cx="8" cy="21" r="1"></circle>
                                 <circle cx="19" cy="21" r="1"></circle>
                                 <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
+                                <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                             Add
                         </x-button>
@@ -254,11 +338,14 @@
                     </a>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency amount="50" /></span>
-                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
+                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white" data-add-to-cart>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
                                 <circle cx="8" cy="21" r="1"></circle>
                                 <circle cx="19" cy="21" r="1"></circle>
                                 <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
+                                <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                             Add
                         </x-button>
@@ -280,9 +367,9 @@
         </ul>
     </section>
 
-    <dialog id="home-product-preview" class="fixed inset-0 z-50 m-0 h-full w-full overflow-y-auto bg-transparent p-4 backdrop:bg-black/60 backdrop:backdrop-blur-sm">
+    <dialog id="home-product-preview" class="preview-dialog fixed inset-0 z-50 m-0 h-full w-full overflow-y-auto bg-transparent p-4 backdrop:bg-black/60 backdrop:backdrop-blur-sm">
         <div class="flex min-h-full items-center justify-center">
-            <div class="relative w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+            <div class="preview-panel relative w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-2xl">
                 <button type="button" class="absolute right-4 top-4 inline-flex size-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition hover:bg-slate-50 hover:text-slate-700" onclick="const dialog = document.getElementById('home-product-preview'); if (dialog) { dialog.close ? dialog.close() : dialog.removeAttribute('open'); }">
                     <span class="sr-only">Close</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="size-5">
@@ -333,3 +420,329 @@
         </div>
     </dialog>
 </div>
+
+@push('scripts')
+    <script>
+        (() => {
+            const products = [
+                {
+                    id: "p1",
+                    title: "Noise-Cancel Headphones",
+                    brand: "SoundPro",
+                    price: 129,
+                    compareAt: 169,
+                    rating: 4.8,
+                    reviews: 2193,
+                    badge: "Hot Deal",
+                    image: "https://images.unsplash.com/photo-1518441902117-f0a0b1ff3fdb?auto=format&fit=crop&w=1200&q=80",
+                },
+                {
+                    id: "p2",
+                    title: "Everyday Sneakers",
+                    brand: "Stride",
+                    price: 79,
+                    compareAt: 99,
+                    rating: 4.5,
+                    reviews: 983,
+                    badge: "Limited",
+                    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1200&q=80",
+                },
+                {
+                    id: "p3",
+                    title: "Matte Phone Case",
+                    brand: "CaseLab",
+                    price: 18,
+                    compareAt: 25,
+                    rating: 4.4,
+                    reviews: 512,
+                    badge: "Popular",
+                    image: "https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=1200&q=80",
+                },
+                {
+                    id: "p4",
+                    title: "Minimal Wallet",
+                    brand: "Hide",
+                    price: 39,
+                    compareAt: 59,
+                    rating: 4.7,
+                    reviews: 842,
+                    badge: "Best Seller",
+                    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80",
+                },
+                {
+                    id: "p5",
+                    title: "Ceramic Travel Mug",
+                    brand: "Daily",
+                    price: 24,
+                    compareAt: null,
+                    rating: 4.6,
+                    reviews: 411,
+                    badge: "New",
+                    image: "https://images.unsplash.com/photo-1526401485004-2aa7b5d8b6f9?auto=format&fit=crop&w=1200&q=80",
+                },
+                {
+                    id: "p6",
+                    title: "Desk Lamp",
+                    brand: "Glow",
+                    price: 46,
+                    compareAt: 65,
+                    rating: 4.3,
+                    reviews: 301,
+                    badge: "Sale",
+                    image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80",
+                },
+            ];
+
+            const INFINITE_FEEL = true;
+            const AUTOPLAY = false;
+            const AUTOPLAY_MS = 4500;
+
+            const viewport = document.getElementById("bestSellersViewport");
+            const live = document.getElementById("bestSellersLive");
+            const dotsEl = document.getElementById("bestSellersDots");
+
+            const prev = document.getElementById("bestSellersPrev");
+            const next = document.getElementById("bestSellersNext");
+            const prevM = document.getElementById("bestSellersPrevM");
+            const nextM = document.getElementById("bestSellersNextM");
+
+            if (!viewport || !dotsEl || !live) return;
+
+            const money = (n) => new Intl.NumberFormat(undefined, { style: "currency", currency: "USD" }).format(n);
+            const intf  = (n) => new Intl.NumberFormat(undefined).format(n);
+
+            function stars(r) {
+                const full = Math.floor(r);
+                const half = r - full >= 0.5 ? 1 : 0;
+                const empty = 5 - full - half;
+
+                const fullStar = `<svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>`;
+                const halfStar = `<svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3V2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2v15.3z" opacity=".35"/></svg>`;
+                const emptyStar = `<svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" opacity=".25"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>`;
+                return fullStar.repeat(full) + (half ? halfStar : "") + emptyStar.repeat(empty);
+            }
+
+            function escapeHtml(str) {
+                return String(str).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m]));
+            }
+
+            function cardHTML(p) {
+                const badge = p.badge
+                    ? `<span class="rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-zinc-800 shadow-sm ring-1 ring-black/5">${escapeHtml(p.badge)}</span>`
+                    : "";
+
+                const compare = p.compareAt
+                    ? `<span class="text-sm text-zinc-400 line-through">${money(p.compareAt)}</span>`
+                    : "";
+
+                return `
+                    <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]" data-id="${p.id}">
+                        <div class="group rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                            <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
+                                <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    src="${p.image}" alt="${escapeHtml(p.title)}" draggable="false" />
+                                <div class="absolute left-3 top-3">${badge}</div>
+
+                                <button data-add
+                                    class="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
+                                    type="button" aria-label="Add to cart">
+                                    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                                        <path d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="p-4">
+                                <div class="text-xs text-zinc-500">${escapeHtml(p.brand)}</div>
+                                <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">${escapeHtml(p.title)}</h3>
+
+                                <div class="mt-2 flex items-center gap-2">
+                                    <div class="flex items-center gap-0.5 text-amber-500" aria-hidden="true">${stars(p.rating)}</div>
+                                    <span class="text-xs font-semibold text-zinc-700">${p.rating.toFixed(1)}</span>
+                                    <span class="text-xs text-zinc-500">(${intf(p.reviews)})</span>
+                                </div>
+
+                                <div class="mt-3 flex items-center justify-between">
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-base font-extrabold text-zinc-900">${money(p.price)}</span>
+                                        ${compare}
+                                    </div>
+
+                                    <button data-add
+                                        class="rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
+                                        type="button">
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }
+
+            const renderList = INFINITE_FEEL ? [...products, ...products, ...products] : [...products];
+            viewport.innerHTML = renderList.map(cardHTML).join("");
+
+            viewport.querySelectorAll("[data-add]").forEach((btn) => {
+                btn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const slide = btn.closest(".slide");
+                    const pid = slide?.dataset.id;
+                    const real = products.find((p) => p.id === pid);
+                    alert(`Added to cart: ${real?.title ?? "Product"}`);
+                });
+            });
+
+            const dots = [];
+            for (let i = 0; i < products.length; i++) {
+                const b = document.createElement("button");
+                b.className = "h-2 w-2 rounded-full bg-zinc-300";
+                b.setAttribute("aria-label", `Go to product ${i + 1}`);
+                b.addEventListener("click", () => scrollToRealIndex(i));
+                dotsEl.appendChild(b);
+                dots.push(b);
+            }
+
+            function setActiveDot(i) {
+                dots.forEach((d, idx) => {
+                    d.classList.toggle("bg-zinc-900", idx === i);
+                    d.classList.toggle("bg-zinc-300", idx !== i);
+                });
+            }
+
+            function keepInMiddle() {
+                if (!INFINITE_FEEL) return;
+                const third = viewport.scrollWidth / 3;
+                const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+
+                if (viewport.scrollLeft < third * 0.35) viewport.scrollLeft += third;
+                else if (viewport.scrollLeft > maxScroll - third * 0.35) viewport.scrollLeft -= third;
+            }
+
+            viewport.addEventListener("scroll", () => keepInMiddle(), { passive: true });
+
+            function startInMiddle() {
+                if (!INFINITE_FEEL) return;
+                const slides = Array.from(viewport.querySelectorAll(".slide"));
+                const middleStart = products.length;
+                slides[middleStart]?.scrollIntoView({ inline: "start" });
+                requestAnimationFrame(keepInMiddle);
+            }
+
+            let activeRealIndex = 0;
+
+            const io = new IntersectionObserver(
+                (entries) => {
+                    let best = null;
+                    for (const e of entries) {
+                        if (!e.isIntersecting) continue;
+                        if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
+                    }
+                    if (!best?.target) return;
+
+                    const id = best.target.dataset.id;
+                    const real = products.findIndex((p) => p.id === id);
+                    if (real >= 0 && real !== activeRealIndex) {
+                        activeRealIndex = real;
+                        setActiveDot(activeRealIndex);
+                        live.textContent = `Showing ${products[activeRealIndex].title}`;
+                    }
+                },
+                { root: viewport, threshold: [0.6, 0.75, 0.9] }
+            );
+
+            viewport.querySelectorAll(".slide").forEach((s) => io.observe(s));
+            setActiveDot(0);
+
+            function cardStepPx() {
+                const first = viewport.querySelector(".slide");
+                if (!first) return 280;
+                const rect = first.getBoundingClientRect();
+                const styles = getComputedStyle(viewport);
+                const gap = parseFloat(styles.columnGap || styles.gap || "16") || 16;
+                return rect.width + gap;
+            }
+
+            function scrollByCards(dir = 1) {
+                viewport.scrollBy({ left: dir * cardStepPx(), behavior: "smooth" });
+            }
+
+            function scrollToRealIndex(i) {
+                const slides = Array.from(viewport.querySelectorAll(".slide"));
+                const targetIndex = INFINITE_FEEL ? products.length + i : i;
+                slides[targetIndex]?.scrollIntoView({ inline: "start", behavior: "smooth" });
+            }
+
+            [prev, prevM].forEach((b) => b?.addEventListener("click", () => scrollByCards(-1)));
+            [next, nextM].forEach((b) => b?.addEventListener("click", () => scrollByCards(1)));
+
+            let dragging = false, startX = 0, startScroll = 0, lastX = 0, lastT = 0, v = 0, raf = null;
+
+            function stopMomentum() { if (raf) cancelAnimationFrame(raf); raf = null; }
+
+            viewport.addEventListener("pointerdown", (e) => {
+                if (e.pointerType === "mouse" && e.button !== 0) return;
+                stopMomentum();
+                dragging = true;
+                viewport.setPointerCapture?.(e.pointerId);
+                startX = e.clientX;
+                startScroll = viewport.scrollLeft;
+                lastX = e.clientX;
+                lastT = performance.now();
+                v = 0;
+            });
+
+            viewport.addEventListener("pointermove", (e) => {
+                if (!dragging) return;
+                const dx = e.clientX - startX;
+                viewport.scrollLeft = startScroll - dx;
+
+                const now = performance.now();
+                const dt = Math.max(1, now - lastT);
+                const vx = (e.clientX - lastX) / dt;
+                v = v * 0.85 + vx * 0.15;
+                lastX = e.clientX;
+                lastT = now;
+            });
+
+            viewport.addEventListener("pointerup", () => {
+                if (!dragging) return;
+                dragging = false;
+
+                let momentum = Math.max(-28, Math.min(28, v * 130));
+                const tick = () => {
+                    momentum *= 0.92;
+                    if (Math.abs(momentum) < 0.25) return;
+                    viewport.scrollLeft -= momentum;
+                    raf = requestAnimationFrame(tick);
+                };
+                raf = requestAnimationFrame(tick);
+            });
+
+            viewport.addEventListener("pointercancel", () => (dragging = false));
+            viewport.addEventListener("pointerleave", () => (dragging = false));
+
+            viewport.addEventListener("keydown", (e) => {
+                if (e.key === "ArrowRight") { e.preventDefault(); scrollByCards(1); }
+                if (e.key === "ArrowLeft")  { e.preventDefault(); scrollByCards(-1); }
+            });
+
+            let autoplay = null;
+            function startAutoplay() {
+                if (!AUTOPLAY) return;
+                stopAutoplay();
+                autoplay = setInterval(() => scrollByCards(1), AUTOPLAY_MS);
+            }
+            function stopAutoplay() {
+                if (autoplay) clearInterval(autoplay);
+                autoplay = null;
+            }
+
+            viewport.addEventListener("mouseenter", stopAutoplay);
+            viewport.addEventListener("mouseleave", startAutoplay);
+
+            if (INFINITE_FEEL) startInMiddle();
+            startAutoplay();
+        })();
+    </script>
+@endpush
