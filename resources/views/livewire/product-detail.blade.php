@@ -340,35 +340,40 @@
                         'badge' => null
                     ],
                 ] as $related)
-                    <div class="group bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full flex flex-col min-w-[260px] sm:min-w-[300px] lg:min-w-[320px] snap-start ring-1 ring-slate-100">
-                        <a class="block relative overflow-hidden h-64 bg-slate-100 group" href="/shop/1">
-                            <img src="{{ $related['image'] }}" alt="{{ $related['name'] }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                            <div class="absolute top-3 right-3 bg-black/80 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm">{{ $related['category'] }}</div>
-                            @if(!empty($related['badge']))
-                                <div class="absolute top-3 left-3 bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm">{{ $related['badge'] }}</div>
-                            @endif
-                        </a>
-                        <div class="p-5 flex flex-col flex-1">
-                            <a class="hover:text-blue-600 transition-colors" href="/shop/1">
-                                <h3 class="text-lg font-bold text-slate-800 mb-2 line-clamp-1">{{ $related['name'] }}</h3>
-                            </a>
-                            <p class="text-slate-600 text-sm mb-4 line-clamp-2 flex-grow">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <div class="flex items-center justify-between mt-auto">
-                                <span class="text-xl font-bold text-blue-600"><x-currency :amount="number_format($related['price'], 2)" /></span>
-                                <button class="inline-flex items-center justify-center text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-9 bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-full px-4" data-add-to-cart>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart w-4 h-4 mr-2" data-cart-icon>
-                                        <circle cx="8" cy="21" r="1"></circle>
-                                        <circle cx="19" cy="21" r="1"></circle>
-                                        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                    <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]">
+                        <div class="group rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                            <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
+                                <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    src="{{ $related['image'] }}" alt="{{ $related['name'] }}" draggable="false" />
+                                <div class="absolute left-3 top-3">
+                                    @if(!empty($related['badge']))
+                                        <span class="rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-zinc-800 shadow-sm ring-1 ring-black/5">{{ $related['badge'] }}</span>
+                                    @else
+                                        <span class="rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-zinc-800 shadow-sm ring-1 ring-black/5">{{ $related['category'] }}</span>
+                                    @endif
+                                </div>
+                                <button class="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
+                                    type="button" aria-label="Add to cart" data-add-to-cart>
+                                    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                                        <path d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
                                     </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                    Add
                                 </button>
                             </div>
+                            <div class="p-4">
+                                <div class="text-xs text-zinc-500">{{ $related['category'] }}</div>
+                                <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">{{ $related['name'] }}</h3>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-base font-extrabold text-zinc-900"><x-currency :amount="number_format($related['price'], 2)" /></span>
+                                    </div>
+                                    <button class="rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
+                                        type="button" data-add-to-cart>
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </article>
                 @endforeach
             </div>
         </div>

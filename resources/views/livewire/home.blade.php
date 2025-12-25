@@ -1,3 +1,4 @@
+<div>
 {{-- @extends('layouts.app')
 
 @section('content')
@@ -71,7 +72,6 @@
         }
     </style>
 @endpush
-
 <div>
     @include('partials.hero')
 
@@ -405,76 +405,140 @@
             </a>
         </div>
 
-        <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <li
-                class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group">
-                <div
-                    class="absolute inset-0 z-20 flex items-center justify-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
-                    <button type="button"
-                        class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white"
-                        aria-label="Add to wishlist" data-wishlist="1">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.0" stroke="currentColor" class="size-4">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                        </svg>
-                    </button>
-                    <button type="button"
-                        class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white"
-                        aria-label="Quick preview" data-preview="1"
-                        onclick="const dialog = document.getElementById('home-product-preview'); if (dialog) { dialog.showModal ? dialog.showModal() : dialog.setAttribute('open', 'open'); }">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="w-4 h-4">
-                            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
-                    </button>
-                </div>
-                <a class="block relative overflow-hidden h-64 bg-slate-100 group" href="#">
-                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-01.jpg"
-                        alt="Black machined steel pen with hexagonal grip and small white logo at top."
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                </a>
-                <div class="p-5 flex flex-col flex-1">
-                    <p class="text-slate-500 text-sm">Black</p>
-                    <a class="hover:text-blue-600 transition-colors" href="#">
-                        <h3 class="text-lg font-bold text-slate-800 mb-2 line-clamp-1">Machined Pen</h3>
-                    </a>
-                    <div class="flex items-center justify-between mt-auto">
-                        <span class="text-xl font-bold text-blue-600"><x-currency amount="35" /></span>
-                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white"
-                            data-add-to-cart>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
-                                <circle cx="8" cy="21" r="1"></circle>
-                                <circle cx="19" cy="21" r="1"></circle>
-                                <path
-                                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12">
-                                </path>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Add
-                        </x-button>
+                <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <li>
+                <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]">
+                    <div class="group rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                        <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
+                            <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-01.jpg"
+                                alt="Black machined steel pen with hexagonal grip and small white logo at top."
+                                draggable="false" />
+                            <button data-add-to-cart
+                                class="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
+                                type="button" aria-label="Add to cart">
+                                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                                    <path d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="text-xs text-zinc-500">Black</div>
+                            <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">Machined Pen</h3>
+                            <div class="mt-3 flex items-center justify-between">
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-base font-extrabold text-zinc-900"><x-currency amount="35" /></span>
+                                </div>
+                                <button data-add-to-cart
+                                    class="rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
+                                    type="button">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <h4 class="sr-only">Available colors</h4>
-                    <ul role="list" class="mt-4 flex items-center gap-2">
-                        <li class="h-4 w-4 rounded-full ring-1 ring-slate-300" style="background-color: #111827">
-                            <span class="sr-only">Black</span>
-                        </li>
-                        <li class="h-4 w-4 rounded-full ring-1 ring-slate-300" style="background-color: #fde68a">
-                            <span class="sr-only">Brass</span>
-                        </li>
-                        <li class="h-4 w-4 rounded-full ring-1 ring-slate-300" style="background-color: #e5e7eb">
-                            <span class="sr-only">Chrome</span>
-                        </li>
-                    </ul>
+                </article>
+            </li>
+            <li>
+                <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]">
+                    <div class="group rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                        <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
+                            <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-02.jpg"
+                                alt="Black porcelain mug with modern square handle and natural clay accents on rim and bottom."
+                                draggable="false" />
+                            <button data-add-to-cart
+                                class="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
+                                type="button" aria-label="Add to cart">
+                                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                                    <path d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="text-xs text-zinc-500">Matte Black</div>
+                            <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">Earthen Mug</h3>
+                            <div class="mt-3 flex items-center justify-between">
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-base font-extrabold text-zinc-900"><x-currency amount="28" /></span>
+                                </div>
+                                <button data-add-to-cart
+                                    class="rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
+                                    type="button">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </li>
+            <li>
+                <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]">
+                    <div class="group rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                        <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
+                            <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-03.jpg"
+                                alt="Natural leather journal with brass disc binding and three paper refill sets."
+                                draggable="false" />
+                            <button data-add-to-cart
+                                class="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
+                                type="button" aria-label="Add to cart">
+                                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                                    <path d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="text-xs text-zinc-500">Natural</div>
+                            <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">Leatherbound Daily Journal Set</h3>
+                            <div class="mt-3 flex items-center justify-between">
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-base font-extrabold text-zinc-900"><x-currency amount="50" /></span>
+                                </div>
+                                <button data-add-to-cart
+                                    class="rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
+                                    type="button">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </li>
+            <li>
+                <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]">
+                    <div class="group rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                        <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
+                            <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-04.jpg"
+                                alt="Black leather journal with brass disc binding."
+                                draggable="false" />
+                            <button data-add-to-cart
+                                class="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
+                                type="button" aria-label="Add to cart">
+                                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                                    <path d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="text-xs text-zinc-500">Black</div>
+                            <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">Leatherbound Daily Journal</h3>
+                            <div class="mt-3 flex items-center justify-between">
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-base font-extrabold text-zinc-900"><x-currency amount="50" /></span>
+                                </div>
+                                <button data-add-to-cart
+                                    class="rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
+                                    type="button">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </li>
+        </ul>
                 </div>
             </li>
 
@@ -1200,3 +1264,5 @@
         }
     </script>
 @endpush
+
+</div>
