@@ -66,6 +66,19 @@ class TrendingNow extends Component
             $this->page++;
         }
     }
+
+    public function addToCart($productId): void
+    {
+        $product = collect($this->products)->firstWhere('id', $productId);
+
+        if (! $product) {
+            return;
+        }
+
+        session()->push('cart', $product);
+
+        $this->dispatch('notify', message: "{$product['name']} added to cart!");
+    }
     public function render()
     {
         return view('livewire.trending-now');

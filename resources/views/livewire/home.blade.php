@@ -1166,5 +1166,37 @@
                 behavior: "smooth"
             }));
         }
+
+        if (track) {
+            let dragging = false;
+            let startX = 0;
+            let startScroll = 0;
+
+            track.addEventListener("pointerdown", (e) => {
+                if (e.pointerType === "mouse" && e.button !== 0) return;
+                dragging = true;
+                startX = e.clientX;
+                startScroll = track.scrollLeft;
+                track.setPointerCapture?.(e.pointerId);
+                track.classList.add("cursor-grabbing");
+            });
+
+            track.addEventListener("pointermove", (e) => {
+                if (!dragging) return;
+                const dx = e.clientX - startX;
+                track.scrollLeft = startScroll - dx;
+            });
+
+            const stopDrag = (e) => {
+                if (!dragging) return;
+                dragging = false;
+                track.releasePointerCapture?.(e.pointerId);
+                track.classList.remove("cursor-grabbing");
+            };
+
+            track.addEventListener("pointerup", stopDrag);
+            track.addEventListener("pointercancel", stopDrag);
+            track.addEventListener("pointerleave", stopDrag);
+        }
     </script>
 @endpush

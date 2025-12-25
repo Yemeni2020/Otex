@@ -1,5 +1,5 @@
 
-<section class="bg-white py-12" data-infinite-scroll>
+<section class="bg-white py-6" data-infinite-scroll>
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div class="flex items-end justify-between gap-4">
             <div>

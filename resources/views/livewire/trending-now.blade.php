@@ -1,4 +1,4 @@
-<section class="bg-white py-12" data-infinite-scroll>
+<section class="bg-white py-6" data-infinite-scroll>
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div class="flex items-end justify-between gap-4">
             <div>
@@ -59,7 +59,7 @@
                     </a>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency :amount="number_format($product['price'], 2)" /></span>
-                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4" data-add-to-cart>
+                        <x-button wire:click="addToCart({{ $product['id'] }})" type="button" size="sm" variant="solid" class="rounded-full px-4" data-add-to-cart>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
                                 <circle cx="8" cy="21" r="1"></circle>
                                 <circle cx="19" cy="21" r="1"></circle>
