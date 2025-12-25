@@ -55,7 +55,37 @@
             70% { transform: translateY(2px) scale(0.98); }
             100% { transform: translateY(0) scale(1); }
         }
+        .topbar-transition { transition: transform 200ms ease, opacity 200ms ease; will-change: transform; }
+        .topbar-hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; }
     </style>
+    <style>
+    /* Ticker animation */
+    @keyframes ticker {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .ticker-track {
+      animation: ticker 22s linear infinite;
+    }
+
+    /* Pause on hover */
+    .ticker-track:hover {
+      animation-play-state: paused;
+    }
+
+    /* Accessibility: reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track {
+        animation: none;
+        transform: translateX(0);
+      }
+    }
+  </style>
 </head>
 <body class="bg-gray-100 text-gray-900 min-h-screen expansion-alids-init">
 
@@ -111,13 +141,31 @@
         const header = document.getElementById('siteHeader');
         const topbar = document.getElementById('siteTopbar');
         const setHeaderOffset = () => {
-            const topbarHeight = topbar ? topbar.offsetHeight : 0;
+            const topbarHeight = topbar && !topbar.classList.contains('topbar-hidden') ? topbar.offsetHeight : 0;
             const headerHeight = header ? header.offsetHeight : 0;
             document.documentElement.style.setProperty('--topbar-height', `${topbarHeight}px`);
             document.documentElement.style.setProperty('--header-stack-height', `${topbarHeight + headerHeight}px`);
         };
         setHeaderOffset();
         window.addEventListener('resize', setHeaderOffset);
+        if (topbar) {
+            let lastScrollY = window.pageYOffset;
+            const handleScroll = () => {
+                const currentScrollY = window.pageYOffset;
+                const scrollingDown = currentScrollY > lastScrollY;
+                if (currentScrollY <= 10) {
+                    topbar.classList.remove('topbar-hidden');
+                } else if (scrollingDown) {
+                    topbar.classList.add('topbar-hidden');
+                } else {
+                    topbar.classList.remove('topbar-hidden');
+                }
+                lastScrollY = currentScrollY;
+                setHeaderOffset();
+            };
+            handleScroll();
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
 
         const cartButton = document.getElementById('cartButton');
         const cartSidebar = document.getElementById('cartSidebar');

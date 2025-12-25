@@ -1,20 +1,34 @@
-<section class="container mx-auto px-4 py-16" data-infinite-scroll>
-    <div class="flex items-center gap-3 mb-8">
-        <div class="p-3 bg-blue-100 rounded-xl">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-blue-600">
-                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-                <polyline points="16 7 22 7 22 13"></polyline>
-            </svg>
-        </div>
-        <div>
-            <h2 class="text-3xl font-bold text-slate-900">Trending Now</h2>
-            <p class="text-slate-500">Items that are getting a lot of attention this week</p>
-        </div>
-    </div>
+<section class="bg-white py-12" data-infinite-scroll>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="flex items-end justify-between gap-4">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Trending Now</h2>
+                <p class="mt-1 text-sm text-zinc-600">Items that are getting a lot of attention this week</p>
+            </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="hidden sm:flex items-center gap-2">
+                <button id="trendingNowPrev"
+                    class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                    aria-label="Previous products" type="button">&lt;</button>
+                <button id="trendingNowNext"
+                    class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                    aria-label="Next products" type="button">&gt;</button>
+            </div>
+        </div>
+
+        <section class="relative mt-6">
+            <div
+                class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent">
+            </div>
+            <div
+                class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent">
+            </div>
+
+            <div id="trendingNowViewport"
+                class="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] cursor-grab active:cursor-grabbing"
+                aria-roledescription="carousel" aria-label="Trending now carousel" tabindex="0">
         @foreach($this->visibleProducts as $product)
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group" wire:key="trending-{{ $product['id'] }}">
+            <div class="snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px] bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group" wire:key="trending-{{ $product['id'] }}">
                 <div class="absolute inset-0 z-20 flex items-center justify-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
                     <button type="button" class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Add to wishlist" data-wishlist="{{ $product['id'] }}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.0" stroke="currentColor" class="size-4">
@@ -43,7 +57,6 @@
                     <a class="hover:text-blue-600 transition-colors" href="/product/{{ $product['id'] }}">
                         <h3 class="text-lg font-bold text-slate-800 mb-2 line-clamp-1">{{ $product['name'] }}</h3>
                     </a>
-                    <p class="text-slate-600 text-sm mb-4 line-clamp-2 flex-grow">{{ $product['description'] }}</p>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency :amount="number_format($product['price'], 2)" /></span>
                         <x-button type="button" size="sm" variant="solid" class="rounded-full px-4" data-add-to-cart>
@@ -61,11 +74,26 @@
                 </div>
             </div>
         @endforeach
+            </div>
+
+            <div class="mt-4 flex sm:hidden items-center justify-center gap-2">
+                <button id="trendingNowPrevM"
+                    class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                    aria-label="Previous products" type="button">&lt;</button>
+                <button id="trendingNowNextM"
+                    class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                    aria-label="Next products" type="button">&gt;</button>
+            </div>
+
+            <div id="trendingNowDots" class="mt-4 flex items-center justify-center gap-2"></div>
+
+            <div id="trendingNowLive" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+        </section>
+        @if($this->hasMore)
+            <div data-infinite-scroll-sentinel class="flex items-center justify-center gap-2 py-6 text-sm text-slate-500">
+                <span class="h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-blue-500"></span>
+                <span>Loading more...</span>
+            </div>
+        @endif
     </div>
-    @if($this->hasMore)
-        <div data-infinite-scroll-sentinel class="flex items-center justify-center gap-2 py-6 text-sm text-slate-500">
-            <span class="h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-blue-500"></span>
-            <span>Loading more...</span>
-        </div>
-    @endif
 </section>

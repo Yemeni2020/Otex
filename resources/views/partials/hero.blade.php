@@ -1,6 +1,6 @@
 <section class="relative overflow-hidden w-full text-white">
        
-    <div class="container mx-auto px-4 py-16 lg:py-24 relative z-10">
+    <div class="container mx-auto px-4 py-12 lg:py-12 relative z-10">
        
 
         <div class="relative">

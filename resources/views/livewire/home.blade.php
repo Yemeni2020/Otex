@@ -5,11 +5,11 @@
 @endsection --}}
 
 {{-- <div class="space-y-16"> --}}
-    <!-- New Arrivals Section -->
+<!-- New Arrivals Section -->
 
 
-    <!-- Best Sellers Section -->
-    {{-- <livewire:best-sellers /> --}}
+<!-- Best Sellers Section -->
+{{-- <livewire:best-sellers /> --}}
 {{-- </div> --}}
 
 
@@ -28,23 +28,41 @@
 @push('head')
     <style>
         @keyframes preview-fade-in {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
+
         @keyframes preview-pop-in {
-            from { opacity: 0; transform: translateY(18px) scale(0.96); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
+
         dialog.preview-dialog[open] {
             animation: preview-fade-in 180ms ease-out;
         }
+
         dialog.preview-dialog::backdrop {
             animation: preview-fade-in 200ms ease-out;
         }
+
         dialog.preview-dialog[open] .preview-panel {
             animation: preview-pop-in 220ms ease-out;
         }
+
         @media (prefers-reduced-motion: reduce) {
+
             dialog.preview-dialog[open],
             dialog.preview-dialog::backdrop,
             dialog.preview-dialog[open] .preview-panel {
@@ -57,45 +75,266 @@
 <div>
     @include('partials.hero')
 
-    <section class="bg-gray-50 py-16">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <section class="w-full">
+        <div class="container mx-auto px-4">
+            <div class="flex items-end justify-between gap-4">
                 <div>
-                    <p class="text-sm font-semibold text-blue-600">Categories</p>
-                    <h2 class="text-3xl font-bold tracking-tight text-slate-900">Shop by Category</h2>
-                    <p class="mt-1 text-sm text-slate-500">Browse curated collections that fit how you work and live.</p>
+                    <p class="text-xs font-medium tracking-wide text-gray-500">Browse</p>
+                    <h2 class="mt-1 text-xl font-semibold tracking-tight text-gray-900">
+                        Shop by Category
+                    </h2>
                 </div>
-                <a href="#" class="hidden text-sm font-semibold text-blue-600 hover:text-blue-500 sm:inline-flex sm:items-center sm:gap-1">
-                    Browse all categories
-                    <span aria-hidden="true">→</span>
-                </a>
+
+                <!-- Optional: scroll buttons -->
+                <div class="hidden gap-2 sm:flex">
+                    <button type="button"
+                        class="group inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white/70 shadow-sm backdrop-blur hover:bg-white"
+                        data-cat-prev aria-label="Previous">
+                        <span class="text-lg leading-none text-gray-700 group-hover:text-gray-900">‹</span>
+                    </button>
+                    <button type="button"
+                        class="group inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white/70 shadow-sm backdrop-blur hover:bg-white"
+                        data-cat-next aria-label="Next">
+                        <span class="text-lg leading-none text-gray-700 group-hover:text-gray-900">›</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-                @foreach($categories as $category)
-                    <a href="{{ $category['href'] }}" class="group relative block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-lg" aria-label="Browse {{ $category['label'] }}">
-                        <div class="relative aspect-[4/5]">
-                            <img src="{{ $category['image'] }}" alt="{{ $category['label'] }} collection" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-gradient-to-t {{ $category['accent'] }} to-transparent"></div>
-                            <div class="absolute inset-x-4 bottom-4 flex items-center justify-between">
-                                <span class="text-lg font-semibold text-white drop-shadow-sm">{{ $category['label'] }}</span>
-                                <span class="inline-flex size-9 items-center justify-center rounded-full border border-white/30 bg-white/20 text-white backdrop-blur transition group-hover:translate-x-1">
-                                    →
-                                </span>
+            <div class="relative mt-5">
+                <!-- edge fades -->
+                <div
+                    class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent">
+                </div>
+                <div
+                    class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent">
+                </div>
+
+                <div class="flex gap-4 overflow-x-auto overflow-y-hidden pb-2 pr-2 scroll-smooth snap-x snap-mandatory touch-pan-x overscroll-x-contain
+               [-webkit-overflow-scrolling:touch] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                    data-cat-track>
+                    <!-- Item -->
+                    <a href="#"
+                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                 transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <!-- gradient ring -->
+                        <div
+                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-1.jpg"
+                                    alt="Smartphone"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    loading="lazy" />
                             </div>
                         </div>
-                    </a>
-                @endforeach
-            </div>
 
-            <div class="mt-8 text-center sm:hidden">
-                <a href="#" class="text-sm font-semibold text-blue-600 hover:text-blue-500">
-                    Browse all categories
-                    <span aria-hidden="true">→</span>
-                </a>
+                        <div class="mt-3 text-center">
+                            <p class="text-sm font-semibold text-gray-900">Smartphone</p>
+                            <p class="mt-0.5 text-xs text-gray-500">New arrivals</p>
+                        </div>
+
+                        <!-- tiny corner badge (optional) -->
+                        <span
+                            class="absolute right-3 top-3 rounded-full bg-gray-900/90 px-2 py-1 text-[10px] font-semibold text-white">
+                            Hot
+                        </span>
+                    </a>
+
+                    <a href="#"
+                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                 transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div
+                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
+                                    alt="Home & Decor"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-center">
+                            <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
+                            <p class="mt-0.5 text-xs text-gray-500">Trending</p>
+                        </div>
+                    </a>
+
+                    <a href="#"
+                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                 transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div
+                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
+                                    alt="Makeup"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-center">
+                            <p class="text-sm font-semibold text-gray-900">Makeup</p>
+                            <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
+                        </div>
+                    </a>
+                    <a href="#"
+                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                 transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div
+                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
+                                    alt="Home & Decor"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-center">
+                            <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
+                            <p class="mt-0.5 text-xs text-gray-500">Trending</p>
+                        </div>
+                    </a>
+
+                    <a href="#"
+                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                 transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div
+                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
+                                    alt="Makeup"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-center">
+                            <p class="text-sm font-semibold text-gray-900">Makeup</p>
+                            <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
+                        </div>
+                    </a>
+                    <a href="#"
+                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                 transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div
+                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
+                                    alt="Home & Decor"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-center">
+                            <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
+                            <p class="mt-0.5 text-xs text-gray-500">Trending</p>
+                        </div>
+                    </a>
+
+                    <a href="#"
+                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                 transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div
+                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
+                                    alt="Makeup"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-center">
+                            <p class="text-sm font-semibold text-gray-900">Makeup</p>
+                            <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
+                        </div>
+                    </a>
+                    <a href="#"
+                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                 transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div
+                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
+                                    alt="Home & Decor"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-center">
+                            <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
+                            <p class="mt-0.5 text-xs text-gray-500">Trending</p>
+                        </div>
+                    </a>
+
+                    <a href="#"
+                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                 transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div
+                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
+                                    alt="Makeup"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-center">
+                            <p class="text-sm font-semibold text-gray-900">Makeup</p>
+                            <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
+                        </div>
+                    </a>
+                    <a href="#"
+                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                 transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div
+                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
+                                    alt="Home & Decor"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-center">
+                            <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
+                            <p class="mt-0.5 text-xs text-gray-500">Trending</p>
+                        </div>
+                    </a>
+
+                    <a href="#"
+                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                 transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div
+                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
+                                    alt="Makeup"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-center">
+                            <p class="text-sm font-semibold text-gray-900">Makeup</p>
+                            <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
+                        </div>
+                    </a>
+
+                    <!-- Add more items... -->
+                </div>
             </div>
         </div>
     </section>
+
+
+
+
+
 
     <section class="bg-white py-12">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -116,16 +355,16 @@
             </div>
 
             <section class="relative mt-6">
-                <div class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent"></div>
-                <div class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent"></div>
-
                 <div
-                    id="bestSellersViewport"
+                    class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent">
+                </div>
+                <div
+                    class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent">
+                </div>
+
+                <div id="bestSellersViewport"
                     class="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] cursor-grab active:cursor-grabbing"
-                    aria-roledescription="carousel"
-                    aria-label="Product carousel"
-                    tabindex="0"
-                ></div>
+                    aria-roledescription="carousel" aria-label="Product carousel" tabindex="0"></div>
 
                 <div class="mt-4 flex sm:hidden items-center justify-center gap-2">
                     <button id="bestSellersPrevM"
@@ -145,7 +384,7 @@
 
     <livewire:new-arrivals />
     <livewire:best-sellers />
-    
+
     <livewire:trending-now />
 
     <section class="container mx-auto px-4 py-16">
@@ -154,9 +393,12 @@
                 <h2 id="trending-heading" class="text-3xl font-bold text-slate-900 mb-2">Trending products</h2>
                 <p class="text-slate-500">Fresh picks customers are loving this week.</p>
             </div>
-            <a href="#" class="text-blue-600 font-medium hover:text-blue-700 flex items-center gap-1 group transition-colors">
+            <a href="#"
+                class="text-blue-600 font-medium hover:text-blue-700 flex items-center gap-1 group transition-colors">
                 See everything
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="w-4 h-4 group-hover:translate-x-1 transition-transform">
                     <path d="M5 12h14"></path>
                     <path d="m12 5 7 7-7 7"></path>
                 </svg>
@@ -164,22 +406,35 @@
         </div>
 
         <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <li class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group">
-                <div class="absolute inset-0 z-20 flex items-center justify-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
-                    <button type="button" class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Add to wishlist" data-wishlist="1">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.0" stroke="currentColor" class="size-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+            <li
+                class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group">
+                <div
+                    class="absolute inset-0 z-20 flex items-center justify-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
+                    <button type="button"
+                        class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white"
+                        aria-label="Add to wishlist" data-wishlist="1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.0" stroke="currentColor" class="size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                         </svg>
                     </button>
-                    <button type="button" class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Quick preview" data-preview="1" onclick="const dialog = document.getElementById('home-product-preview'); if (dialog) { dialog.showModal ? dialog.showModal() : dialog.setAttribute('open', 'open'); }">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                    <button type="button"
+                        class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white"
+                        aria-label="Quick preview" data-preview="1"
+                        onclick="const dialog = document.getElementById('home-product-preview'); if (dialog) { dialog.showModal ? dialog.showModal() : dialog.setAttribute('open', 'open'); }">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="w-4 h-4">
                             <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path>
                             <circle cx="12" cy="12" r="3"></circle>
                         </svg>
                     </button>
                 </div>
                 <a class="block relative overflow-hidden h-64 bg-slate-100 group" href="#">
-                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-01.jpg" alt="Black machined steel pen with hexagonal grip and small white logo at top." class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-01.jpg"
+                        alt="Black machined steel pen with hexagonal grip and small white logo at top."
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 </a>
                 <div class="p-5 flex flex-col flex-1">
                     <p class="text-slate-500 text-sm">Black</p>
@@ -188,13 +443,21 @@
                     </a>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency amount="35" /></span>
-                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white" data-add-to-cart>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
+                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white"
+                            data-add-to-cart>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
                                 <circle cx="8" cy="21" r="1"></circle>
                                 <circle cx="19" cy="21" r="1"></circle>
-                                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                                <path
+                                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12">
+                                </path>
                             </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                             Add
@@ -215,22 +478,35 @@
                 </div>
             </li>
 
-            <li class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group">
-                <div class="absolute inset-0 z-20 flex items-center justify-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
-                    <button type="button" class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Add to wishlist" data-wishlist="2">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.0" stroke="currentColor" class="size-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+            <li
+                class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group">
+                <div
+                    class="absolute inset-0 z-20 flex items-center justify-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
+                    <button type="button"
+                        class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white"
+                        aria-label="Add to wishlist" data-wishlist="2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.0" stroke="currentColor" class="size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                         </svg>
                     </button>
-                    <button type="button" class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Quick preview" data-preview="2" onclick="const dialog = document.getElementById('home-product-preview'); if (dialog) { dialog.showModal ? dialog.showModal() : dialog.setAttribute('open', 'open'); }">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                    <button type="button"
+                        class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white"
+                        aria-label="Quick preview" data-preview="2"
+                        onclick="const dialog = document.getElementById('home-product-preview'); if (dialog) { dialog.showModal ? dialog.showModal() : dialog.setAttribute('open', 'open'); }">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="w-4 h-4">
                             <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path>
                             <circle cx="12" cy="12" r="3"></circle>
                         </svg>
                     </button>
                 </div>
                 <a class="block relative overflow-hidden h-64 bg-slate-100 group" href="#">
-                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-02.jpg" alt="Black porcelain mug with modern square handle and natural clay accents on rim and bottom." class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-02.jpg"
+                        alt="Black porcelain mug with modern square handle and natural clay accents on rim and bottom."
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 </a>
                 <div class="p-5 flex flex-col flex-1">
                     <p class="text-slate-500 text-sm">Matte Black</p>
@@ -239,13 +515,21 @@
                     </a>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency amount="28" /></span>
-                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white" data-add-to-cart>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
+                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white"
+                            data-add-to-cart>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
                                 <circle cx="8" cy="21" r="1"></circle>
                                 <circle cx="19" cy="21" r="1"></circle>
-                                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                                <path
+                                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12">
+                                </path>
                             </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                             Add
@@ -263,37 +547,59 @@
                 </div>
             </li>
 
-            <li class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group">
-                <div class="absolute inset-0 z-20 flex items-center justify-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
-                    <button type="button" class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Add to wishlist" data-wishlist="3">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.0" stroke="currentColor" class="size-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+            <li
+                class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group">
+                <div
+                    class="absolute inset-0 z-20 flex items-center justify-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
+                    <button type="button"
+                        class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white"
+                        aria-label="Add to wishlist" data-wishlist="3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.0" stroke="currentColor" class="size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                         </svg>
                     </button>
-                    <button type="button" class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Quick preview" data-preview="3" onclick="const dialog = document.getElementById('home-product-preview'); if (dialog) { dialog.showModal ? dialog.showModal() : dialog.setAttribute('open', 'open'); }">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                    <button type="button"
+                        class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white"
+                        aria-label="Quick preview" data-preview="3"
+                        onclick="const dialog = document.getElementById('home-product-preview'); if (dialog) { dialog.showModal ? dialog.showModal() : dialog.setAttribute('open', 'open'); }">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="w-4 h-4">
                             <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path>
                             <circle cx="12" cy="12" r="3"></circle>
                         </svg>
                     </button>
                 </div>
                 <a class="block relative overflow-hidden h-64 bg-slate-100 group" href="#">
-                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-03.jpg" alt="Natural leather journal with brass disc binding and three paper refill sets." class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-03.jpg"
+                        alt="Natural leather journal with brass disc binding and three paper refill sets."
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 </a>
                 <div class="p-5 flex flex-col flex-1">
                     <p class="text-slate-500 text-sm">Natural</p>
                     <a class="hover:text-blue-600 transition-colors" href="#">
-                        <h3 class="text-lg font-bold text-slate-800 mb-2 line-clamp-1">Leatherbound Daily Journal Set</h3>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2 line-clamp-1">Leatherbound Daily Journal Set
+                        </h3>
                     </a>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency amount="50" /></span>
-                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white" data-add-to-cart>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
+                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white"
+                            data-add-to-cart>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
                                 <circle cx="8" cy="21" r="1"></circle>
                                 <circle cx="19" cy="21" r="1"></circle>
-                                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                                <path
+                                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12">
+                                </path>
                             </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                             Add
@@ -314,22 +620,35 @@
                 </div>
             </li>
 
-            <li class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group">
-                <div class="absolute inset-0 z-20 flex items-center justify-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
-                    <button type="button" class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Add to wishlist" data-wishlist="4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.0" stroke="currentColor" class="size-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+            <li
+                class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group">
+                <div
+                    class="absolute inset-0 z-20 flex items-center justify-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
+                    <button type="button"
+                        class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white"
+                        aria-label="Add to wishlist" data-wishlist="4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.0" stroke="currentColor" class="size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                         </svg>
                     </button>
-                    <button type="button" class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Quick preview" data-preview="4" onclick="const dialog = document.getElementById('home-product-preview'); if (dialog) { dialog.showModal ? dialog.showModal() : dialog.setAttribute('open', 'open'); }">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                    <button type="button"
+                        class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white"
+                        aria-label="Quick preview" data-preview="4"
+                        onclick="const dialog = document.getElementById('home-product-preview'); if (dialog) { dialog.showModal ? dialog.showModal() : dialog.setAttribute('open', 'open'); }">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="w-4 h-4">
                             <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path>
                             <circle cx="12" cy="12" r="3"></circle>
                         </svg>
                     </button>
                 </div>
                 <a class="block relative overflow-hidden h-64 bg-slate-100 group" href="#">
-                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-04.jpg" alt="Black leather journal with brass disc binding." class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-04.jpg"
+                        alt="Black leather journal with brass disc binding."
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 </a>
                 <div class="p-5 flex flex-col flex-1">
                     <p class="text-slate-500 text-sm">Black</p>
@@ -338,13 +657,21 @@
                     </a>
                     <div class="flex items-center justify-between mt-auto">
                         <span class="text-xl font-bold text-blue-600"><x-currency amount="50" /></span>
-                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white" data-add-to-cart>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
+                        <x-button type="button" size="sm" variant="solid" class="rounded-full px-4 text-white"
+                            data-add-to-cart>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2" data-cart-icon>
                                 <circle cx="8" cy="21" r="1"></circle>
                                 <circle cx="19" cy="21" r="1"></circle>
-                                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                                <path
+                                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12">
+                                </path>
                             </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="hidden w-4 h-4 mr-2 text-emerald-500" data-check-icon>
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                             Add
@@ -367,12 +694,16 @@
         </ul>
     </section>
 
-    <dialog id="home-product-preview" class="preview-dialog fixed inset-0 z-50 m-0 h-full w-full overflow-y-auto bg-transparent p-4 backdrop:bg-black/60 backdrop:backdrop-blur-sm">
+    <dialog id="home-product-preview"
+        class="preview-dialog fixed inset-0 z-50 m-0 h-full w-full overflow-y-auto bg-transparent p-4 backdrop:bg-black/60 backdrop:backdrop-blur-sm">
         <div class="flex min-h-full items-center justify-center">
             <div class="preview-panel relative w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-2xl">
-                <button type="button" class="absolute right-4 top-4 inline-flex size-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition hover:bg-slate-50 hover:text-slate-700" onclick="const dialog = document.getElementById('home-product-preview'); if (dialog) { dialog.close ? dialog.close() : dialog.removeAttribute('open'); }">
+                <button type="button"
+                    class="absolute right-4 top-4 inline-flex size-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition hover:bg-slate-50 hover:text-slate-700"
+                    onclick="const dialog = document.getElementById('home-product-preview'); if (dialog) { dialog.close ? dialog.close() : dialog.removeAttribute('open'); }">
                     <span class="sr-only">Close</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="size-5">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        aria-hidden="true" class="size-5">
                         <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                 </button>
@@ -380,7 +711,8 @@
                 <div class="grid gap-8 p-6 md:p-8 lg:grid-cols-[1fr,1.1fr]">
                     <div class="space-y-4">
                         <div class="overflow-hidden rounded-2xl bg-slate-100">
-                            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80" alt="Backseat Tablet Organizer" class="h-full w-full object-cover">
+                            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80"
+                                alt="Backseat Tablet Organizer" class="h-full w-full object-cover">
                         </div>
                         <div class="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
                             <span class="rounded-full bg-amber-100 px-3 py-1 text-amber-700">Best Seller</span>
@@ -398,21 +730,47 @@
 
                         <div class="flex items-center gap-3">
                             <div class="flex items-center text-amber-400">
-                                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4"><path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
-                                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4"><path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
-                                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4"><path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
-                                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4"><path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
-                                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4 text-slate-200"><path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4">
+                                    <path
+                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                </svg>
+                                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4">
+                                    <path
+                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                </svg>
+                                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4">
+                                    <path
+                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                </svg>
+                                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4">
+                                    <path
+                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                </svg>
+                                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                                    class="size-4 text-slate-200">
+                                    <path
+                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                </svg>
                             </div>
                             <span class="text-sm text-slate-500">3.9 out of 5</span>
-                            <a href="#" class="text-sm font-semibold text-blue-600 hover:text-blue-500">See all reviews</a>
+                            <a href="#" class="text-sm font-semibold text-blue-600 hover:text-blue-500">See all
+                                reviews</a>
                         </div>
 
-                        <p class="text-slate-600">Perfect for road trips with kids. Holds tablets up to 11 inches, drinks, snacks, and toys. Durable waterproof fabric.</p>
+                        <p class="text-slate-600">Perfect for road trips with kids. Holds tablets up to 11 inches,
+                            drinks, snacks, and toys. Durable waterproof fabric.</p>
 
                         <div class="flex flex-wrap gap-3">
-                            <x-button type="button" size="lg" variant="solid" class="rounded-full px-6">Add to bag</x-button>
-                            <a href="/shop/8" class="inline-flex h-12 items-center justify-center rounded-full border border-slate-200 px-6 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50">View full details</a>
+                            <x-button type="button" size="lg" variant="solid" class="rounded-full px-6">Add to
+                                bag</x-button>
+                            <a href="/shop/8"
+                                class="inline-flex h-12 items-center justify-center rounded-full border border-slate-200 px-6 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50">View
+                                full details</a>
                         </div>
                     </div>
                 </div>
@@ -424,8 +782,7 @@
 @push('scripts')
     <script>
         (() => {
-            const products = [
-                {
+            const products = [{
                     id: "p1",
                     title: "Noise-Cancel Headphones",
                     brand: "SoundPro",
@@ -508,32 +865,44 @@
 
             if (!viewport || !dotsEl || !live) return;
 
-            const money = (n) => new Intl.NumberFormat(undefined, { style: "currency", currency: "USD" }).format(n);
-            const intf  = (n) => new Intl.NumberFormat(undefined).format(n);
+            const money = (n) => new Intl.NumberFormat(undefined, {
+                style: "currency",
+                currency: "USD"
+            }).format(n);
+            const intf = (n) => new Intl.NumberFormat(undefined).format(n);
 
             function stars(r) {
                 const full = Math.floor(r);
                 const half = r - full >= 0.5 ? 1 : 0;
                 const empty = 5 - full - half;
 
-                const fullStar = `<svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>`;
-                const halfStar = `<svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3V2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2v15.3z" opacity=".35"/></svg>`;
-                const emptyStar = `<svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" opacity=".25"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>`;
+                const fullStar =
+                    `<svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>`;
+                const halfStar =
+                    `<svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 17.3V2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2v15.3z" opacity=".35"/></svg>`;
+                const emptyStar =
+                    `<svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" opacity=".25"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.76 1.64 7.03z"/></svg>`;
                 return fullStar.repeat(full) + (half ? halfStar : "") + emptyStar.repeat(empty);
             }
 
             function escapeHtml(str) {
-                return String(str).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m]));
+                return String(str).replace(/[&<>"']/g, (m) => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#039;"
+                } [m]));
             }
 
             function cardHTML(p) {
-                const badge = p.badge
-                    ? `<span class="rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-zinc-800 shadow-sm ring-1 ring-black/5">${escapeHtml(p.badge)}</span>`
-                    : "";
+                const badge = p.badge ?
+                    `<span class="rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-zinc-800 shadow-sm ring-1 ring-black/5">${escapeHtml(p.badge)}</span>` :
+                    "";
 
-                const compare = p.compareAt
-                    ? `<span class="text-sm text-zinc-400 line-through">${money(p.compareAt)}</span>`
-                    : "";
+                const compare = p.compareAt ?
+                    `<span class="text-sm text-zinc-400 line-through">${money(p.compareAt)}</span>` :
+                    "";
 
                 return `
                     <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]" data-id="${p.id}">
@@ -619,13 +988,20 @@
                 else if (viewport.scrollLeft > maxScroll - third * 0.35) viewport.scrollLeft -= third;
             }
 
-            viewport.addEventListener("scroll", () => keepInMiddle(), { passive: true });
+            viewport.addEventListener("scroll", () => keepInMiddle(), {
+                passive: true
+            });
 
             function startInMiddle() {
                 if (!INFINITE_FEEL) return;
                 const slides = Array.from(viewport.querySelectorAll(".slide"));
                 const middleStart = products.length;
-                slides[middleStart]?.scrollIntoView({ inline: "start" });
+                // slides[middleStart]?.scrollIntoView({ inline: "start" });
+                slides[middleStart]?.scrollIntoView({
+                    inline: "start",
+                    block: "nearest",
+                    behavior: "auto"
+                });
                 requestAnimationFrame(keepInMiddle);
             }
 
@@ -647,8 +1023,10 @@
                         setActiveDot(activeRealIndex);
                         live.textContent = `Showing ${products[activeRealIndex].title}`;
                     }
-                },
-                { root: viewport, threshold: [0.6, 0.75, 0.9] }
+                }, {
+                    root: viewport,
+                    threshold: [0.6, 0.75, 0.9]
+                }
             );
 
             viewport.querySelectorAll(".slide").forEach((s) => io.observe(s));
@@ -664,21 +1042,38 @@
             }
 
             function scrollByCards(dir = 1) {
-                viewport.scrollBy({ left: dir * cardStepPx(), behavior: "smooth" });
+                viewport.scrollBy({
+                    left: dir * cardStepPx(),
+                    behavior: "smooth"
+                });
             }
 
             function scrollToRealIndex(i) {
                 const slides = Array.from(viewport.querySelectorAll(".slide"));
                 const targetIndex = INFINITE_FEEL ? products.length + i : i;
-                slides[targetIndex]?.scrollIntoView({ inline: "start", behavior: "smooth" });
+                // slides[targetIndex]?.scrollIntoView({ inline: "start", behavior: "smooth" });
+                slides[targetIndex]?.scrollIntoView({
+                    inline: "start",
+                    block: "nearest",
+                    behavior: "smooth"
+                });
             }
 
             [prev, prevM].forEach((b) => b?.addEventListener("click", () => scrollByCards(-1)));
             [next, nextM].forEach((b) => b?.addEventListener("click", () => scrollByCards(1)));
 
-            let dragging = false, startX = 0, startScroll = 0, lastX = 0, lastT = 0, v = 0, raf = null;
+            let dragging = false,
+                startX = 0,
+                startScroll = 0,
+                lastX = 0,
+                lastT = 0,
+                v = 0,
+                raf = null;
 
-            function stopMomentum() { if (raf) cancelAnimationFrame(raf); raf = null; }
+            function stopMomentum() {
+                if (raf) cancelAnimationFrame(raf);
+                raf = null;
+            }
 
             viewport.addEventListener("pointerdown", (e) => {
                 if (e.pointerType === "mouse" && e.button !== 0) return;
@@ -723,16 +1118,24 @@
             viewport.addEventListener("pointerleave", () => (dragging = false));
 
             viewport.addEventListener("keydown", (e) => {
-                if (e.key === "ArrowRight") { e.preventDefault(); scrollByCards(1); }
-                if (e.key === "ArrowLeft")  { e.preventDefault(); scrollByCards(-1); }
+                if (e.key === "ArrowRight") {
+                    e.preventDefault();
+                    scrollByCards(1);
+                }
+                if (e.key === "ArrowLeft") {
+                    e.preventDefault();
+                    scrollByCards(-1);
+                }
             });
 
             let autoplay = null;
+
             function startAutoplay() {
                 if (!AUTOPLAY) return;
                 stopAutoplay();
                 autoplay = setInterval(() => scrollByCards(1), AUTOPLAY_MS);
             }
+
             function stopAutoplay() {
                 if (autoplay) clearInterval(autoplay);
                 autoplay = null;
@@ -744,5 +1147,24 @@
             if (INFINITE_FEEL) startInMiddle();
             startAutoplay();
         })();
+    </script>
+    <script>
+        // Optional: arrow buttons scroll the row
+        const track = document.querySelector("[data-cat-track]");
+        const prev = document.querySelector("[data-cat-prev]");
+        const next = document.querySelector("[data-cat-next]");
+
+        if (track && prev && next) {
+            const step = () => Math.max(260, Math.floor(track.clientWidth * 0.75));
+
+            prev.addEventListener("click", () => track.scrollBy({
+                left: -step(),
+                behavior: "smooth"
+            }));
+            next.addEventListener("click", () => track.scrollBy({
+                left: step(),
+                behavior: "smooth"
+            }));
+        }
     </script>
 @endpush

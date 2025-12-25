@@ -1,5 +1,5 @@
-<div class="min-h-screen bg-slate-50 py-12">
-    <div class="container mx-auto px-4">
+<div class="bg-white py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <nav class="flex text-sm text-slate-500 mb-8">
             <a class="hover:text-blue-600" href="/">Home</a>
             <span class="mx-2">/</span>

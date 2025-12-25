@@ -59,6 +59,34 @@
             100% { transform: translateY(0) scale(1); }
         }
     </style>
+    <style>
+    /* Ticker animation */
+    @keyframes ticker {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .ticker-track {
+      animation: ticker 22s linear infinite;
+    }
+
+    /* Pause on hover */
+    .ticker-track:hover {
+      animation-play-state: paused;
+    }
+
+    /* Accessibility: reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track {
+        animation: none;
+        transform: translateX(0);
+      }
+    }
+  </style>
     
 </head>
 <body class="bg-gray-100 text-gray-900 min-h-screen expansion-alids-init">

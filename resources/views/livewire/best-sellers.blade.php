@@ -61,23 +61,37 @@
     {{-- </div>
 </section>
 </div> --}}
-<section class="bg-slate-50/50 rounded-3xl p-8 border border-slate-200/60 container mx-auto mb-16">
-    <div class="flex items-center gap-3 mb-8">
-        <div class="p-3 bg-amber-100 rounded-xl">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-amber-600">
-                <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path>
-                <circle cx="12" cy="8" r="6"></circle>
-            </svg>
-        </div>
-        <div>
-            <h2 class="text-3xl font-bold text-slate-900">Best Sellers</h2>
-            <p class="text-slate-500">Most popular products chosen by our customers</p>
-        </div>
-    </div>
+<section class="bg-white py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="flex items-end justify-between gap-4">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Best Sellers</h2>
+                <p class="mt-1 text-sm text-zinc-600">Most popular products chosen by our customers</p>
+            </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="hidden sm:flex items-center gap-2">
+                <button id="bestSellersPrev"
+                    class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                    aria-label="Previous products" type="button">&lt;</button>
+                <button id="bestSellersNext"
+                    class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                    aria-label="Next products" type="button">&gt;</button>
+            </div>
+        </div>
+
+        <section class="relative mt-6">
+            <div
+                class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent">
+            </div>
+            <div
+                class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent">
+            </div>
+
+            <div id="bestSellersViewport"
+                class="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] cursor-grab active:cursor-grabbing"
+                aria-roledescription="carousel" aria-label="Best sellers carousel" tabindex="0">
         @foreach($this->visibleProducts as $product)
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group" wire:key="best-seller-{{ $product['id'] }}">
+                <div class="snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px] bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl h-full flex flex-col relative group" wire:key="best-seller-{{ $product['id'] }}">
                 <div class="absolute inset-0 z-20 flex items-center justify-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100">
                     <button type="button" class="pointer-events-auto p-2 rounded-full bg-white/90 backdrop-blur border border-slate-200 text-slate-700 shadow hover:bg-white" aria-label="Add to wishlist" data-wishlist="{{ $product['id'] }}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.0" stroke="currentColor" class="size-4">
@@ -121,13 +135,28 @@
                         </x-button>
                     </div>
                 </div>
-            </div>
+                </div>
         @endforeach
+            </div>
+
+            <div class="mt-4 flex sm:hidden items-center justify-center gap-2">
+                <button id="bestSellersPrevM"
+                    class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                    aria-label="Previous products" type="button">&lt;</button>
+                <button id="bestSellersNextM"
+                    class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                    aria-label="Next products" type="button">&gt;</button>
+            </div>
+
+            <div id="bestSellersDots" class="mt-4 flex items-center justify-center gap-2"></div>
+
+            <div id="bestSellersLive" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+        </section>
+        @if($this->hasMore)
+            <div data-infinite-scroll-sentinel class="flex items-center justify-center gap-2 py-6 text-sm text-slate-500">
+                <span class="h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-blue-500"></span>
+                <span>Loading more...</span>
+            </div>
+        @endif
     </div>
-    @if($this->hasMore)
-        <div data-infinite-scroll-sentinel class="flex items-center justify-center gap-2 py-6 text-sm text-slate-500">
-            <span class="h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-blue-500"></span>
-            <span>Loading more...</span>
-        </div>
-    @endif
 </section>

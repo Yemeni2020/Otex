@@ -93,7 +93,7 @@
             <x-card class="rounded-2xl border border-slate-200/70 bg-white/90 p-6 shadow-[0_20px_50px_-40px_rgba(15,23,42,0.45)] ring-1 ring-slate-900/5">
                 <div class="flex items-center justify-between gap-6">
                     <div class="flex items-center gap-4">
-                        <a class="grid h-14 w-14 place-items-center rounded-xl border border-[color:var(--line)] bg-white overflow-hidden shadow-sm"
+                        <a class="grid h-14 w-14 place-items-center rounded-xl  bg-white overflow-hidden shadow-sm"
                             href="#">
                             <img class="h-full w-full object-contain" src="{{ asset('img/logo_avatar.svg') }}"
                                 alt="logo">
@@ -108,13 +108,7 @@
                         </div>
                     </div>
 
-                    <div
-                        class="grid h-14 w-14 place-items-center rounded-xl border border-[color:var(--line)] bg-white shadow-sm">
-                        <svg viewBox="0 0 24 24" class="h-10 w-10 text-[color:var(--primary)]" fill="currentColor">
-                            <path
-                                d="M12 2a10 10 0 1 0 7.07 17.07l-2.12-2.12A7 7 0 1 1 19 12h-7v3h10A10 10 0 0 0 12 2z" />
-                        </svg>
-                    </div>
+                    
                 </div>
             </x-card>
 
@@ -354,8 +348,23 @@
 
                         <!-- payment panel -->
                         <div id="paymentPanel" class="hidden mt-4 rounded-xl border border-slate-200/70 bg-white shadow-sm p-4">
+                            <div class="sm:hidden">
+                                <label for="paymentOptionsSelect" class="text-xs font-semibold text-slate-500">Payment method</label>
+                                <select id="paymentOptionsSelect"
+                                    class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200/60">
+                                    <option value="apple-pay">Apple Pay</option>
+                                    <option value="google-pay">Google Pay</option>
+                                    <option value="mada" selected>Mada</option>
+                                    <option value="credit">Card</option>
+                                    <option value="tabby">Tabby</option>
+                                    <option value="tamara">Tamara</option>
+                                    <option value="bank-transfer">Bank transfer</option>
+                                    <option value="cod">Cash on delivery</option>
+                                </select>
+                            </div>
+
                             <!-- payment options row -->
-                            <div class="flex flex-wrap gap-2 hidden" id="paymentOptionsRow">
+                            <div class="hidden sm:flex flex-wrap gap-2" id="paymentOptionsRow">
                                 <button
                                     class="payment-option apple-pay-option hidden h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
                                     type="button" aria-pressed="false" data-payment="apple-pay" data-label="Apple Pay">
@@ -703,6 +712,9 @@
             const googlePayOption = document.querySelector('.google-pay-option');
             const googlePayPanel = document.querySelector('[data-payment-panel="google-pay"]');
             const paymentOptionsRow = document.getElementById('paymentOptionsRow');
+            const paymentOptionsSelect = document.getElementById('paymentOptionsSelect');
+            const applePaySelectOption = paymentOptionsSelect?.querySelector('option[value="apple-pay"]');
+            const googlePaySelectOption = paymentOptionsSelect?.querySelector('option[value="google-pay"]');
             const addressList = document.getElementById('addressList');
             const addAddressBtn = document.querySelector('[data-add-address]');
             const addressDialog = document.getElementById('addressDialog');
@@ -771,6 +783,10 @@
                     showPaymentPanel(option.getAttribute('data-payment'));
                     const label = option.getAttribute('data-label');
                     if (label && paymentSummary) paymentSummary.textContent = label;
+                    if (paymentOptionsSelect) {
+                        const value = option.getAttribute('data-payment');
+                        if (value) paymentOptionsSelect.value = value;
+                    }
                 });
             });
 
@@ -921,11 +937,28 @@
             if (isIOS && isSafari) {
                 alertBox?.classList.remove('hidden');
             }
-            paymentOptionsRow?.classList.remove('hidden');
+            paymentOptionsSelect?.addEventListener('change', (e) => {
+                const value = e.target.value;
+                const selectedButton = document.querySelector(`.payment-option[data-payment=\"${value}\"]`);
+                selectedButton?.click();
+            });
+
             applePayOption?.classList.add('hidden');
             googlePayOption?.classList.add('hidden');
+            if (applePaySelectOption) {
+                applePaySelectOption.hidden = true;
+                applePaySelectOption.disabled = true;
+            }
+            if (googlePaySelectOption) {
+                googlePaySelectOption.hidden = true;
+                googlePaySelectOption.disabled = true;
+            }
             if (isIOS) {
                 applePayOption?.classList.remove('hidden');
+                if (applePaySelectOption) {
+                    applePaySelectOption.hidden = false;
+                    applePaySelectOption.disabled = false;
+                }
             } else {
                 applePayOption?.classList.add('hidden');
                 applePayPanel?.classList.add('hidden');
@@ -937,13 +970,26 @@
                     fallback?.setAttribute('aria-pressed', 'true');
                     showPaymentPanel('mada');
                     if (paymentSummary) paymentSummary.textContent = 'Mada';
+                    if (paymentOptionsSelect) paymentOptionsSelect.value = 'mada';
                 }
             }
             if (isAndroid) {
                 googlePayOption?.classList.remove('hidden');
+                if (googlePaySelectOption) {
+                    googlePaySelectOption.hidden = false;
+                    googlePaySelectOption.disabled = false;
+                }
             } else {
                 googlePayOption?.classList.add('hidden');
                 googlePayPanel?.classList.add('hidden');
+                if (paymentOptionsSelect?.value === 'google-pay') {
+                    const fallback = document.querySelector('.payment-option[data-payment="mada"]');
+                    fallback?.classList.add('is-active');
+                    fallback?.setAttribute('aria-pressed', 'true');
+                    showPaymentPanel('mada');
+                    if (paymentSummary) paymentSummary.textContent = 'Mada';
+                    paymentOptionsSelect.value = 'mada';
+                }
             }
 
             addressList?.addEventListener('click', (e) => {
