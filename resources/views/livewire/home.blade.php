@@ -1,21 +1,21 @@
 <div>
-{{-- @extends('layouts.app')
+    {{-- @extends('layouts.app')
 
 @section('content')
     <livewire:best-sellers />
 @endsection --}}
 
-{{-- <div class="space-y-16"> --}}
-<!-- New Arrivals Section -->
+    {{-- <div class="space-y-16"> --}}
+    <!-- New Arrivals Section -->
 
 
-<!-- Best Sellers Section -->
-{{-- <livewire:best-sellers /> --}}
-{{-- </div> --}}
+    <!-- Best Sellers Section -->
+    {{-- <livewire:best-sellers /> --}}
+    {{-- </div> --}}
 
 
 
-{{-- <livewire:new-arrivals />
+    {{-- <livewire:new-arrivals />
 <livewire:best-sellers />
 
 <script>
@@ -26,525 +26,540 @@
 
 
 
-@push('head')
-    <style>
-        @keyframes preview-fade-in {
-            from {
-                opacity: 0;
+    @push('head')
+        <style>
+            @keyframes preview-fade-in {
+                from {
+                    opacity: 0;
+                }
+
+                to {
+                    opacity: 1;
+                }
             }
 
-            to {
-                opacity: 1;
+            @keyframes preview-pop-in {
+                from {
+                    opacity: 0;
+                    transform: translateY(18px) scale(0.96);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
             }
-        }
 
-        @keyframes preview-pop-in {
-            from {
-                opacity: 0;
-                transform: translateY(18px) scale(0.96);
+            dialog.preview-dialog[open] {
+                animation: preview-fade-in 180ms ease-out;
             }
 
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
+            dialog.preview-dialog::backdrop {
+                animation: preview-fade-in 200ms ease-out;
             }
-        }
 
-        dialog.preview-dialog[open] {
-            animation: preview-fade-in 180ms ease-out;
-        }
-
-        dialog.preview-dialog::backdrop {
-            animation: preview-fade-in 200ms ease-out;
-        }
-
-        dialog.preview-dialog[open] .preview-panel {
-            animation: preview-pop-in 220ms ease-out;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-
-            dialog.preview-dialog[open],
-            dialog.preview-dialog::backdrop,
             dialog.preview-dialog[open] .preview-panel {
-                animation: none;
+                animation: preview-pop-in 220ms ease-out;
             }
-        }
-    </style>
-@endpush
-<div>
-    @include('partials.hero')
 
-    <section class="w-full">
-        <div class="container mx-auto px-4">
-            <div class="flex items-end justify-between gap-4">
-                <div>
-                    <p class="text-xs font-medium tracking-wide text-gray-500">Browse</p>
-                    <h2 class="mt-1 text-xl font-semibold tracking-tight text-gray-900">
-                        Shop by Category
-                    </h2>
+            @media (prefers-reduced-motion: reduce) {
+
+                dialog.preview-dialog[open],
+                dialog.preview-dialog::backdrop,
+                dialog.preview-dialog[open] .preview-panel {
+                    animation: none;
+                }
+            }
+        </style>
+    @endpush
+    <div>
+        @include('partials.hero')
+
+        <section class="w-full">
+            <div class="container mx-auto px-4">
+                <div class="flex items-end justify-between gap-4">
+                    <div>
+                        <p class="text-xs font-medium tracking-wide text-gray-500">Browse</p>
+                        <h2 class="mt-1 text-xl font-semibold tracking-tight text-gray-900">
+                            Shop by Category
+                        </h2>
+                    </div>
+
+                    <!-- Optional: scroll buttons -->
+                    <div class="hidden gap-2 sm:flex">
+                        <button type="button"
+                            class="group inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white/70 shadow-sm backdrop-blur hover:bg-white"
+                            data-cat-prev aria-label="Previous">
+                            <span class="text-lg leading-none text-gray-700 group-hover:text-gray-900">‹</span>
+                        </button>
+                        <button type="button"
+                            class="group inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white/70 shadow-sm backdrop-blur hover:bg-white"
+                            data-cat-next aria-label="Next">
+                            <span class="text-lg leading-none text-gray-700 group-hover:text-gray-900">›</span>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Optional: scroll buttons -->
-                <div class="hidden gap-2 sm:flex">
-                    <button type="button"
-                        class="group inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white/70 shadow-sm backdrop-blur hover:bg-white"
-                        data-cat-prev aria-label="Previous">
-                        <span class="text-lg leading-none text-gray-700 group-hover:text-gray-900">‹</span>
-                    </button>
-                    <button type="button"
-                        class="group inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white/70 shadow-sm backdrop-blur hover:bg-white"
-                        data-cat-next aria-label="Next">
-                        <span class="text-lg leading-none text-gray-700 group-hover:text-gray-900">›</span>
-                    </button>
-                </div>
-            </div>
+                <div class="relative mt-5">
+                    <!-- edge fades -->
+                    <div
+                        class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent">
+                    </div>
+                    <div
+                        class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent">
+                    </div>
 
-            <div class="relative mt-5">
-                <!-- edge fades -->
-                <div
-                    class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent">
-                </div>
-                <div
-                    class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent">
-                </div>
-
-                <div class="flex gap-4 overflow-x-auto overflow-y-hidden pb-2 pr-2 scroll-smooth snap-x snap-mandatory touch-pan-x overscroll-x-contain
+                    <div class="flex gap-4 overflow-x-auto overflow-y-hidden pb-2 pr-2 scroll-smooth snap-x snap-mandatory touch-pan-x overscroll-x-contain
                [-webkit-overflow-scrolling:touch] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-                    data-cat-track>
-                    <!-- Item -->
-                    <a href="#"
-                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                        data-cat-track>
+                        <!-- Item -->
+                        <a href="#"
+                            class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
                  transition hover:-translate-y-0.5 hover:shadow-lg">
-                        <!-- gradient ring -->
-                        <div
-                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
-                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
-                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-1.jpg"
-                                    alt="Smartphone"
-                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                    loading="lazy" />
+                            <!-- gradient ring -->
+                            <div
+                                class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                                <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                    <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-1.jpg"
+                                        alt="Smartphone"
+                                        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                        loading="lazy" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mt-3 text-center">
-                            <p class="text-sm font-semibold text-gray-900">Smartphone</p>
-                            <p class="mt-0.5 text-xs text-gray-500">New arrivals</p>
-                        </div>
+                            <div class="mt-3 text-center">
+                                <p class="text-sm font-semibold text-gray-900">Smartphone</p>
+                                <p class="mt-0.5 text-xs text-gray-500">New arrivals</p>
+                            </div>
 
-                        <!-- tiny corner badge (optional) -->
-                        <span
-                            class="absolute right-3 top-3 rounded-full bg-gray-900/90 px-2 py-1 text-[10px] font-semibold text-white">
-                            Hot
-                        </span>
-                    </a>
+                            <!-- tiny corner badge (optional) -->
+                            <span
+                                class="absolute right-3 top-3 rounded-full bg-gray-900/90 px-2 py-1 text-[10px] font-semibold text-white">
+                                Hot
+                            </span>
+                        </a>
 
-                    <a href="#"
-                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                        <a href="#"
+                            class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
                  transition hover:-translate-y-0.5 hover:shadow-lg">
-                        <div
-                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
-                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
-                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
-                                    alt="Home & Decor"
-                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                    loading="lazy" />
+                            <div
+                                class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                                <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                    <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
+                                        alt="Home & Decor"
+                                        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                        loading="lazy" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mt-3 text-center">
-                            <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
-                            <p class="mt-0.5 text-xs text-gray-500">Trending</p>
-                        </div>
-                    </a>
+                            <div class="mt-3 text-center">
+                                <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
+                                <p class="mt-0.5 text-xs text-gray-500">Trending</p>
+                            </div>
+                        </a>
 
-                    <a href="#"
-                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                        <a href="#"
+                            class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
                  transition hover:-translate-y-0.5 hover:shadow-lg">
-                        <div
-                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
-                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
-                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
-                                    alt="Makeup"
-                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                    loading="lazy" />
+                            <div
+                                class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                                <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                    <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
+                                        alt="Makeup"
+                                        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                        loading="lazy" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mt-3 text-center">
-                            <p class="text-sm font-semibold text-gray-900">Makeup</p>
-                            <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
-                        </div>
-                    </a>
-                    <a href="#"
-                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                            <div class="mt-3 text-center">
+                                <p class="text-sm font-semibold text-gray-900">Makeup</p>
+                                <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
+                            </div>
+                        </a>
+                        <a href="#"
+                            class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
                  transition hover:-translate-y-0.5 hover:shadow-lg">
-                        <div
-                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
-                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
-                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
-                                    alt="Home & Decor"
-                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                    loading="lazy" />
+                            <div
+                                class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                                <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                    <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
+                                        alt="Home & Decor"
+                                        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                        loading="lazy" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mt-3 text-center">
-                            <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
-                            <p class="mt-0.5 text-xs text-gray-500">Trending</p>
-                        </div>
-                    </a>
+                            <div class="mt-3 text-center">
+                                <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
+                                <p class="mt-0.5 text-xs text-gray-500">Trending</p>
+                            </div>
+                        </a>
 
-                    <a href="#"
-                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                        <a href="#"
+                            class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
                  transition hover:-translate-y-0.5 hover:shadow-lg">
-                        <div
-                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
-                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
-                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
-                                    alt="Makeup"
-                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                    loading="lazy" />
+                            <div
+                                class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                                <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                    <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
+                                        alt="Makeup"
+                                        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                        loading="lazy" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mt-3 text-center">
-                            <p class="text-sm font-semibold text-gray-900">Makeup</p>
-                            <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
-                        </div>
-                    </a>
-                    <a href="#"
-                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                            <div class="mt-3 text-center">
+                                <p class="text-sm font-semibold text-gray-900">Makeup</p>
+                                <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
+                            </div>
+                        </a>
+                        <a href="#"
+                            class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
                  transition hover:-translate-y-0.5 hover:shadow-lg">
-                        <div
-                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
-                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
-                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
-                                    alt="Home & Decor"
-                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                    loading="lazy" />
+                            <div
+                                class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                                <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                    <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
+                                        alt="Home & Decor"
+                                        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                        loading="lazy" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mt-3 text-center">
-                            <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
-                            <p class="mt-0.5 text-xs text-gray-500">Trending</p>
-                        </div>
-                    </a>
+                            <div class="mt-3 text-center">
+                                <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
+                                <p class="mt-0.5 text-xs text-gray-500">Trending</p>
+                            </div>
+                        </a>
 
-                    <a href="#"
-                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                        <a href="#"
+                            class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
                  transition hover:-translate-y-0.5 hover:shadow-lg">
-                        <div
-                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
-                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
-                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
-                                    alt="Makeup"
-                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                    loading="lazy" />
+                            <div
+                                class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                                <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                    <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
+                                        alt="Makeup"
+                                        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                        loading="lazy" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mt-3 text-center">
-                            <p class="text-sm font-semibold text-gray-900">Makeup</p>
-                            <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
-                        </div>
-                    </a>
-                    <a href="#"
-                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                            <div class="mt-3 text-center">
+                                <p class="text-sm font-semibold text-gray-900">Makeup</p>
+                                <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
+                            </div>
+                        </a>
+                        <a href="#"
+                            class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
                  transition hover:-translate-y-0.5 hover:shadow-lg">
-                        <div
-                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
-                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
-                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
-                                    alt="Home & Decor"
-                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                    loading="lazy" />
+                            <div
+                                class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                                <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                    <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
+                                        alt="Home & Decor"
+                                        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                        loading="lazy" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mt-3 text-center">
-                            <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
-                            <p class="mt-0.5 text-xs text-gray-500">Trending</p>
-                        </div>
-                    </a>
+                            <div class="mt-3 text-center">
+                                <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
+                                <p class="mt-0.5 text-xs text-gray-500">Trending</p>
+                            </div>
+                        </a>
 
-                    <a href="#"
-                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                        <a href="#"
+                            class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
                  transition hover:-translate-y-0.5 hover:shadow-lg">
-                        <div
-                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
-                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
-                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
-                                    alt="Makeup"
-                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                    loading="lazy" />
+                            <div
+                                class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                                <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                    <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
+                                        alt="Makeup"
+                                        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                        loading="lazy" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mt-3 text-center">
-                            <p class="text-sm font-semibold text-gray-900">Makeup</p>
-                            <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
-                        </div>
-                    </a>
-                    <a href="#"
-                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                            <div class="mt-3 text-center">
+                                <p class="text-sm font-semibold text-gray-900">Makeup</p>
+                                <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
+                            </div>
+                        </a>
+                        <a href="#"
+                            class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
                  transition hover:-translate-y-0.5 hover:shadow-lg">
-                        <div
-                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
-                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
-                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
-                                    alt="Home & Decor"
-                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                    loading="lazy" />
+                            <div
+                                class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                                <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                    <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/04/cat-2.jpg"
+                                        alt="Home & Decor"
+                                        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                        loading="lazy" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mt-3 text-center">
-                            <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
-                            <p class="mt-0.5 text-xs text-gray-500">Trending</p>
-                        </div>
-                    </a>
+                            <div class="mt-3 text-center">
+                                <p class="text-sm font-semibold text-gray-900">Home &amp; Decor</p>
+                                <p class="mt-0.5 text-xs text-gray-500">Trending</p>
+                            </div>
+                        </a>
 
-                    <a href="#"
-                        class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
+                        <a href="#"
+                            class="snap-start group relative w-[150px] shrink-0 rounded-2xl border border-gray-200/70 bg-white/70 p-4 shadow-sm backdrop-blur
                  transition hover:-translate-y-0.5 hover:shadow-lg">
-                        <div
-                            class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
-                            <div class="h-full w-full overflow-hidden rounded-full bg-white">
-                                <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
-                                    alt="Makeup"
-                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                    loading="lazy" />
+                            <div
+                                class="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-indigo-200 via-pink-200 to-amber-200 p-[2px]">
+                                <div class="h-full w-full overflow-hidden rounded-full bg-white">
+                                    <img src="https://import.theme-sky.com/merto/wp-content/uploads/2024/09/cosmetic-cat-7.jpg"
+                                        alt="Makeup"
+                                        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                        loading="lazy" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mt-3 text-center">
-                            <p class="text-sm font-semibold text-gray-900">Makeup</p>
-                            <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
-                        </div>
-                    </a>
+                            <div class="mt-3 text-center">
+                                <p class="text-sm font-semibold text-gray-900">Makeup</p>
+                                <p class="mt-0.5 text-xs text-gray-500">Best sellers</p>
+                            </div>
+                        </a>
 
-                    <!-- Add more items... -->
+                        <!-- Add more items... -->
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
 
 
 
 
 
-    <section class="bg-white py-12">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div class="flex items-end justify-between gap-4">
+        <section class="bg-white py-12">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <div class="flex items-end justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Best Sellers</h2>
+                        <p class="mt-1 text-sm text-zinc-600">Shop trending products, updated daily.</p>
+                    </div>
+
+                    <div class="hidden sm:flex items-center gap-2">
+                        <button id="bestSellersPrev"
+                            class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                            aria-label="Previous products" type="button">&lt;</button>
+                        <button id="bestSellersNext"
+                            class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                            aria-label="Next products" type="button">&gt;</button>
+                    </div>
+                </div>
+
+                <section class="relative mt-6">
+                    <div
+                        class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent">
+                    </div>
+                    <div
+                        class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent">
+                    </div>
+
+                    <div id="bestSellersViewport"
+                        class="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] cursor-grab active:cursor-grabbing"
+                        aria-roledescription="carousel" aria-label="Product carousel" tabindex="0"></div>
+
+                    <div class="mt-4 flex sm:hidden items-center justify-center gap-2">
+                        <button id="bestSellersPrevM"
+                            class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                            aria-label="Previous products" type="button">&lt;</button>
+                        <button id="bestSellersNextM"
+                            class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
+                            aria-label="Next products" type="button">&gt;</button>
+                    </div>
+
+                    <div id="bestSellersDots" class="mt-4 flex items-center justify-center gap-2"></div>
+
+                    <div id="bestSellersLive" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+                </section>
+            </div>
+        </section>
+
+        <livewire:new-arrivals />
+        <livewire:best-sellers />
+
+        <livewire:trending-now />
+
+        <section class="container mx-auto px-4 py-16">
+            <div class="flex flex-col md:flex-row justify-between items-end md:items-center mb-12">
                 <div>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Best Sellers</h2>
-                    <p class="mt-1 text-sm text-zinc-600">Shop trending products, updated daily.</p>
+                    <h2 id="trending-heading" class="text-3xl font-bold text-slate-900 mb-2">Trending products</h2>
+                    <p class="text-slate-500">Fresh picks customers are loving this week.</p>
                 </div>
-
-                <div class="hidden sm:flex items-center gap-2">
-                    <button id="bestSellersPrev"
-                        class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
-                        aria-label="Previous products" type="button">&lt;</button>
-                    <button id="bestSellersNext"
-                        class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
-                        aria-label="Next products" type="button">&gt;</button>
-                </div>
+                <a href="#"
+                    class="text-blue-600 font-medium hover:text-blue-700 flex items-center gap-1 group transition-colors">
+                    See everything
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                        <path d="M5 12h14"></path>
+                        <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                </a>
             </div>
 
-            <section class="relative mt-6">
-                <div
-                    class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent">
-                </div>
-                <div
-                    class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent">
-                </div>
-
-                <div id="bestSellersViewport"
-                    class="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [-ms-overflow-style:none] cursor-grab active:cursor-grabbing"
-                    aria-roledescription="carousel" aria-label="Product carousel" tabindex="0"></div>
-
-                <div class="mt-4 flex sm:hidden items-center justify-center gap-2">
-                    <button id="bestSellersPrevM"
-                        class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
-                        aria-label="Previous products" type="button">&lt;</button>
-                    <button id="bestSellersNextM"
-                        class="grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-900 shadow-sm hover:bg-zinc-50 active:scale-[0.98]"
-                        aria-label="Next products" type="button">&gt;</button>
-                </div>
-
-                <div id="bestSellersDots" class="mt-4 flex items-center justify-center gap-2"></div>
-
-                <div id="bestSellersLive" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-            </section>
-        </div>
-    </section>
-
-    <livewire:new-arrivals />
-    <livewire:best-sellers />
-
-    <livewire:trending-now />
-
-    <section class="container mx-auto px-4 py-16">
-        <div class="flex flex-col md:flex-row justify-between items-end md:items-center mb-12">
-            <div>
-                <h2 id="trending-heading" class="text-3xl font-bold text-slate-900 mb-2">Trending products</h2>
-                <p class="text-slate-500">Fresh picks customers are loving this week.</p>
-            </div>
-            <a href="#"
-                class="text-blue-600 font-medium hover:text-blue-700 flex items-center gap-1 group transition-colors">
-                See everything
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="w-4 h-4 group-hover:translate-x-1 transition-transform">
-                    <path d="M5 12h14"></path>
-                    <path d="m12 5 7 7-7 7"></path>
-                </svg>
-            </a>
-        </div>
-
-                <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <li>
-                <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]">
-                    <div class="group relative rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-                        <a href="/shop/1" class="absolute inset-0 z-10" aria-label="View Machined Pen"></a>
-                        <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
-                            <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-01.jpg"
-                                alt="Black machined steel pen with hexagonal grip and small white logo at top."
-                                draggable="false" />
-                            <button data-add-to-cart
-                                class="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
-                                type="button" aria-label="Add to cart">
-                                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
-                                    <path d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="p-4">
-                            <div class="text-xs text-zinc-500">Black</div>
-                            <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">Machined Pen</h3>
-                            <div class="mt-3 flex items-center justify-between">
-                                <div class="flex items-baseline gap-2">
-                                    <span class="text-base font-extrabold text-zinc-900"><x-currency amount="35" /></span>
-                                </div>
+            <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <li>
+                    <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]">
+                        <div
+                            class="group relative rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                            <a href="/shop/1" class="absolute inset-0 z-10" aria-label="View Machined Pen"></a>
+                            <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
+                                <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-01.jpg"
+                                    alt="Black machined steel pen with hexagonal grip and small white logo at top."
+                                    draggable="false" />
                                 <button data-add-to-cart
-                                    class="relative z-20 rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
-                                    type="button">
-                                    Add
+                                    class="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
+                                    type="button" aria-label="Add to cart">
+                                    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" />
+                                    </svg>
                                 </button>
                             </div>
-                        </div>
-                    </div>
-                </article>
-            </li>
-            <li>
-                <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]">
-                    <div class="group relative rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-                        <a href="/shop/2" class="absolute inset-0 z-10" aria-label="View Earthen Mug"></a>
-                        <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
-                            <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-02.jpg"
-                                alt="Black porcelain mug with modern square handle and natural clay accents on rim and bottom."
-                                draggable="false" />
-                            <button data-add-to-cart
-                                class="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
-                                type="button" aria-label="Add to cart">
-                                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
-                                    <path d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="p-4">
-                            <div class="text-xs text-zinc-500">Matte Black</div>
-                            <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">Earthen Mug</h3>
-                            <div class="mt-3 flex items-center justify-between">
-                                <div class="flex items-baseline gap-2">
-                                    <span class="text-base font-extrabold text-zinc-900"><x-currency amount="28" /></span>
+                            <div class="p-4">
+                                <div class="text-xs text-zinc-500">Black</div>
+                                <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">Machined Pen</h3>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-base font-extrabold text-zinc-900"><x-currency
+                                                amount="35" /></span>
+                                    </div>
+                                    <button data-add-to-cart
+                                        class="relative z-20 rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
+                                        type="button">
+                                        Add
+                                    </button>
                                 </div>
-                                <button data-add-to-cart
-                                    class="relative z-20 rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
-                                    type="button">
-                                    Add
-                                </button>
                             </div>
                         </div>
-                    </div>
-                </article>
-            </li>
-            <li>
-                <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]">
-                    <div class="group relative rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-                        <a href="/shop/3" class="absolute inset-0 z-10" aria-label="View Leatherbound Daily Journal Set"></a>
-                        <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
-                            <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-03.jpg"
-                                alt="Natural leather journal with brass disc binding and three paper refill sets."
-                                draggable="false" />
-                            <button data-add-to-cart
-                                class="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
-                                type="button" aria-label="Add to cart">
-                                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
-                                    <path d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="p-4">
-                            <div class="text-xs text-zinc-500">Natural</div>
-                            <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">Leatherbound Daily Journal Set</h3>
-                            <div class="mt-3 flex items-center justify-between">
-                                <div class="flex items-baseline gap-2">
-                                    <span class="text-base font-extrabold text-zinc-900"><x-currency amount="50" /></span>
-                                </div>
+                    </article>
+                </li>
+                <li>
+                    <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]">
+                        <div
+                            class="group relative rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                            <a href="/shop/2" class="absolute inset-0 z-10" aria-label="View Earthen Mug"></a>
+                            <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
+                                <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-02.jpg"
+                                    alt="Black porcelain mug with modern square handle and natural clay accents on rim and bottom."
+                                    draggable="false" />
                                 <button data-add-to-cart
-                                    class="relative z-20 rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
-                                    type="button">
-                                    Add
+                                    class="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
+                                    type="button" aria-label="Add to cart">
+                                    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" />
+                                    </svg>
                                 </button>
                             </div>
-                        </div>
-                    </div>
-                </article>
-            </li>
-            <li>
-                <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]">
-                    <div class="group relative rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-                        <a href="/shop/4" class="absolute inset-0 z-10" aria-label="View Leatherbound Journal"></a>
-                        <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
-                            <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-04.jpg"
-                                alt="Black leather journal with brass disc binding."
-                                draggable="false" />
-                            <button data-add-to-cart
-                                class="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
-                                type="button" aria-label="Add to cart">
-                                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
-                                    <path d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="p-4">
-                            <div class="text-xs text-zinc-500">Black</div>
-                            <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">Leatherbound Daily Journal</h3>
-                            <div class="mt-3 flex items-center justify-between">
-                                <div class="flex items-baseline gap-2">
-                                    <span class="text-base font-extrabold text-zinc-900"><x-currency amount="50" /></span>
+                            <div class="p-4">
+                                <div class="text-xs text-zinc-500">Matte Black</div>
+                                <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">Earthen Mug</h3>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-base font-extrabold text-zinc-900"><x-currency
+                                                amount="28" /></span>
+                                    </div>
+                                    <button data-add-to-cart
+                                        class="relative z-20 rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
+                                        type="button">
+                                        Add
+                                    </button>
                                 </div>
-                                <button data-add-to-cart
-                                    class="relative z-20 rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
-                                    type="button">
-                                    Add
-                                </button>
                             </div>
                         </div>
-                    </div>
-                </article>
-            </li>
-        </ul>
-                </div>
-            
+                    </article>
+                </li>
+                <li>
+                    <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]">
+                        <div
+                            class="group relative rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                            <a href="/shop/3" class="absolute inset-0 z-10"
+                                aria-label="View Leatherbound Daily Journal Set"></a>
+                            <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
+                                <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-03.jpg"
+                                    alt="Natural leather journal with brass disc binding and three paper refill sets."
+                                    draggable="false" />
+                                <button data-add-to-cart
+                                    class="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
+                                    type="button" aria-label="Add to cart">
+                                    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <div class="text-xs text-zinc-500">Natural</div>
+                                <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">Leatherbound Daily
+                                    Journal Set</h3>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-base font-extrabold text-zinc-900"><x-currency
+                                                amount="50" /></span>
+                                    </div>
+                                    <button data-add-to-cart
+                                        class="relative z-20 rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
+                                        type="button">
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]">
+                        <div
+                            class="group relative rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                            <a href="/shop/4" class="absolute inset-0 z-10"
+                                aria-label="View Leatherbound Journal"></a>
+                            <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
+                                <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    src="https://tailwindcss.com/plus-assets/img/ecommerce-images/home-page-02-product-04.jpg"
+                                    alt="Black leather journal with brass disc binding." draggable="false" />
+                                <button data-add-to-cart
+                                    class="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
+                                    type="button" aria-label="Add to cart">
+                                    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <div class="text-xs text-zinc-500">Black</div>
+                                <h3 class="mt-1 text-sm font-bold text-zinc-900 line-clamp-2">Leatherbound Daily
+                                    Journal</h3>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-base font-extrabold text-zinc-900"><x-currency
+                                                amount="50" /></span>
+                                    </div>
+                                    <button data-add-to-cart
+                                        class="relative z-20 rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
+                                        type="button">
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+    </div>
+
 
     </section>
 

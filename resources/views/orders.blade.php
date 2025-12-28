@@ -19,21 +19,26 @@
                             </div>
                             <div>
                                 <p class="text-sm text-slate-500">Date</p>
-                                @php($date = $order['placed_at'] ?? $order['date'] ?? null)
-                                <p class="text-slate-800">{{ $date ? \Carbon\Carbon::parse($date)->toFormattedDateString() : '—' }}</p>
+                                @php($date = $order['placed_at'] ?? ($order['date'] ?? null))
+                                <p class="text-slate-800">
+                                    {{ $date ? \Carbon\Carbon::parse($date)->toFormattedDateString() : '—' }}</p>
                             </div>
                             <div>
                                 <p class="text-sm text-slate-500">Total</p>
-                                <p class="text-slate-800 font-semibold">${{ number_format($order['total'] ?? 0, 2) }}</p>
+                                <p class="text-slate-800 font-semibold">${{ number_format($order['total'] ?? 0, 2) }}
+                                </p>
                             </div>
                             <div>
                                 <p class="text-sm text-slate-500">Status</p>
                                 @php($status = $order['status'] ?? 'Processing')
-                                <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold {{ $status === 'Shipped' ? 'bg-blue-50 text-blue-700' : ($status === 'Delivered' ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700') }}">{{ $status }}</span>
+                                <span
+                                    class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold {{ $status === 'Shipped' ? 'bg-blue-50 text-blue-700' : ($status === 'Delivered' ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700') }}">{{ $status }}</span>
                             </div>
                             <div class="flex gap-2">
-                                <a href="{{ route('orders.show', $order['id']) }}" class="rounded-full px-4 py-2 text-sm font-medium bg-blue-600 text-white hover:bg-blue-700">View</a>
-                                <a href="/contact" class="rounded-full px-4 py-2 text-sm font-medium border border-slate-200 text-slate-700 hover:border-blue-200">Support</a>
+                                <a href="{{ route('orders.show', $order['id']) }}"
+                                    class="rounded-full px-4 py-2 text-sm font-medium bg-blue-600 text-white hover:bg-blue-700">View</a>
+                                <a href="/contact"
+                                    class="rounded-full px-4 py-2 text-sm font-medium border border-slate-200 text-slate-700 hover:border-blue-200">Support</a>
                             </div>
                         </div>
                     </div>

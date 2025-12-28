@@ -52,8 +52,7 @@
             </button>
         </div>
     </div> --}}
-    <div
-        id="applePayAlert"
+    <div id="applePayAlert"
         class="hidden relative isolate flex items-center gap-x-6 overflow-hidden bg-gray-800/50 px-6 py-2.5 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10 sm:px-3.5 sm:before:flex-1">
         <div aria-hidden="true"
             class="absolute top-1/2 left-[max(-7rem,calc(50%-52rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl">
@@ -70,10 +69,12 @@
                 Apple Pay is available only in Safari. Please open this checkout in Safari to pay.
             </p>
             <button type="button" id="copyCheckoutLink"
-                class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-sm font-semibold text-white shadow-xs inset-ring-white/20 hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Copy link <span aria-hidden="true"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.7">
-                    <path d="M9 9h10v10H9z" />
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                </svg></span></button>
+                class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-sm font-semibold text-white shadow-xs inset-ring-white/20 hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Copy
+                link <span aria-hidden="true"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none"
+                        stroke="currentColor" stroke-width="1.7">
+                        <path d="M9 9h10v10H9z" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg></span></button>
         </div>
         <div class="flex flex-1 justify-end">
             <button type="button" class="-m-4 p-4 focus-visible:-outline-offset-4" data-dismiss-alert>
@@ -90,7 +91,8 @@
     <main class="min-h-screen bg-slate-50 py-12">
         <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-6">
             <!-- Store header -->
-            <x-card class="rounded-2xl border border-slate-200/70 bg-white/90 p-6 shadow-[0_20px_50px_-40px_rgba(15,23,42,0.45)] ring-1 ring-slate-900/5">
+            <x-card
+                class="rounded-2xl border border-slate-200/70 bg-white/90 p-6 shadow-[0_20px_50px_-40px_rgba(15,23,42,0.45)] ring-1 ring-slate-900/5">
                 <div class="flex items-center justify-between gap-6">
                     <div class="flex items-center gap-4">
                         <a class="grid h-14 w-14 place-items-center rounded-xl  bg-white overflow-hidden shadow-sm"
@@ -108,12 +110,13 @@
                         </div>
                     </div>
 
-                    
+
                 </div>
             </x-card>
 
             <!-- Totals + coupon -->
-            <x-card class="mt-5 rounded-2xl border border-slate-200/70 bg-white/90 shadow-[0_20px_50px_-40px_rgba(15,23,42,0.45)] ring-1 ring-slate-900/5">
+            <x-card
+                class="mt-5 rounded-2xl border border-slate-200/70 bg-white/90 shadow-[0_20px_50px_-40px_rgba(15,23,42,0.45)] ring-1 ring-slate-900/5">
                 <div class="p-6 flex flex-wrap items-center justify-between gap-2">
                     <div class="text-xl font-extrabold text-slate-900">113.45 <span class="text-slate-400">SAR</span>
                     </div>
@@ -124,8 +127,10 @@
                     <div class="mb-2 text-sm text-[color:var(--primary)]">Have a discount code?</div>
 
                     <div class="flex flex-wrap gap-2">
-                        <x-input placeholder="Enter coupon code" class="rounded-xl border border-slate-200/70 bg-white px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200/60" />
-                        <x-button type="button" size="md" variant="solid" class="rounded-xl px-5 shadow-sm">Apply</x-button>
+                        <x-input placeholder="Enter coupon code"
+                            class="rounded-xl border border-slate-200/70 bg-white px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200/60" />
+                        <x-button type="button" size="md" variant="solid"
+                            class="rounded-xl px-5 shadow-sm">Apply</x-button>
                     </div>
 
                     <div class="mt-4 flex justify-center">
@@ -139,9 +144,11 @@
             </x-card>
 
             <!-- Main accordion card -->
-            <x-card class="mt-5 rounded-2xl border border-slate-200/70 bg-white/90 shadow-[0_20px_50px_-40px_rgba(15,23,42,0.45)] ring-1 ring-slate-900/5">
+            <x-card
+                class="mt-5 rounded-2xl border border-slate-200/70 bg-white/90 shadow-[0_20px_50px_-40px_rgba(15,23,42,0.45)] ring-1 ring-slate-900/5">
                 <!-- Shipping Address header -->
-                <button class="w-full p-6 flex items-center justify-between hover:bg-slate-50/70 transition" type="button">
+                <button class="w-full p-6 flex items-center justify-between hover:bg-slate-50/70 transition"
+                    type="button">
                     <div class="flex items-center gap-2 text-slate-700">
                         <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor"
                             stroke-width="1.7">
@@ -160,32 +167,35 @@
                     <div class="rounded-xl border border-slate-200/70 bg-white shadow-sm">
                         <div class="flex items-center justify-between px-4 py-3 bg-slate-50/70">
                             <div class="text-sm font-bold text-slate-700">Saved addresses</div>
-                            <svg viewBox="0 0 24 24" class="h-5 w-5 text-slate-500" fill="none"
-                                stroke="currentColor" stroke-width="1.8">
+                            <svg viewBox="0 0 24 24" class="h-5 w-5 text-slate-500" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
                                 <path d="m6 15 6-6 6 6" />
                             </svg>
                         </div>
 
                         <div id="addressList" class="px-4 py-3 space-y-3">
-                            <label class="address-item is-active flex items-start justify-between gap-3 rounded-lg border border-slate-200/70 p-3" data-address="Saudi Arabia - Dammam - Al Khalidiyah North - Saad Bin Saud">
+                            <label
+                                class="address-item is-active flex items-start justify-between gap-3 rounded-lg border border-slate-200/70 p-3"
+                                data-address="Saudi Arabia - Dammam - Al Khalidiyah North - Saad Bin Saud">
                                 <div class="flex items-start gap-3">
-                                    <input type="radio" name="address" checked class="mt-1 accent-[color:var(--primary)]">
+                                    <input type="radio" name="address" checked
+                                        class="mt-1 accent-[color:var(--primary)]">
                                     <span class="text-sm text-slate-700" data-address-text>
                                         Saudi Arabia - Dammam - Al Khalidiyah North - Saad Bin Saud
                                     </span>
                                 </div>
 
                                 <div class="flex items-center gap-3">
-                                    <button class="text-slate-500 hover:text-slate-800" aria-label="edit" data-edit-address
-                                        type="button">
+                                    <button class="text-slate-500 hover:text-slate-800" aria-label="edit"
+                                        data-edit-address type="button">
                                         <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none"
                                             stroke="currentColor" stroke-width="1.7">
                                             <path d="M12 20h9" />
                                             <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
                                         </svg>
                                     </button>
-                                    <button class="text-red-500 hover:text-red-600" aria-label="delete" data-delete-address
-                                        type="button">
+                                    <button class="text-red-500 hover:text-red-600" aria-label="delete"
+                                        data-delete-address type="button">
                                         <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none"
                                             stroke="currentColor" stroke-width="1.7">
                                             <path d="M3 6h18" />
@@ -203,7 +213,8 @@
                                 Add new address
                             </button>
 
-                            <div id="addressDialog" class="hidden mt-4 rounded-xl border border-slate-200/70 bg-white p-4 shadow-sm">
+                            <div id="addressDialog"
+                                class="hidden mt-4 rounded-xl border border-slate-200/70 bg-white p-4 shadow-sm">
                                 <div class="text-sm font-semibold text-slate-800">New address</div>
                                 <div class="mt-3 grid gap-3 md:grid-cols-2">
                                     <input id="addressName" type="text" placeholder="Full name"
@@ -229,7 +240,9 @@
                                 </div>
                             </div>
 
-                            <div id="addressNotice" class="hidden mt-3 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-700"></div>
+                            <div id="addressNotice"
+                                class="hidden mt-3 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
+                            </div>
 
                             <label class="mt-4 flex items-start gap-3 text-sm text-slate-700">
                                 <input type="checkbox" class="mt-1 accent-[color:var(--primary)]">
@@ -243,13 +256,15 @@
                             </label>
 
                             <x-button type="button" size="lg" variant="solid"
-                                class="mt-5 w-full rounded-xl text-sm font-extrabold shadow-sm" data-confirm-address>Confirm address</x-button>
+                                class="mt-5 w-full rounded-xl text-sm font-extrabold shadow-sm"
+                                data-confirm-address>Confirm address</x-button>
                         </div>
                     </div>
 
                     <!-- SHIPPING COMPANIES (click to open) -->
                     <div class="mt-6 border-t border-slate-200/70 pt-5">
-                        <button id="toggleShipping" class="w-full p-6 flex items-center justify-between hover:bg-slate-50/70 transition"
+                        <button id="toggleShipping"
+                            class="w-full p-6 flex items-center justify-between hover:bg-slate-50/70 transition"
                             type="button">
                             <div class="flex items-center gap-2 font-bold text-slate-900">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"
@@ -273,13 +288,16 @@
                                 </svg>
                                 <span>Shipping carrier</span>
                             </div>
-                            <div id="shippingSummary" class="text-xs text-slate-500">SMSA | Express shipping, 2-3 business days</div>
+                            <div id="shippingSummary" class="text-xs text-slate-500">SMSA | Express shipping, 2-3
+                                business days</div>
                         </button>
 
                         <!-- shipping panel -->
-                        <div id="shippingPanel" class="hidden mt-4 rounded-xl border border-slate-200/70 bg-white shadow-sm p-4">
+                        <div id="shippingPanel"
+                            class="hidden mt-4 rounded-xl border border-slate-200/70 bg-white shadow-sm p-4">
                             <ul id="shippingOptions" class="space-y-3">
-                                <li class="shipping-option is-active rounded-md border border-slate-200/70 px-4 py-3 hover:bg-slate-50" data-shipping-summary="SMSA | Express shipping, 2-3 business days">
+                                <li class="shipping-option is-active rounded-md border border-slate-200/70 px-4 py-3 hover:bg-slate-50"
+                                    data-shipping-summary="SMSA | Express shipping, 2-3 business days">
                                     <label class="flex items-center justify-between gap-3 cursor-pointer">
                                         <div class="flex items-center gap-3">
                                             <input type="radio" name="ship" checked
@@ -296,10 +314,12 @@
                                         </div>
                                     </label>
                                 </li>
-                                <li class="shipping-option rounded-md border border-slate-200/70 px-4 py-3 hover:bg-slate-50" data-shipping-summary="Aramex | Standard shipping, 4-6 business days">
+                                <li class="shipping-option rounded-md border border-slate-200/70 px-4 py-3 hover:bg-slate-50"
+                                    data-shipping-summary="Aramex | Standard shipping, 4-6 business days">
                                     <label class="flex items-center justify-between gap-3 cursor-pointer">
                                         <div class="flex items-center gap-3">
-                                            <input type="radio" name="ship" class="accent-[color:var(--primary)]">
+                                            <input type="radio" name="ship"
+                                                class="accent-[color:var(--primary)]">
                                             <img class="h-8 w-8"
                                                 src="https://cdn.assets.salla.network/prod/stores/images/shipping_logo.svg"
                                                 alt="Aramex">
@@ -323,7 +343,8 @@
 
                     <!-- PAYMENT (click to open) -->
                     <div class="mt-6 border-t border-slate-200/70 pt-5">
-                        <button id="togglePayment" class="w-full p-6 flex items-center justify-between hover:bg-slate-50/70 transition"
+                        <button id="togglePayment"
+                            class="w-full p-6 flex items-center justify-between hover:bg-slate-50/70 transition"
                             type="button">
                             <div class="flex items-center gap-2 font-bold text-slate-900">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"
@@ -347,78 +368,97 @@
                         </button>
 
                         <!-- payment panel -->
-                        <div id="paymentPanel" class="hidden mt-4 rounded-xl border border-slate-200/70 bg-white shadow-sm p-4">
+                        <div id="paymentPanel"
+                            class="hidden mt-4 rounded-xl border border-slate-200/70 bg-white shadow-sm p-4">
                             <div class="relative" id="paymentDropdown">
-                                <label class="text-xs font-semibold text-slate-500" for="paymentDropdownButton">Payment method</label>
+                                <label class="text-xs font-semibold text-slate-500"
+                                    for="paymentDropdownButton">Payment method</label>
                                 <button id="paymentDropdownButton" type="button"
                                     class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200/60 flex items-center justify-between">
                                     <span class="flex items-center gap-2">
-                                        <span id="paymentDropdownIcon" class="flex h-4 w-4 items-center justify-center text-slate-700"></span>
-                                        <span id="paymentDropdownText" class="text-sm font-semibold text-slate-700">Mada</span>
+                                        <span id="paymentDropdownIcon"
+                                            class="flex h-4 w-4 items-center justify-center text-slate-700"></span>
+                                        <span id="paymentDropdownText"
+                                            class="text-sm font-semibold text-slate-700">Mada</span>
                                     </span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 0 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500"
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 0 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z"
+                                            clip-rule="evenodd" />
                                     </svg>
                                 </button>
                                 <div id="paymentDropdownMenu"
                                     class="absolute left-0 right-0 z-20 mt-2 hidden rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
                                     <div class="max-h-64 space-y-1 overflow-auto">
-                                <button
-                                    class="payment-option apple-pay-option hidden w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
-                                    type="button" aria-pressed="false" data-payment="apple-pay" data-label="Apple Pay">
-                                    <svg viewBox="0 0 24 24" class="h-4 w-4 text-slate-800" fill="currentColor" aria-hidden="true">
-                                        <path d="M17.9 12.6c-.02-1.54 1.26-2.27 1.31-2.31-.72-1.06-1.84-1.2-2.24-1.22-.95-.1-1.86.56-2.34.56-.48 0-1.22-.55-2-.53-1.03.02-1.98.6-2.5 1.51-1.07 1.85-.27 4.57.77 6.07.5.73 1.1 1.56 1.89 1.53.76-.03 1.05-.49 1.97-.49.92 0 1.18.49 1.99.48.82-.02 1.34-.73 1.84-1.46.58-.84.82-1.65.83-1.69-.02-.01-1.6-.62-1.62-2.45Zm-1.53-4.23c.42-.5.7-1.2.62-1.9-.61.02-1.35.41-1.79.91-.39.45-.74 1.18-.65 1.87.68.05 1.38-.36 1.82-.88Z" />
-                                    </svg>
-                                    Apple Pay
-                                </button>
-                                <button
-                                    class="payment-option google-pay-option hidden w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
-                                    type="button" aria-pressed="false" data-payment="google-pay" data-label="Google Pay">
-                                    Google Pay
-                                </button>
-                                <button
-                                    class="payment-option is-active w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
-                                    type="button" aria-pressed="true" data-payment="mada" data-label="Mada">
-                                    <img class="h-4 w-auto"
-                                        src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-mada.svg"
-                                        alt="mada">
-                                    Mada
-                                </button>
-                                <button
-                                    class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
-                                    type="button" aria-pressed="false" data-payment="credit" data-label="Card">
-                                    <img class="h-4 w-auto"
-                                        src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-credit-2.svg"
-                                        alt="credit">
-                                    Card
-                                </button>
-                                <button
-                                    class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
-                                    type="button" aria-pressed="false" data-payment="tabby" data-label="Tabby">
-                                    <img class="h-4 w-auto"
-                                        src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-tabby_en.png?v=0.0.1"
-                                        alt="tabby">
-                                    Tabby
-                                </button>
-                                <button
-                                    class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
-                                    type="button" aria-pressed="false" data-payment="tamara" data-label="Tamara">
-                                    <img class="h-4 w-auto"
-                                        src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/tamara/ar-tamara-label.svg"
-                                        alt="tamara">
-                                    Tamara
-                                </button>
-                                <button
-                                    class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition"
-                                    type="button" aria-pressed="false" data-payment="bank-transfer" data-label="Bank transfer">
-                                    Bank transfer
-                                </button>
-                                <button
-                                    class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center justify-between gap-2"
-                                    type="button" aria-pressed="false" data-payment="cod" data-label="Cash on delivery">
-                                    Cash on delivery
-                                    <span class="rounded-full bg-sky-100 text-sky-700 text-[11px] px-2 py-0.5 border border-sky-200">+10 SAR</span>
-                                </button>
+                                        <button
+                                            class="payment-option apple-pay-option hidden w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                            type="button" aria-pressed="false" data-payment="apple-pay"
+                                            data-label="Apple Pay">
+                                            <svg viewBox="0 0 24 24" class="h-4 w-4 text-slate-800"
+                                                fill="currentColor" aria-hidden="true">
+                                                <path
+                                                    d="M17.9 12.6c-.02-1.54 1.26-2.27 1.31-2.31-.72-1.06-1.84-1.2-2.24-1.22-.95-.1-1.86.56-2.34.56-.48 0-1.22-.55-2-.53-1.03.02-1.98.6-2.5 1.51-1.07 1.85-.27 4.57.77 6.07.5.73 1.1 1.56 1.89 1.53.76-.03 1.05-.49 1.97-.49.92 0 1.18.49 1.99.48.82-.02 1.34-.73 1.84-1.46.58-.84.82-1.65.83-1.69-.02-.01-1.6-.62-1.62-2.45Zm-1.53-4.23c.42-.5.7-1.2.62-1.9-.61.02-1.35.41-1.79.91-.39.45-.74 1.18-.65 1.87.68.05 1.38-.36 1.82-.88Z" />
+                                            </svg>
+                                            Apple Pay
+                                        </button>
+                                        <button
+                                            class="payment-option google-pay-option hidden w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                            type="button" aria-pressed="false" data-payment="google-pay"
+                                            data-label="Google Pay">
+                                            Google Pay
+                                        </button>
+                                        <button
+                                            class="payment-option is-active w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                            type="button" aria-pressed="true" data-payment="mada"
+                                            data-label="Mada">
+                                            <img class="h-4 w-auto"
+                                                src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-mada.svg"
+                                                alt="mada">
+                                            Mada
+                                        </button>
+                                        <button
+                                            class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                            type="button" aria-pressed="false" data-payment="credit"
+                                            data-label="Card">
+                                            <img class="h-4 w-auto"
+                                                src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-credit-2.svg"
+                                                alt="credit">
+                                            Card
+                                        </button>
+                                        <button
+                                            class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                            type="button" aria-pressed="false" data-payment="tabby"
+                                            data-label="Tabby">
+                                            <img class="h-4 w-auto"
+                                                src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-tabby_en.png?v=0.0.1"
+                                                alt="tabby">
+                                            Tabby
+                                        </button>
+                                        <button
+                                            class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                            type="button" aria-pressed="false" data-payment="tamara"
+                                            data-label="Tamara">
+                                            <img class="h-4 w-auto"
+                                                src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/tamara/ar-tamara-label.svg"
+                                                alt="tamara">
+                                            Tamara
+                                        </button>
+                                        <button
+                                            class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition"
+                                            type="button" aria-pressed="false" data-payment="bank-transfer"
+                                            data-label="Bank transfer">
+                                            Bank transfer
+                                        </button>
+                                        <button
+                                            class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center justify-between gap-2"
+                                            type="button" aria-pressed="false" data-payment="cod"
+                                            data-label="Cash on delivery">
+                                            Cash on delivery
+                                            <span
+                                                class="rounded-full bg-sky-100 text-sky-700 text-[11px] px-2 py-0.5 border border-sky-200">+10
+                                                SAR</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -427,57 +467,90 @@
                                 <div class="mt-4 rounded-2xl border border-slate-200/70 bg-white p-4 shadow-sm">
                                     <div class="grid gap-4 md:grid-cols-3">
                                         <div class="md:col-span-2">
-                                            <label class="text-sm font-semibold text-slate-700" for="Field-numberInput">Card number</label>
+                                            <label class="text-sm font-semibold text-slate-700"
+                                                for="Field-numberInput">Card number</label>
                                             <div class="mt-2 relative">
-                                                <input dir="ltr" type="text" inputmode="numeric" name="number" id="Field-numberInput" placeholder="1234 1234 1234 1234" autocomplete="cc-number" aria-invalid="false" aria-describedby="cardBrandIconsDesc cardNumberError" aria-required="true" class="w-full rounded-xl border border-slate-200/70 bg-white px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200/60 pr-28">
-                                                <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 text-slate-500">
-                                                    <span id="cardBrandBadge" class="hidden rounded-md bg-slate-900 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"></span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18" fill="none" class="h-4 w-auto" aria-hidden="true">
-                                                        <rect x="1" y="1" width="26" height="16" rx="3" fill="#0f172a"/>
-                                                        <rect x="3" y="4" width="8" height="4" rx="1" fill="#e2e8f0"/>
-                                                        <rect x="3" y="11" width="10" height="2" rx="1" fill="#94a3b8"/>
-                                                        <circle cx="18" cy="9" r="4" fill="#f59e0b"/>
-                                                        <circle cx="22" cy="9" r="4" fill="#ef4444" fill-opacity="0.9"/>
+                                                <input dir="ltr" type="text" inputmode="numeric"
+                                                    name="number" id="Field-numberInput"
+                                                    placeholder="1234 1234 1234 1234" autocomplete="cc-number"
+                                                    aria-invalid="false"
+                                                    aria-describedby="cardBrandIconsDesc cardNumberError"
+                                                    aria-required="true"
+                                                    class="w-full rounded-xl border border-slate-200/70 bg-white px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200/60 pr-28">
+                                                <div
+                                                    class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 text-slate-500">
+                                                    <span id="cardBrandBadge"
+                                                        class="hidden rounded-md bg-slate-900 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"></span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="28"
+                                                        height="18" viewBox="0 0 28 18" fill="none"
+                                                        class="h-4 w-auto" aria-hidden="true">
+                                                        <rect x="1" y="1" width="26" height="16"
+                                                            rx="3" fill="#0f172a" />
+                                                        <rect x="3" y="4" width="8" height="4"
+                                                            rx="1" fill="#e2e8f0" />
+                                                        <rect x="3" y="11" width="10" height="2"
+                                                            rx="1" fill="#94a3b8" />
+                                                        <circle cx="18" cy="9" r="4" fill="#f59e0b" />
+                                                        <circle cx="22" cy="9" r="4" fill="#ef4444"
+                                                            fill-opacity="0.9" />
                                                     </svg>
                                                 </div>
                                             </div>
                                             <div id="cardBrandIconsDesc" class="mt-2 text-xs text-slate-500">
                                                 Supported cards include Visa and Mastercard.
                                             </div>
-                                            <div id="cardNumberError" class="mt-2 hidden text-xs text-red-600">Your card number is invalid.</div>
+                                            <div id="cardNumberError" class="mt-2 hidden text-xs text-red-600">Your
+                                                card number is invalid.</div>
                                         </div>
 
-                                        
+
                                     </div>
                                     <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-2 grid-cols-2">
-                                            <div>
-                                                <div class="rounded-2xl bg-slate-50 px-4 py-2">
-                                                    <label class="text-xs font-semibold text-slate-500" for="Field-expiryInput">Expiration (MM/YY)</label>
-                                                    <input dir="ltr" type="text" inputmode="numeric" name="expiry" id="Field-expiryInput" placeholder="MM / YY" autocomplete="cc-exp" aria-invalid="false" aria-required="true" class="mt-1 w-full bg-transparent text-sm font-semibold text-slate-700 placeholder:text-slate-400 focus:outline-none">
-                                                </div>
-                                                <div id="expiryError" class="mt-2 hidden text-xs text-red-600">Expiration date is in the past.</div>
+                                        <div>
+                                            <div class="rounded-2xl bg-slate-50 px-4 py-2">
+                                                <label class="text-xs font-semibold text-slate-500"
+                                                    for="Field-expiryInput">Expiration (MM/YY)</label>
+                                                <input dir="ltr" type="text" inputmode="numeric"
+                                                    name="expiry" id="Field-expiryInput" placeholder="MM / YY"
+                                                    autocomplete="cc-exp" aria-invalid="false" aria-required="true"
+                                                    class="mt-1 w-full bg-transparent text-sm font-semibold text-slate-700 placeholder:text-slate-400 focus:outline-none">
                                             </div>
+                                            <div id="expiryError" class="mt-2 hidden text-xs text-red-600">Expiration
+                                                date is in the past.</div>
+                                        </div>
 
-                                            <div>
-                                                <div class="rounded-xl bg-slate-50 px-4 py-2">
-                                                    <label class="text-xs font-semibold text-slate-500" for="Field-cvcInput">Security code</label>
-                                                    <div class="mt-1 relative">
-                                                        <input dir="ltr" type="text" inputmode="numeric" name="cvc" id="Field-cvcInput" placeholder="CVC" autocomplete="cc-csc" aria-invalid="false" aria-describedby="cvcDesc" aria-required="true" class="w-full bg-transparent text-sm font-semibold text-slate-700 placeholder:text-slate-400 focus:outline-none pr-10">
-                                                        <div class="absolute right-0 top-1/2 -translate-y-1/2 text-slate-500">
-                                                            <svg class="h-4 w-auto" width="30" height="20" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true">
-                                                                <path opacity="0.74" d="M25.2061 0.00488281C27.3194 0.112115 29 1.85996 29 4V11.3291C28.5428 11.0304 28.0336 10.8304 27.5 10.7188V8H1.5V16C1.5 17.3807 2.61929 18.5 4 18.5H10.1104V20H4L3.79395 19.9951C1.7488 19.8913 0.108652 18.2512 0.00488281 16.2061L0 16V4C0 1.85996 1.68056 0.112115 3.79395 0.00488281L4 0H25L25.2061 0.00488281ZM4 1.5C2.61929 1.5 1.5 2.61929 1.5 4V5H27.5V4C27.5 2.61929 26.3807 1.5 25 1.5H4Z"></path>
-                                                            </svg>
-                                                        </div>
+                                        <div>
+                                            <div class="rounded-xl bg-slate-50 px-4 py-2">
+                                                <label class="text-xs font-semibold text-slate-500"
+                                                    for="Field-cvcInput">Security code</label>
+                                                <div class="mt-1 relative">
+                                                    <input dir="ltr" type="text" inputmode="numeric"
+                                                        name="cvc" id="Field-cvcInput" placeholder="CVC"
+                                                        autocomplete="cc-csc" aria-invalid="false"
+                                                        aria-describedby="cvcDesc" aria-required="true"
+                                                        class="w-full bg-transparent text-sm font-semibold text-slate-700 placeholder:text-slate-400 focus:outline-none pr-10">
+                                                    <div
+                                                        class="absolute right-0 top-1/2 -translate-y-1/2 text-slate-500">
+                                                        <svg class="h-4 w-auto" width="30" height="20"
+                                                            viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"
+                                                            fill="currentColor" aria-hidden="true">
+                                                            <path opacity="0.74"
+                                                                d="M25.2061 0.00488281C27.3194 0.112115 29 1.85996 29 4V11.3291C28.5428 11.0304 28.0336 10.8304 27.5 10.7188V8H1.5V16C1.5 17.3807 2.61929 18.5 4 18.5H10.1104V20H4L3.79395 19.9951C1.7488 19.8913 0.108652 18.2512 0.00488281 16.2061L0 16V4C0 1.85996 1.68056 0.112115 3.79395 0.00488281L4 0H25L25.2061 0.00488281ZM4 1.5C2.61929 1.5 1.5 2.61929 1.5 4V5H27.5V4C27.5 2.61929 26.3807 1.5 25 1.5H4Z">
+                                                            </path>
+                                                        </svg>
                                                     </div>
                                                 </div>
-                                                <div id="cvcDesc" class="mt-2 text-xs text-slate-500">3-digit code on back of card</div>
                                             </div>
+                                            <div id="cvcDesc" class="mt-2 text-xs text-slate-500">3-digit code on
+                                                back of card</div>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div data-payment-panel="tabby" class="hidden mt-5 space-y-4">
-                                <div class="rounded-xl border border-slate-200/70 bg-slate-50/60 p-4 text-sm text-slate-600">
+                                <div
+                                    class="rounded-xl border border-slate-200/70 bg-slate-50/60 p-4 text-sm text-slate-600">
                                     Split your payment with Tabby. Enter your mobile number to continue.
                                 </div>
                                 <x-input placeholder="Mobile number"
@@ -489,7 +562,8 @@
                             </div>
 
                             <div data-payment-panel="tamara" class="hidden mt-5 space-y-4">
-                                <div class="rounded-xl border border-slate-200/70 bg-slate-50/60 p-4 text-sm text-slate-600">
+                                <div
+                                    class="rounded-xl border border-slate-200/70 bg-slate-50/60 p-4 text-sm text-slate-600">
                                     Tamara requires a national ID to verify your account.
                                 </div>
                                 <x-input placeholder="National ID"
@@ -501,7 +575,8 @@
                             </div>
 
                             <div data-payment-panel="apple-pay" class="hidden mt-5 space-y-4">
-                                <div class="rounded-xl border border-slate-200/70 bg-slate-50/60 p-4 text-sm text-slate-600">
+                                <div
+                                    class="rounded-xl border border-slate-200/70 bg-slate-50/60 p-4 text-sm text-slate-600">
                                     Apple Pay is available on iOS devices. Continue to authorize with Apple Pay.
                                 </div>
                                 <x-button type="button" size="lg" variant="solid"
@@ -511,7 +586,8 @@
                             </div>
 
                             <div data-payment-panel="google-pay" class="hidden mt-5 space-y-4">
-                                <div class="rounded-xl border border-slate-200/70 bg-slate-50/60 p-4 text-sm text-slate-600">
+                                <div
+                                    class="rounded-xl border border-slate-200/70 bg-slate-50/60 p-4 text-sm text-slate-600">
                                     Google Pay is available on Android devices. Continue to authorize with Google Pay.
                                 </div>
                                 <x-button type="button" size="lg" variant="solid"
@@ -521,7 +597,8 @@
                             </div>
 
                             <div data-payment-panel="bank-transfer" class="hidden mt-5 space-y-4">
-                                <div class="rounded-xl border border-slate-200/70 bg-slate-50/60 p-4 text-sm text-slate-600">
+                                <div
+                                    class="rounded-xl border border-slate-200/70 bg-slate-50/60 p-4 text-sm text-slate-600">
                                     Transfer to: SA00 0000 0000 0000 0000 0000 (Rukn Bank). Upload your receipt.
                                 </div>
                                 <input type="file"
@@ -533,7 +610,8 @@
                             </div>
 
                             <div data-payment-panel="cod" class="hidden mt-5 space-y-4">
-                                <div class="rounded-xl border border-slate-200/70 bg-slate-50/60 p-4 text-sm text-slate-600">
+                                <div
+                                    class="rounded-xl border border-slate-200/70 bg-slate-50/60 p-4 text-sm text-slate-600">
                                     Pay in cash upon delivery. Add delivery instructions if needed.
                                 </div>
                                 <textarea rows="3"
@@ -881,7 +959,8 @@
 
             function detectCardBrand(digits) {
                 if (/^4/.test(digits)) return 'visa';
-                if (/^(5[1-5])/.test(digits) || /^(222[1-9]|22[3-9]\\d|2[3-6]\\d{2}|27[01]\\d|2720)/.test(digits)) return 'mastercard';
+                if (/^(5[1-5])/.test(digits) || /^(222[1-9]|22[3-9]\\d|2[3-6]\\d{2}|27[01]\\d|2720)/.test(digits))
+                    return 'mastercard';
                 if (/^3[47]/.test(digits)) return 'amex';
                 if (/^6(011|5|4[4-9])/.test(digits)) return 'discover';
                 if (/^35(2[8-9]|[3-8]\\d)/.test(digits)) return 'jcb';
@@ -1022,7 +1101,10 @@
                         editingAddressItem = item;
                         setAddressDialogFromText(current);
                         addressDialog?.classList.remove('hidden');
-                        addressDialog?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        addressDialog?.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest'
+                        });
                     }
                 }
                 if (deleteBtn) {
@@ -1072,7 +1154,10 @@
                 editingAddressItem = null;
                 resetAddressDialog();
                 addressDialog?.classList.remove('hidden');
-                addressDialog?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                addressDialog?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest'
+                });
             });
 
             cancelAddressBtn?.addEventListener('click', () => {
@@ -1100,7 +1185,8 @@
                 }
 
                 const label = document.createElement('label');
-                label.className = 'address-item flex items-start justify-between gap-3 rounded-lg border border-slate-200/70 p-3';
+                label.className =
+                    'address-item flex items-start justify-between gap-3 rounded-lg border border-slate-200/70 p-3';
                 label.setAttribute('data-address', value);
 
                 const left = document.createElement('div');

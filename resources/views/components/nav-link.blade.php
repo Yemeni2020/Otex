@@ -1,16 +1,10 @@
-@props([
-    'href',
-    'active' => false,
-])
+@props(['href', 'active' => false])
 
-<a href="{{ $href }}"
-   @if($active) aria-current="page" @endif
-   {{ $attributes->merge([
-       'class' =>
-           'hover:text-blue-600 transition-colors relative group py-2 ' .
-           ($active ? 'text-blue-600' : 'text-slate-700')
-   ]) }}
->
+<a href="{{ $href }}" @if ($active) aria-current="page" @endif
+    {{ $attributes->merge([
+        'class' =>
+            'hover:text-blue-600 transition-colors relative group py-2 ' . ($active ? 'text-blue-600' : 'text-slate-700'),
+    ]) }}>
     {{ $slot }}
 
     <span

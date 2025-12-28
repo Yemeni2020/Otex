@@ -30,7 +30,7 @@
     <div class="flex items-start gap-3">
         <span class="mt-1 h-2.5 w-2.5 rounded-full {{ $style['dot'] }}"></span>
         <div class="flex-1 text-sm">
-            @if($title)
+            @if ($title)
                 <div class="font-semibold text-slate-900">{{ $title }}</div>
             @endif
             <div class="text-slate-700">{{ $slot }}</div>

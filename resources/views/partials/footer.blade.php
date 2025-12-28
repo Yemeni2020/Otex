@@ -174,7 +174,8 @@
         </div>
     </footer> --}}
 
-<footer class="relative bg-white/80 backdrop-blur-xl text-slate-900 border-t border-slate-200/60 dark:bg-[#0c0f10] dark:border-white/10 dark:text-gray-200">
+<footer
+    class="relative bg-white/80 backdrop-blur-xl text-slate-900 border-t border-slate-200/60 dark:bg-[#0c0f10] dark:border-white/10 dark:text-gray-200">
 
     <!-- TOP -->
     <div class="container mx-auto px-4 py-16">
@@ -278,19 +279,26 @@
             <!-- Payment icons -->
             <div class="flex flex-wrap items-center gap-3">
                 <img src="https://cdn.salla.network/cdn-cgi/image/fit=scale-down,width=58,height=58,onerror=redirect,format=auto/images/payment/mada_mini.png"
-                    alt="Mada" class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
+                    alt="Mada"
+                    class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
                 <img src="https://cdn.salla.network/cdn-cgi/image/fit=scale-down,width=58,height=58,onerror=redirect,format=auto/images/payment/credit_card_mini.png"
-                    alt="Credit card" class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
+                    alt="Credit card"
+                    class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
                 <img src="https://cdn.salla.network/cdn-cgi/image/fit=scale-down,width=58,height=58,onerror=redirect,format=auto/images/payment/stc_pay_mini.png"
-                    alt="STC Pay" class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
+                    alt="STC Pay"
+                    class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
                 <img src="https://cdn.salla.network/cdn-cgi/image/fit=scale-down,width=58,height=58,onerror=redirect,format=auto/images/payment/apple_pay_mini.png"
-                    alt="Apple Pay" class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
+                    alt="Apple Pay"
+                    class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
                 <img src="https://cdn.salla.network/cdn-cgi/image/fit=scale-down,width=58,height=58,onerror=redirect,format=auto/images/payment/google_pay_mini.png"
-                    alt="Google Pay" class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
+                    alt="Google Pay"
+                    class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
                 <img src="https://cdn.salla.network/cdn-cgi/image/fit=scale-down,width=58,height=58,onerror=redirect,format=auto/images/payment/tamara_installment_mini.png"
-                    alt="Tamara Installment" class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
+                    alt="Tamara Installment"
+                    class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
                 <img src="https://cdn.salla.network/cdn-cgi/image/fit=scale-down,width=58,height=58,onerror=redirect,format=auto/images/payment/cod_mini.png"
-                    alt="Cash on Delivery" class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
+                    alt="Cash on Delivery"
+                    class="h-10 w-14 rounded bg-white p-2 ring-1 ring-slate-200 dark:bg-white/5 dark:ring-white/10">
             </div>
 
             <!-- Copyright -->
