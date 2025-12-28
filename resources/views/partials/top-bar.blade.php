@@ -1,4 +1,4 @@
-{{-- <div class="relative  hidden md:block  text-slate-600 text-xs py-1.5 backdrop-blur-sm border-b border-slate-200 dark:bg-slate-900/95 dark:text-slate-300 dark:border-slate-800 transition-colors"> --}}
+
 <div id="siteTopbar" class="block bg-white border-b border-gray-200 topbar-transition"
     style="position: fixed; top: 0; left: 0; right: 0; z-index: 60;">
     <div class="w-full">

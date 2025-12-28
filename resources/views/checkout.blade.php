@@ -34,24 +34,7 @@
         </style>
     @endpush
 
-    {{-- <div id="applePayAlert" class="bg-[color:var(--warn)] text-slate-900">
-        <div class="container mx-auto px-4 py-3 flex items-center justify-between gap-3 text-xs">
-            <button class="opacity-70 hover:opacity-100 text-red-500" aria-label="close" type="button"
-                data-dismiss-alert>×</button>
-            <div class="flex-1 text-center">
-                Apple Pay is available only in Safari. Please open this checkout in Safari to pay.
-            </div>
-            <button id="copyCheckoutLink"
-                class="inline-flex items-center gap-2 rounded-md border border-black/20 bg-black/10 px-3 py-1.5 hover:bg-black/15"
-                type="button">
-                Copy link
-                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.7">
-                    <path d="M9 9h10v10H9z" />
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                </svg>
-            </button>
-        </div>
-    </div> --}}
+    
     <div id="applePayAlert"
         class="hidden relative isolate flex items-center gap-x-6 overflow-hidden bg-gray-800/50 px-6 py-2.5 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10 sm:px-3.5 sm:before:flex-1">
         <div aria-hidden="true"
@@ -109,7 +92,6 @@
                             </div>
                         </div>
                     </div>
-
 
                 </div>
             </x-card>
@@ -502,7 +484,6 @@
                                             <div id="cardNumberError" class="mt-2 hidden text-xs text-red-600">Your
                                                 card number is invalid.</div>
                                         </div>
-
 
                                     </div>
                                     <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-2 grid-cols-2">

@@ -1,7 +1,7 @@
 <x-layouts.app>
     <main class="py-12">
         <div class="mx-auto max-w-6xl px-4">
-            {{-- breadcrumb --}}
+            
             <div class="mb-6 flex items-center justify-end gaps-2 text-sm text-slate-400">
                 <span class="inline-flex h-7 w-7 items-center justify-center rounded-md border border-slate-200">
                     <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.7">
@@ -11,9 +11,9 @@
                 <span>/</span>
                 <span class="text-slate-500">cart</span>
             </div>
-            {{-- progress --}}
+            
             <div class="mb-8 flex items-center justify-between">
-                {{-- step2 --}}
+                
                 <div class="flex items-center gap-3">
                     <div class="text-right">
                         <div class="text-sm font-semibold text-blue-600"> Complete the order</div>
@@ -29,11 +29,11 @@
                         </svg>
                     </div>
                 </div>
-                {{-- Line --}}
+                
                 <div class="mx-4 hidden flex-1 lg:block">
                     <div class="h-[2px] w-full bg-slate-200"></div>
                 </div>
-                {{-- step-2 right --}}
+                
                 <div class="flex items-center gap-3">
                     <div class="relative grid h-12 w-12 place-items-center rounded-lg bg-blue-800 text-white ">
                         <!-- cart icon -->
@@ -53,9 +53,9 @@
                     </div>
                 </div>
             </div>
-            {{-- wrapper --}}
+            
             <section class="rounded-[18px] bg-white p-6">
-                {{-- desktop table head --}}
+                
                 <div
                     class="hidden rounded-[14px] bg-white px-6 py-4 text-sm text-slate-500 md:flex md:items-center md:justify-between">
                     <div class="font-semibold text-slate-600">Product</div>
@@ -65,11 +65,11 @@
                         <span class="w-14 text-left">Total</span>
                     </div>
                 </div>
-                {{-- Item 1 --}}
+                
                 <article class="mt-6 rounded-[14px] bg-white px-5 py-5 shadow-sm md:px-6">
                     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <div class="flex items-center gap-4">
-                            {{-- products --}}
+                            
                             <div class="flex items-center gap-4">
                                 <button class="grid h-8 w-8 place-items-center rounded-full bg-red-500/90 text-white"
                                     aria-label="delete">
@@ -90,12 +90,12 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- desktop values --}}
+                        
                         <div class="hidden md:flex md:items-center md:gap-16">
                             <div class="text-sm font-semibold text-slate-700">56.35 <span
                                     class="text-slate-400">$</span></div>
 
-                            {{-- qty --}}
+                            
                             <div
                                 class="inline-flex items-center overflow-hidden rounded-full border border-slate-200 bg-white">
                                 <button class="px-2 py-2 text-slate-500 hover:bg-slate-50">
@@ -114,13 +114,12 @@
                                             d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
                                     </svg>
 
-
                                 </button>
                             </div>
                             <div class="w-14 text-left text-sm font-bold text-slate-800">65.35 <span
                                     class="text-slate-400">$</span></div>
                         </div>
-                        {{-- Mobile values --}}
+                        
                         <div class="grid gap-3 md:hidden">
                             <div class="flex justify-between text-sm">
                                 <span class="text-slate-400">Price</span>
@@ -151,11 +150,10 @@
                                 <span class="font-semibold">56.35$</span>
                             </div>
 
-
                         </div>
                     </div>
                 </article>
-                {{-- Total --}}
+                
                 <div class="mt-6 rounded-[14px] shadow-sm bg-white p-6">
                     <div class="grid gap text-sm">
                         <div class="flex items-center justify-between">
@@ -183,7 +181,7 @@
 
                 </div>
 
-                {{-- CTA --}}
+                
                 <div class="mt-6">
                     <x-button-link href="{{ route('checkout') }}" variant="solid"
                         class="w-full rounded-full bg-blue-500 py-4 mt-4 text-white text-center text-sm font-extrabold shadow-sm hover:brightness-95">

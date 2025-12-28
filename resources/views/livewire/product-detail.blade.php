@@ -153,23 +153,7 @@
                 </form>
 
                 <div class="space-y-10">
-                    {{-- <div class="space-y-3">
-                            <h2 class="text-lg font-semibold text-slate-900">Description</h2>
-                            <div class="space-y-3 text-slate-700 leading-relaxed">
-                                <p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p>
-                                <p>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</p>
-                            </div>
-                        </div>
-
-                        <div class="space-y-3">
-                            <h2 class="text-lg font-semibold text-slate-900">Fabric &amp; Care</h2>
-                            <ul class="space-y-2 text-slate-700 list-disc pl-5">
-                                <li>Only the best materials</li>
-                                <li>Ethically and locally made</li>
-                                <li>Pre-washed and pre-shrunk</li>
-                                <li>Machine wash cold with similar colors</li>
-                            </ul>
-                        </div> --}}
+                    
 
                     <section aria-labelledby="policies-heading" class="space-y-4">
                         <h2 id="policies-heading" class="text-lg font-semibold text-slate-900">Our Policies</h2>

@@ -1,30 +1,14 @@
 <div>
-    {{-- @extends('layouts.app')
+    
 
-@section('content')
-    <livewire:best-sellers />
-@endsection --}}
-
-    {{-- <div class="space-y-16"> --}}
+    
     <!-- New Arrivals Section -->
 
-
     <!-- Best Sellers Section -->
-    {{-- <livewire:best-sellers /> --}}
-    {{-- </div> --}}
+    
+    
 
-
-
-    {{-- <livewire:new-arrivals />
-<livewire:best-sellers />
-
-<script>
-    window.addEventListener('notify', event => {
-        alert(event.detail.message);
-    });
-</script> --}}
-
-
+    
 
     @push('head')
         <style>
@@ -331,11 +315,6 @@
             </div>
         </section>
 
-
-
-
-
-
         <section class="bg-white py-12">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
                 <div class="flex items-end justify-between gap-4">
@@ -559,7 +538,6 @@
                 </li>
             </ul>
     </div>
-
 
     </section>
 

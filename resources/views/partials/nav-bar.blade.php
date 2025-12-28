@@ -56,13 +56,7 @@
                     <img src="{{ asset('img/logo_text.svg') }}" alt="Otex logo"
                         class="h-14 w-auto object-contain drop-shadow-sm">
                 </div>
-                {{-- <div class="hidden sm:block">
-                    <h1
-                        class="text-2xl font-bold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent leading-none filter drop-shadow-sm">
-                        Otex</h1>
-                    <p class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold leading-none mt-0.5">
-                        Express</p>
-                </div> --}}
+                
             </a>
 
             <!-- Desktop Navigation -->
@@ -189,8 +183,6 @@
                     buttonClass="text-slate-400 hover:text-blue-600" class="w-full" />
             </div>
 
-
-
             <!-- User Actions -->
             <div class="flex items-center gap-2 sm:gap-4">
                 <button id="mobileSearchButton" aria-label="Search"
@@ -203,7 +195,7 @@
                     </svg>
                 </button>
 
-                {{-- Dark mode --}}
+                
                 <button id="themeToggleButton" type="button"
                     class="p-2 rounded-full hover:bg-black/5 transition-colors text-slate-700">
                     <svg id="themeIconSun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
