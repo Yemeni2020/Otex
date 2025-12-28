@@ -21,7 +21,7 @@
 
 <header
     id="siteHeader"
-    class="fixed inset-x-0 z-50 transition-all duration-300 border-b border-white/20 bg-white/50 backdrop-blur-lg supports-[backdrop-filter]:bg-white/40"
+    class="fixed inset-x-0 z-50 overflow-visible transition-all duration-300 border-b border-white/20 bg-white/50 backdrop-blur-lg supports-[backdrop-filter]:bg-white/40"
     style="top: var(--topbar-height, 0px);">
     <!-- Main Header -->
     
@@ -81,7 +81,7 @@
                     </button>
                     <div
                         id="desktop-shop-menu"
-                        class="dropdown-content mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[280px] hidden">
+                        class="dropdown-content absolute top-full mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[280px] z-[70] hidden">
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <h4 class="font-bold text-slate-800 mb-2">Interior</h4>
@@ -132,7 +132,7 @@
                     </button>
                     <div
                         id="desktop-categories-menu"
-                        class="dropdown-content mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[280px] hidden">
+                        class="dropdown-content absolute top-full mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[280px] z-[70] hidden">
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <h4 class="font-bold text-slate-800 mb-2">Performance</h4>
@@ -190,7 +190,7 @@
             <!-- User Actions -->
             <div class="flex items-center gap-2 sm:gap-4">
                 <button id="mobileSearchButton" aria-label="Search"
-                    class="md:hidden p-2 hover:bg-black/5 rounded-full text-slate-600 transition-colors">
+                    class="hidden md:hidden p-2 hover:bg-black/5 rounded-full text-slate-600 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="w-5 h-5">
@@ -249,7 +249,8 @@
                     </button>
                     <div
                         id="desktop-user-menu"
-                        class="dropdown-content mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[200px] right-0 hidden">
+                        class="dropdown-content absolute top-full mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 min-w-[200px] z-[70] hidden"
+                        style="inset-inline-end: 0;">
                         <div class="space-y-3">
                             <h4 class="font-bold text-slate-800 mb-2">My Account</h4>
                             <a href="/profile"
@@ -321,6 +322,7 @@
                         <a href="/categories/dash-cams"
                             class="block py-1 text-slate-600 hover:text-blue-600 transition-colors">Dash Cams</a>
                     </div>
+                    
                 </div>
 
                 @php $mobileAbout = $isActive(['about']); @endphp
@@ -331,6 +333,7 @@
                 <a href="/contact"
                     class="block py-2 font-medium transition-colors {{ $mobileContact ? 'text-blue-600' : 'text-slate-700 hover:text-blue-600' }}">Contact</a>
             </div>
+            
         </div>
 
         <!-- Mobile search -->

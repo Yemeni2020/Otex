@@ -92,7 +92,8 @@
                 aria-roledescription="carousel" aria-label="Best sellers carousel" tabindex="0">
         @foreach($this->visibleProducts as $product)
             <article class="slide snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[260px]" wire:key="best-seller-{{ $product['id'] }}">
-                <div class="group rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                <div class="group relative rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                    <a href="{{ route('shop.show', $product['id']) }}" class="absolute inset-0 z-10" aria-label="View {{ $product['name'] }}"></a>
                     <div class="relative aspect-[4/3] bg-zinc-100 overflow-hidden">
                         <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                             src="{{ $product['image'] }}" alt="{{ $product['name'] }}" draggable="false" />
@@ -104,7 +105,7 @@
                             @endif
                         </div>
                         <button wire:click="addToCart({{ $product['id'] }})"
-                            class="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
+                            class="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-white/95 text-zinc-900 shadow-sm ring-1 ring-black/5 hover:bg-white"
                             type="button" aria-label="Add to cart">
                             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
                                 <path d="M7 4H5L4 6v2h2l3.6 7.59-1.35 2.44A2 2 0 0 0 10 22h10v-2H10l1.1-2h7.45a2 2 0 0 0 1.75-1.03L23 8H7.42L7 7H4V5h2l1-2ZM10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
@@ -135,7 +136,7 @@
                                 @endif
                             </div>
                             <x-button wire:click="addToCart({{ $product['id'] }})"
-                                class="rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
+                                class="relative z-20 rounded-full bg-zinc-900 px-3.5 py-2 text-xs font-bold text-white hover:bg-zinc-800 active:scale-[0.98]"
                                 type="button">
                                 Add
                             </x-button>

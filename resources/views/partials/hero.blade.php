@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <div class="absolute inset-x-0 bottom-0 h-1.5 bg-white/10 rounded-full overflow-hidden mt-4">
+            <div class="absolute inset-x-4 bottom-0 h-1.5 bg-white/10 rounded-full overflow-hidden mt-4">
                 <div id="hero-progress" class="h-full w-0 bg-gradient-to-r from-blue-400 via-indigo-400 to-blue-600"></div>
             </div>
         </div>

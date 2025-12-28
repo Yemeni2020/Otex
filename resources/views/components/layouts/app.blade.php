@@ -27,20 +27,37 @@
         .dark header { background-color: rgba(15, 23, 42, 0.8); color: #e2e8f0; }
         .dark nav a { color: #e2e8f0; }
         .dark .bg-white { background-color: #0f172a !important; }
+        .dark .bg-white\/95 { background-color: rgba(15, 23, 42, 0.95) !important; }
+        .dark .bg-white\/90 { background-color: rgba(15, 23, 42, 0.9) !important; }
+        .dark .bg-white\/80 { background-color: rgba(15, 23, 42, 0.8) !important; }
+        .dark .bg-white\/70 { background-color: rgba(15, 23, 42, 0.7) !important; }
+        .dark .bg-white\/60 { background-color: rgba(15, 23, 42, 0.6) !important; }
+        .dark .bg-white\/50 { background-color: rgba(15, 23, 42, 0.5) !important; }
         .dark .bg-gray-50,
         .dark .bg-slate-50 { background-color: #0b1428 !important; }
+        .dark .bg-slate-50\/60 { background-color: rgba(15, 23, 42, 0.6) !important; }
+        .dark .bg-zinc-50 { background-color: #0b1428 !important; }
+        .dark .bg-zinc-100 { background-color: #111827 !important; }
         .dark .text-gray-900,
         .dark .text-slate-900,
-        .dark .text-slate-800 { color: #e2e8f0 !important; }
+        .dark .text-slate-800,
+        .dark .text-zinc-900,
+        .dark .text-zinc-800 { color: #e2e8f0 !important; }
         .dark .text-gray-800,
         .dark .text-slate-700,
         .dark .text-slate-600,
-        .dark .text-slate-500 { color: #cbd5e1 !important; }
+        .dark .text-slate-500,
+        .dark .text-zinc-700,
+        .dark .text-zinc-600,
+        .dark .text-zinc-500 { color: #cbd5e1 !important; }
+        .dark .text-zinc-400 { color: #94a3b8 !important; }
         .dark .text-gray-700,
         .dark .text-gray-600 { color: #cbd5e1 !important; }
         .dark .border-gray-200 { border-color: #1e293b !important; }
         .dark .border-slate-100,
-        .dark .border-slate-200 { border-color: #1e293b !important; }
+        .dark .border-slate-200,
+        .dark .border-zinc-200 { border-color: #1e293b !important; }
+        .dark .border-zinc-200\/70 { border-color: rgba(30, 41, 59, 0.7) !important; }
         .dark .shadow-lg,
         .dark .shadow-xl { box-shadow: 0 10px 30px rgba(0,0,0,0.45) !important; }
         .toggle-checkbox:checked + .toggle-label { background: linear-gradient(90deg, #2563eb, #60a5fa); }
@@ -103,8 +120,17 @@
 
     @include('partials.footer')
 
+    <!-- WhatsApp (mobile) -->
+    <a href="https://wa.me/966000000000"
+       aria-label="Chat on WhatsApp"
+       class="fixed bottom-27 right-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-emerald-600 active:translate-y-0 sm:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+            <path d="M27.281 4.65c-2.994-3-6.975-4.65-11.219-4.65-8.738 0-15.85 7.112-15.85 15.856 0 2.794 0.731 5.525 2.119 7.925l-2.25 8.219 8.406-2.206c2.319 1.262 4.925 1.931 7.575 1.931h0.006c8.738 0 15.856-7.113 15.856-15.856 0-4.238-1.65-8.219-4.644-11.219zM16.069 29.050v0c-2.369 0-4.688-0.637-6.713-1.837l-0.481-0.288-4.987 1.306 1.331-4.863-0.313-0.5c-1.325-2.094-2.019-4.519-2.019-7.012 0-7.269 5.912-13.181 13.188-13.181 3.519 0 6.831 1.375 9.319 3.862 2.488 2.494 3.856 5.8 3.856 9.325-0.006 7.275-5.919 13.188-13.181 13.188zM23.294 19.175c-0.394-0.2-2.344-1.156-2.706-1.288s-0.625-0.2-0.894 0.2c-0.262 0.394-1.025 1.288-1.256 1.556-0.231 0.262-0.462 0.3-0.856 0.1s-1.675-0.619-3.188-1.969c-1.175-1.050-1.975-2.35-2.206-2.744s-0.025-0.613 0.175-0.806c0.181-0.175 0.394-0.463 0.594-0.694s0.262-0.394 0.394-0.662c0.131-0.262 0.069-0.494-0.031-0.694s-0.894-2.15-1.219-2.944c-0.319-0.775-0.65-0.669-0.894-0.681-0.231-0.012-0.494-0.012-0.756-0.012s-0.694 0.1-1.056 0.494c-0.363 0.394-1.387 1.356-1.387 3.306s1.419 3.831 1.619 4.1c0.2 0.262 2.794 4.269 6.769 5.981 0.944 0.406 1.681 0.65 2.256 0.837 0.95 0.3 1.813 0.256 2.494 0.156 0.762-0.113 2.344-0.956 2.675-1.881s0.331-1.719 0.231-1.881c-0.094-0.175-0.356-0.275-0.756-0.475z"></path>
+        </svg>
+    </a>
+
     <!-- Scroll to top -->
-    <button id="scrollToTop" aria-label="Scroll to top" class="scroll-to-top fixed bottom-6 right-4 z-40 hidden transition-opacity duration-300 opacity-0" type="button">
+    <button id="scrollToTop" aria-label="Scroll to top" class="scroll-to-top fixed bottom-6 right-4 z-40 !hidden lg:!block transition-opacity duration-300 opacity-0" type="button">
         <svg class="progress-circle svg-content" width="56" height="56" viewBox="-1 -1 102 102">
             <path id="scrollToTopPath" d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" 
                   class="stroke-[3] stroke-blue-500 fill-white drop-shadow"

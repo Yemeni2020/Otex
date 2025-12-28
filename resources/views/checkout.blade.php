@@ -348,25 +348,23 @@
 
                         <!-- payment panel -->
                         <div id="paymentPanel" class="hidden mt-4 rounded-xl border border-slate-200/70 bg-white shadow-sm p-4">
-                            <div class="sm:hidden">
-                                <label for="paymentOptionsSelect" class="text-xs font-semibold text-slate-500">Payment method</label>
-                                <select id="paymentOptionsSelect"
-                                    class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200/60">
-                                    <option value="apple-pay">Apple Pay</option>
-                                    <option value="google-pay">Google Pay</option>
-                                    <option value="mada" selected>Mada</option>
-                                    <option value="credit">Card</option>
-                                    <option value="tabby">Tabby</option>
-                                    <option value="tamara">Tamara</option>
-                                    <option value="bank-transfer">Bank transfer</option>
-                                    <option value="cod">Cash on delivery</option>
-                                </select>
-                            </div>
-
-                            <!-- payment options row -->
-                            <div class="hidden sm:flex flex-wrap gap-2" id="paymentOptionsRow">
+                            <div class="relative" id="paymentDropdown">
+                                <label class="text-xs font-semibold text-slate-500" for="paymentDropdownButton">Payment method</label>
+                                <button id="paymentDropdownButton" type="button"
+                                    class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200/60 flex items-center justify-between">
+                                    <span class="flex items-center gap-2">
+                                        <span id="paymentDropdownIcon" class="flex h-4 w-4 items-center justify-center text-slate-700"></span>
+                                        <span id="paymentDropdownText" class="text-sm font-semibold text-slate-700">Mada</span>
+                                    </span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 0 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                                <div id="paymentDropdownMenu"
+                                    class="absolute left-0 right-0 z-20 mt-2 hidden rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
+                                    <div class="max-h-64 space-y-1 overflow-auto">
                                 <button
-                                    class="payment-option apple-pay-option hidden h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                    class="payment-option apple-pay-option hidden w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
                                     type="button" aria-pressed="false" data-payment="apple-pay" data-label="Apple Pay">
                                     <svg viewBox="0 0 24 24" class="h-4 w-4 text-slate-800" fill="currentColor" aria-hidden="true">
                                         <path d="M17.9 12.6c-.02-1.54 1.26-2.27 1.31-2.31-.72-1.06-1.84-1.2-2.24-1.22-.95-.1-1.86.56-2.34.56-.48 0-1.22-.55-2-.53-1.03.02-1.98.6-2.5 1.51-1.07 1.85-.27 4.57.77 6.07.5.73 1.1 1.56 1.89 1.53.76-.03 1.05-.49 1.97-.49.92 0 1.18.49 1.99.48.82-.02 1.34-.73 1.84-1.46.58-.84.82-1.65.83-1.69-.02-.01-1.6-.62-1.62-2.45Zm-1.53-4.23c.42-.5.7-1.2.62-1.9-.61.02-1.35.41-1.79.91-.39.45-.74 1.18-.65 1.87.68.05 1.38-.36 1.82-.88Z" />
@@ -374,12 +372,12 @@
                                     Apple Pay
                                 </button>
                                 <button
-                                    class="payment-option google-pay-option hidden h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                    class="payment-option google-pay-option hidden w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
                                     type="button" aria-pressed="false" data-payment="google-pay" data-label="Google Pay">
                                     Google Pay
                                 </button>
                                 <button
-                                    class="payment-option is-active h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                    class="payment-option is-active w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
                                     type="button" aria-pressed="true" data-payment="mada" data-label="Mada">
                                     <img class="h-4 w-auto"
                                         src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-mada.svg"
@@ -387,7 +385,7 @@
                                     Mada
                                 </button>
                                 <button
-                                    class="payment-option h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                    class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
                                     type="button" aria-pressed="false" data-payment="credit" data-label="Card">
                                     <img class="h-4 w-auto"
                                         src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-credit-2.svg"
@@ -395,7 +393,7 @@
                                     Card
                                 </button>
                                 <button
-                                    class="payment-option h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                    class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
                                     type="button" aria-pressed="false" data-payment="tabby" data-label="Tabby">
                                     <img class="h-4 w-auto"
                                         src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/pay-option-tabby_en.png?v=0.0.1"
@@ -403,7 +401,7 @@
                                     Tabby
                                 </button>
                                 <button
-                                    class="payment-option h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
+                                    class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center gap-2"
                                     type="button" aria-pressed="false" data-payment="tamara" data-label="Tamara">
                                     <img class="h-4 w-auto"
                                         src="https://cdn.assets.salla.network/prod/stores/vendor/checkout/images/icons/tamara/ar-tamara-label.svg"
@@ -411,18 +409,18 @@
                                     Tamara
                                 </button>
                                 <button
-                                    class="payment-option h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition"
+                                    class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition"
                                     type="button" aria-pressed="false" data-payment="bank-transfer" data-label="Bank transfer">
                                     Bank transfer
                                 </button>
                                 <button
-                                    class="payment-option h-10 rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition relative"
+                                    class="payment-option w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 transition inline-flex items-center justify-between gap-2"
                                     type="button" aria-pressed="false" data-payment="cod" data-label="Cash on delivery">
                                     Cash on delivery
-                                    <span
-                                        class="absolute -left-2 -top-2 rounded-full bg-sky-100 text-sky-700 text-[11px] px-2 py-0.5 border border-sky-200">+10
-                                        SAR</span>
+                                    <span class="rounded-full bg-sky-100 text-sky-700 text-[11px] px-2 py-0.5 border border-sky-200">+10 SAR</span>
                                 </button>
+                                    </div>
+                                </div>
                             </div>
 
                             <div data-payment-panel="card">
@@ -711,10 +709,10 @@
             const applePayPanel = document.querySelector('[data-payment-panel="apple-pay"]');
             const googlePayOption = document.querySelector('.google-pay-option');
             const googlePayPanel = document.querySelector('[data-payment-panel="google-pay"]');
-            const paymentOptionsRow = document.getElementById('paymentOptionsRow');
-            const paymentOptionsSelect = document.getElementById('paymentOptionsSelect');
-            const applePaySelectOption = paymentOptionsSelect?.querySelector('option[value="apple-pay"]');
-            const googlePaySelectOption = paymentOptionsSelect?.querySelector('option[value="google-pay"]');
+            const paymentDropdownButton = document.getElementById('paymentDropdownButton');
+            const paymentDropdownMenu = document.getElementById('paymentDropdownMenu');
+            const paymentDropdownText = document.getElementById('paymentDropdownText');
+            const paymentDropdownIcon = document.getElementById('paymentDropdownIcon');
             const addressList = document.getElementById('addressList');
             const addAddressBtn = document.querySelector('[data-add-address]');
             const addressDialog = document.getElementById('addressDialog');
@@ -769,6 +767,41 @@
                 });
             }
 
+            const updatePaymentDropdown = (option) => {
+                if (!option || !paymentDropdownText) return;
+                const label = option.getAttribute('data-label') || option.textContent?.trim();
+                if (label) paymentDropdownText.textContent = label;
+                if (paymentDropdownIcon) {
+                    paymentDropdownIcon.innerHTML = '';
+                    const icon = option.querySelector('img, svg');
+                    if (icon) {
+                        const clone = icon.cloneNode(true);
+                        if (clone.tagName === 'IMG') {
+                            clone.className = 'h-4 w-auto';
+                        } else {
+                            clone.className = 'h-4 w-4';
+                        }
+                        paymentDropdownIcon.appendChild(clone);
+                    }
+                }
+            };
+
+            const closePaymentDropdown = () => {
+                paymentDropdownMenu?.classList.add('hidden');
+            };
+
+            paymentDropdownButton?.addEventListener('click', (e) => {
+                e.preventDefault();
+                paymentDropdownMenu?.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!paymentDropdownMenu || !paymentDropdownButton) return;
+                if (!paymentDropdownMenu.contains(e.target) && !paymentDropdownButton.contains(e.target)) {
+                    closePaymentDropdown();
+                }
+            });
+
             paymentOptions.forEach((option) => {
                 option.addEventListener('click', () => {
                     paymentOptions.forEach((btn) => {
@@ -780,13 +813,11 @@
                     if (payPanel?.classList.contains('hidden')) {
                         payPanel.classList.remove('hidden');
                     }
-                    showPaymentPanel(option.getAttribute('data-payment'));
                     const label = option.getAttribute('data-label');
                     if (label && paymentSummary) paymentSummary.textContent = label;
-                    if (paymentOptionsSelect) {
-                        const value = option.getAttribute('data-payment');
-                        if (value) paymentOptionsSelect.value = value;
-                    }
+                    showPaymentPanel(option.getAttribute('data-payment'));
+                    updatePaymentDropdown(option);
+                    closePaymentDropdown();
                 });
             });
 
@@ -937,60 +968,48 @@
             if (isIOS && isSafari) {
                 alertBox?.classList.remove('hidden');
             }
-            paymentOptionsSelect?.addEventListener('change', (e) => {
-                const value = e.target.value;
-                const selectedButton = document.querySelector(`.payment-option[data-payment=\"${value}\"]`);
-                selectedButton?.click();
-            });
 
-            applePayOption?.classList.add('hidden');
-            googlePayOption?.classList.add('hidden');
-            if (applePaySelectOption) {
-                applePaySelectOption.hidden = true;
-                applePaySelectOption.disabled = true;
-            }
-            if (googlePaySelectOption) {
-                googlePaySelectOption.hidden = true;
-                googlePaySelectOption.disabled = true;
-            }
-            if (isIOS) {
-                applePayOption?.classList.remove('hidden');
-                if (applePaySelectOption) {
-                    applePaySelectOption.hidden = false;
-                    applePaySelectOption.disabled = false;
+            const isApplePayAvailable = isIOS && isSafari;
+            const isGooglePayAvailable = isAndroid;
+
+            const applyPlatformPaymentOptions = () => {
+                if (applePayOption) {
+                    applePayOption.classList.toggle('hidden', !isApplePayAvailable);
+                    applePayOption.style.display = isApplePayAvailable ? '' : 'none';
                 }
-            } else {
-                applePayOption?.classList.add('hidden');
-                applePayPanel?.classList.add('hidden');
-                if (applePayOption?.classList.contains('is-active')) {
-                    applePayOption.classList.remove('is-active');
-                    applePayOption.setAttribute('aria-pressed', 'false');
-                    const fallback = document.querySelector('.payment-option[data-payment="mada"]');
-                    fallback?.classList.add('is-active');
-                    fallback?.setAttribute('aria-pressed', 'true');
-                    showPaymentPanel('mada');
-                    if (paymentSummary) paymentSummary.textContent = 'Mada';
-                    if (paymentOptionsSelect) paymentOptionsSelect.value = 'mada';
+                if (googlePayOption) {
+                    googlePayOption.classList.toggle('hidden', !isGooglePayAvailable);
+                    googlePayOption.style.display = isGooglePayAvailable ? '' : 'none';
                 }
-            }
-            if (isAndroid) {
-                googlePayOption?.classList.remove('hidden');
-                if (googlePaySelectOption) {
-                    googlePaySelectOption.hidden = false;
-                    googlePaySelectOption.disabled = false;
+
+                if (!isApplePayAvailable) {
+                    applePayPanel?.classList.add('hidden');
+                    if (applePayOption?.classList.contains('is-active')) {
+                        applePayOption.classList.remove('is-active');
+                        applePayOption.setAttribute('aria-pressed', 'false');
+                        const fallback = document.querySelector('.payment-option[data-payment="mada"]');
+                        fallback?.classList.add('is-active');
+                        fallback?.setAttribute('aria-pressed', 'true');
+                        showPaymentPanel('mada');
+                        if (paymentSummary) paymentSummary.textContent = 'Mada';
+                        updatePaymentDropdown(fallback);
+                    }
                 }
-            } else {
-                googlePayOption?.classList.add('hidden');
-                googlePayPanel?.classList.add('hidden');
-                if (paymentOptionsSelect?.value === 'google-pay') {
-                    const fallback = document.querySelector('.payment-option[data-payment="mada"]');
-                    fallback?.classList.add('is-active');
-                    fallback?.setAttribute('aria-pressed', 'true');
-                    showPaymentPanel('mada');
-                    if (paymentSummary) paymentSummary.textContent = 'Mada';
-                    paymentOptionsSelect.value = 'mada';
+
+                if (!isGooglePayAvailable) {
+                    googlePayPanel?.classList.add('hidden');
+                    if (googlePayOption?.classList.contains('is-active')) {
+                        const fallback = document.querySelector('.payment-option[data-payment="mada"]');
+                        fallback?.classList.add('is-active');
+                        fallback?.setAttribute('aria-pressed', 'true');
+                        showPaymentPanel('mada');
+                        if (paymentSummary) paymentSummary.textContent = 'Mada';
+                        updatePaymentDropdown(fallback);
+                    }
                 }
-            }
+            };
+
+            applyPlatformPaymentOptions();
 
             addressList?.addEventListener('click', (e) => {
                 const editBtn = e.target.closest('[data-edit-address]');
@@ -1151,8 +1170,14 @@
                 if (text && shippingSummary) shippingSummary.textContent = text;
             });
 
-            const initialPayment = document.querySelector('.payment-option.is-active')?.getAttribute('data-payment');
+            const initialOption = document.querySelector('.payment-option.is-active');
+            const initialPayment = initialOption?.getAttribute('data-payment');
             showPaymentPanel(initialPayment);
+            if (initialOption) {
+                updatePaymentDropdown(initialOption);
+                const label = initialOption.getAttribute('data-label');
+                if (label && paymentSummary) paymentSummary.textContent = label;
+            }
         </script>
     @endpush
 </x-layouts.app>
