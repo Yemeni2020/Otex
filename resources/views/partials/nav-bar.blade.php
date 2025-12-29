@@ -295,8 +295,8 @@
                         style="inset-inline-end: 0;">
                         <div class="space-y-3">
                             <h4 class="font-bold text-slate-800 mb-2">My Account</h4>
-                            <a href="/profile"
-                                class="block text-sm text-slate-600 hover:text-blue-600 transition-colors">Profile</a>
+                            <a href="/settings"
+                                class="block text-sm text-slate-600 hover:text-blue-600 transition-colors">Settings</a>
                             <a href="/orders"
                                 class="block text-sm text-slate-600 hover:text-blue-600 transition-colors">Orders</a>
                             <a href="/wishlist"

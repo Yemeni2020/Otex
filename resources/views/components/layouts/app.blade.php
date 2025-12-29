@@ -148,6 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     };
+    window.applyTheme = applyTheme;
+    window.setTheme = (theme) => {
+        localStorage.setItem('theme', theme);
+        applyTheme(theme);
+    };
     const storedTheme = localStorage.getItem('theme');
     applyTheme(storedTheme || 'light');
     if (themeToggle) {
@@ -254,6 +259,87 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     document.addEventListener('click', handleWishlistToggle);
+
+    // Password UI (settings page)
+    window.togglePassword = (button) => {
+        const field = button?.closest?.('.password-field');
+        const target = field ? field.querySelector('input') : null;
+        if (!target) return;
+        const isPassword = target.getAttribute('type') === 'password';
+        target.setAttribute('type', isPassword ? 'text' : 'password');
+        button.textContent = isPassword ? 'Hide' : 'Show';
+        button.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+    };
+
+    window.updatePasswordStrength = () => {
+        const newPassword = document.getElementById('newPassword');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const strengthLabel = document.getElementById('passwordStrengthLabel');
+        const strengthBar = document.getElementById('passwordStrengthBar');
+        const matchHint = document.getElementById('passwordMatchHint');
+        const updateButton = document.getElementById('updatePasswordButton');
+        const ruleItems = document.querySelectorAll('#passwordRules [data-rule]');
+
+        if (!newPassword || !confirmPassword || !strengthLabel || !strengthBar || !matchHint || !updateButton) {
+            return;
+        }
+
+        const value = newPassword.value || '';
+        const rules = {
+            length: value.length >= 12,
+            case: /[a-z]/.test(value) && /[A-Z]/.test(value),
+            number: /[0-9]/.test(value),
+            symbol: /[^A-Za-z0-9]/.test(value),
+        };
+        const passedCount = Object.values(rules).filter(Boolean).length;
+        const labels = ['Very weak', 'Weak', 'Fair', 'Good', 'Strong'];
+        const colors = ['bg-rose-500', 'bg-amber-500', 'bg-yellow-500', 'bg-lime-500', 'bg-emerald-500'];
+        const widths = ['w-1/5', 'w-2/5', 'w-3/5', 'w-4/5', 'w-full'];
+        const idx = Math.min(passedCount, 4);
+
+        strengthBar.className = 'h-2 rounded-full transition-all';
+        if (!value.length) {
+            strengthLabel.textContent = '-';
+            strengthBar.classList.add('bg-slate-400', 'w-0');
+        } else {
+            strengthLabel.textContent = labels[idx];
+            strengthBar.classList.add(colors[idx], widths[idx]);
+        }
+
+        ruleItems.forEach((item) => {
+            const key = item.getAttribute('data-rule');
+            const passed = !!rules[key];
+            item.classList.toggle('text-emerald-600', passed);
+            item.classList.toggle('text-slate-600', !passed);
+        });
+
+        const matches = confirmPassword.value.length > 0 && confirmPassword.value === value;
+        if (!confirmPassword.value.length) {
+            matchHint.textContent = '-';
+            matchHint.classList.remove('text-emerald-600', 'text-rose-600');
+        } else if (matches) {
+            matchHint.textContent = 'Passwords match';
+            matchHint.classList.add('text-emerald-600');
+            matchHint.classList.remove('text-rose-600');
+        } else {
+            matchHint.textContent = 'Passwords do not match';
+            matchHint.classList.add('text-rose-600');
+            matchHint.classList.remove('text-emerald-600');
+        }
+
+        const valid = passedCount >= 4 && matches;
+        updateButton.disabled = !valid;
+        updateButton.classList.toggle('opacity-60', !valid);
+        updateButton.classList.toggle('cursor-not-allowed', !valid);
+    };
+
+    document.addEventListener('input', (event) => {
+        if (event.target?.id === 'newPassword' || event.target?.id === 'confirmPassword') {
+            window.updatePasswordStrength();
+        }
+    });
+
+    window.updatePasswordStrength();
 
     if (mobileMenuButton && mobileMenu) {
         const openMenu = () => {

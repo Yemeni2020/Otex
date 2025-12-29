@@ -205,6 +205,11 @@ Route::get('/contact', function () {
 
 // Profile / Orders / Wishlist
 Route::view('/profile', 'profile')->name('profile');
+Route::view('/login', 'pages.login')->name('login');
+Route::view('/signup', 'pages.signup')->name('signup');
+Route::view('/reset-password', 'pages.reset-password')->name('password.reset');
+Route::view('/otp', 'pages.otp')->name('otp');
+Route::view('/settings', 'pages.settings')->name('settings');
 Route::view('/orders/history', 'orders.history')->name('orders.history');
 Route::view('/orders/success', 'orders.success')->name('orders.success');
 Route::post('/orders/place', function () {
