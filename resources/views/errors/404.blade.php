@@ -16,8 +16,10 @@
             </div>
         </main>
         <div class="relative hidden md:block">
-            <img src="https://images.unsplash.com/photo-1583585635793-0e1894c169bd?auto=format&fit=crop&w=1200&q=80"
-                alt="Not found" class="absolute inset-0 w-full h-full object-cover opacity-90 dark:opacity-60">
+            <img src="{{ asset('img/404_light.avif') }}" alt="Not found"
+                class="absolute inset-0 w-full h-full object-cover opacity-90 dark:hidden">
+            <img src="{{ asset('img/dark_mode.avif') }}" alt="Not found"
+                class="absolute inset-0 w-full h-full object-cover opacity-60 hidden dark:block">
         </div>
     </div>
 </x-layouts.app>

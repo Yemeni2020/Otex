@@ -239,8 +239,47 @@
                     @endif
                 </button>
 
-                <!-- User Dropdown -->
-                <div class="dropdown relative">
+                <div class="dropdown relative hidden lg:block">
+                    <button type="button" aria-label="Notifications" data-dropdown-target="desktop-notifications-menu"
+                        class="inline-flex items-center justify-center h-10 w-10 rounded-full border border-slate-200/70 text-slate-600 hover:text-blue-600 hover:border-blue-200 transition-colors desktop-dropdown-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2c0 .5-.2 1-.6 1.4L4 17h5m6 0a3 3 0 1 1-6 0" />
+                        </svg>
+                    </button>
+                    <div id="desktop-notifications-menu"
+                        class="dropdown-content absolute top-full mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 w-72 z-[70] hidden"
+                        style="inset-inline-end: 0;">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-bold text-slate-800">Notifications</h4>
+                                <button type="button"
+                                    class="text-xs font-semibold text-blue-600 hover:text-blue-700">Mark all
+                                    read</button>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="rounded-lg border border-slate-100 p-3">
+                                    <p class="text-sm font-semibold text-slate-800">Order shipped</p>
+                                    <p class="text-xs text-slate-500">Order #14034056 is on the way.</p>
+                                </div>
+                                <div class="rounded-lg border border-slate-100 p-3">
+                                    <p class="text-sm font-semibold text-slate-800">New message</p>
+                                    <p class="text-xs text-slate-500">Support replied to your request.</p>
+                                </div>
+                                <div class="rounded-lg border border-slate-100 p-3">
+                                    <p class="text-sm font-semibold text-slate-800">Weekly deals</p>
+                                    <p class="text-xs text-slate-500">New discounts available now.</p>
+                                </div>
+                            </div>
+                            <a href="/notifications"
+                                class="block text-sm font-semibold text-blue-600 hover:text-blue-700">View all</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Dropdown (desktop only) -->
+                <div class="dropdown relative hidden lg:block">
                     <button type="button" data-dropdown-target="desktop-user-menu"
                         class="inline-flex items-center justify-center text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-10 w-10 rounded-full hover:bg-black/5 relative group transition-colors desktop-dropdown-toggle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -335,6 +374,31 @@
                     Us</a>
                 <a href="/contact"
                     class="block py-2 font-medium transition-colors {{ $mobileContact ? 'text-blue-600' : 'text-slate-700 hover:text-blue-600' }}">Contact</a>
+            </div>
+
+            <div class="mt-6 border-t border-gray-100 pt-4">
+                <div class="flex items-center gap-3">
+                    <div class="h-10 w-10 overflow-hidden rounded-full bg-slate-100">
+                        <img src="https://i.pravatar.cc/80?img=12" alt="Profile" class="h-full w-full object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-sm font-semibold text-slate-900">Tom Cook</div>
+                        <div class="text-xs text-slate-500">tom@example.com</div>
+                    </div>
+                    <button type="button"
+                        class="h-9 w-9 rounded-full border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" class="mx-auto">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2c0 .5-.2 1-.6 1.4L4 17h5m6 0a3 3 0 1 1-6 0" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="mt-4 space-y-2 text-sm font-medium text-slate-700">
+                    <a href="/profile" class="block py-2 hover:text-blue-600 transition-colors">Your profile</a>
+                    <a href="/settings" class="block py-2 hover:text-blue-600 transition-colors">Settings</a>
+                    <a href="/logout" class="block py-2 text-slate-500 hover:text-blue-600 transition-colors">Sign out</a>
+                </div>
             </div>
 
         </div>

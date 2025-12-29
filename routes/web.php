@@ -323,6 +323,7 @@ Route::get('/orders/{order}/receipt', function (string $order) {
     return view('orders.receipt', ['order' => $orderData]);
 })->name('orders.receipt');
 Route::view('/wishlist', 'wishlist')->name('wishlist');
+Route::view('/notifications', 'notifications')->name('notifications');
 
 // Checkout Page
 Route::get('/checkout', function () {
