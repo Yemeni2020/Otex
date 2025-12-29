@@ -61,8 +61,11 @@ class BestSellers extends Component
     public function addToCart($productId)
     {
         $product = collect($this->products)->firstWhere('id', $productId);
+        if (!$product) {
+            return;
+        }
         session()->push('cart', $product);
-        $this->dispatchBrowserEvent('notify', ['message' => "{$product['name']} added to cart!"]);
+        $this->dispatch('notify', message: "{$product['name']} added to cart!");
     }
 
     public function render()

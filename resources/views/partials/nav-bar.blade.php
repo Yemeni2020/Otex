@@ -52,7 +52,7 @@
                     <img src="{{ asset('img/logo_avatar.svg') }}" alt="Otex logo"
                         class="h-14 w-auto object-contain drop-shadow-sm">
                 </div>
-                <div class="p-1 rounded-xl">
+                <div class="p-1 rounded-xl hidden md:block">
                     <img src="{{ asset('img/logo_text.svg') }}" alt="Otex logo"
                         class="h-14 w-auto object-contain drop-shadow-sm">
                 </div>

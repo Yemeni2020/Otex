@@ -1,12 +1,12 @@
 <div>
 
     @if ($isOpen)
-        <div id="cartBackdrop" wire:click="close" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
+        <div id="cartBackdrop" wire:click="close" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[70]"></div>
     @endif
 
 
     <div id="cartSidebar"
-        class="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl z-50 flex flex-col transform transition-transform duration-300 {{ $isOpen ? 'translate-x-0' : 'translate-x-full' }}">
+        class="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl z-[80] flex flex-col transform transition-transform duration-300 {{ $isOpen ? 'translate-x-0' : 'translate-x-full' }}">
 
         <!-- Header -->
         <div class="p-6 border-b border-slate-200 flex items-center justify-between">

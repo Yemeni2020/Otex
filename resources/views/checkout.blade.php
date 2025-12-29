@@ -606,6 +606,13 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="border-t border-slate-200/70 px-6 pb-6 pt-6">
+                    <x-button id="openPlaceOrder" type="button" size="lg" variant="solid"
+                        class="w-full rounded-xl text-sm font-extrabold shadow-sm">
+                        Place order
+                    </x-button>
+                </div>
             </x-card>
 
             <!-- bottom text -->
@@ -615,6 +622,32 @@
             </div>
         </div>
     </main>
+
+    <!-- ===================== PLACE ORDER MODAL ===================== -->
+    <div id="placeOrderModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/40" data-close-place-order></div>
+        <div class="relative mx-auto flex min-h-screen max-w-lg items-center px-4">
+            <form id="placeOrderForm" action="/orders/place" method="post"
+                class="w-full rounded-2xl bg-white p-6 shadow-xl">
+                @csrf
+                <input type="hidden" name="redirect" value="/orders/success">
+                <h3 class="text-lg font-bold text-slate-900">Place order?</h3>
+                <p class="mt-2 text-sm text-slate-600">
+                    We'll submit your order and redirect to the confirmation page.
+                </p>
+                <div class="mt-6 flex items-center justify-end gap-2">
+                    <button type="button" data-close-place-order
+                        class="rounded-lg px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50">
+                        Cancel
+                    </button>
+                    <x-button type="submit" size="md" variant="solid"
+                        class="rounded-lg px-5 py-2 text-sm font-semibold">
+                        Place order
+                    </x-button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- ===================== ORDER DETAILS DRAWER ===================== -->
     <div id="drawerOverlay" class="fixed inset-0 z-50 hidden">
@@ -717,6 +750,10 @@
             const closeBtn = document.getElementById('closeDrawer');
             const alertBox = document.getElementById('applePayAlert');
             const copyBtn = document.getElementById('copyCheckoutLink');
+            const openPlaceOrderBtn = document.getElementById('openPlaceOrder');
+            const placeOrderModal = document.getElementById('placeOrderModal');
+            const placeOrderForm = document.getElementById('placeOrderForm');
+            const closePlaceOrderBtns = document.querySelectorAll('[data-close-place-order]');
 
             function openDrawer() {
                 if (!overlay || !drawer) return;
@@ -736,6 +773,27 @@
             closeBtn?.addEventListener('click', closeDrawer);
             overlay?.addEventListener('click', (e) => {
                 if (e.target.hasAttribute('data-close-drawer')) closeDrawer();
+            });
+
+            function openPlaceOrderModal() {
+                if (!placeOrderModal) return;
+                placeOrderModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closePlaceOrderModal() {
+                if (!placeOrderModal) return;
+                placeOrderModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+
+            openPlaceOrderBtn?.addEventListener('click', openPlaceOrderModal);
+            closePlaceOrderBtns.forEach((btn) => {
+                btn.addEventListener('click', closePlaceOrderModal);
+            });
+
+            placeOrderForm?.addEventListener('submit', () => {
+                closePlaceOrderModal();
             });
 
             alertBox?.addEventListener('click', (e) => {
