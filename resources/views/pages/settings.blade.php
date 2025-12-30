@@ -236,9 +236,9 @@
                         <h2 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4">Theme</h2>
                         <form class="space-y-4">
                             <label class="flex items-center justify-between rounded-xl bg-slate-100 px-4 py-3 text-sm text-slate-900 dark:bg-slate-900 dark:text-white">
-                                <span class="font-semibold">Annual billing <span class="text-xs text-slate-500 dark:text-slate-300">(Save 10%)</span></span>
+                                <span class="font-semibold"><span id="themeToggleLabel">Light mode</span></span>
                                 <span class="relative inline-flex h-6 w-11 items-center">
-                                    <input id="themeToggle" type="checkbox" class="peer sr-only">
+                                    <input id="themeToggle" type="checkbox" class="peer sr-only" data-theme-toggle>
                                     <span class="absolute inset-0 rounded-full bg-slate-300 transition peer-checked:bg-slate-700 dark:bg-slate-700 dark:peer-checked:bg-slate-500"></span>
                                     <span class="absolute left-1 h-4 w-4 rounded-full bg-white transition peer-checked:translate-x-5"></span>
                                 </span>
@@ -310,7 +310,8 @@
         const initThemeSettings = () => {
             const root = document.documentElement;
             const toggle = document.getElementById('themeToggle');
-            if (!toggle) return;
+            const label = document.getElementById('themeToggleLabel');
+            if (!toggle || !label) return;
 
             const storedTheme = localStorage.getItem('theme') || 'light';
             const setTheme = (theme) => {
@@ -327,9 +328,15 @@
                 }
             };
 
+            const syncLabel = (checked) => {
+                label.textContent = checked ? 'Dark mode' : 'Light mode';
+            };
+
             toggle.checked = storedTheme === 'dark';
+            syncLabel(toggle.checked);
             toggle.addEventListener('change', () => {
                 setTheme(toggle.checked ? 'dark' : 'light');
+                syncLabel(toggle.checked);
             });
         };
 

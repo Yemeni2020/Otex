@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconClose = document.getElementById('mobileMenuIconClose');
     const mobileSearchButton = document.getElementById('mobileSearchButton');
     const mobileSearchBar = document.getElementById('mobileSearchBar');
-    const themeToggle = document.getElementById('toggle');
+    const themeToggles = document.querySelectorAll('[data-theme-toggle]');
     const themeToggleButton = document.getElementById('themeToggleButton');
     const themeIconSun = document.getElementById('themeIconSun');
     const themeIconMoon = document.getElementById('themeIconMoon');
@@ -141,14 +141,18 @@ document.addEventListener('DOMContentLoaded', () => {
         root.dataset.theme = theme;
         if (theme === 'dark') {
             root.classList.add('dark');
-            if (themeToggle) themeToggle.checked = true;
+            themeToggles.forEach((toggle) => {
+                toggle.checked = true;
+            });
             if (themeIconSun && themeIconMoon) {
                 themeIconSun.classList.add('hidden');
                 themeIconMoon.classList.remove('hidden');
             }
         } else {
             root.classList.remove('dark');
-            if (themeToggle) themeToggle.checked = false;
+            themeToggles.forEach((toggle) => {
+                toggle.checked = false;
+            });
             if (themeIconSun && themeIconMoon) {
                 themeIconSun.classList.remove('hidden');
                 themeIconMoon.classList.add('hidden');
@@ -162,13 +166,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const storedTheme = localStorage.getItem('theme');
     applyTheme(storedTheme || 'light');
-    if (themeToggle) {
-        themeToggle.addEventListener('change', (e) => {
+    themeToggles.forEach((toggle) => {
+        toggle.addEventListener('change', (e) => {
             const next = e.target.checked ? 'dark' : 'light';
             localStorage.setItem('theme', next);
             applyTheme(next);
         });
-    }
+    });
     if (themeToggleButton) {
         themeToggleButton.addEventListener('click', () => {
             const next = root.classList.contains('dark') ? 'light' : 'dark';
